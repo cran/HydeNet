@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>    toc: no</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Getting Started with HydeNet}
+-->
+
+<hr/>
+
+<p>title: &ldquo;Getting Started with <code>HydeNet</code>&rdquo;
+author: &ldquo;Jarrod Dalton and Benjamin Nutter&rdquo;
+date: &ldquo;11 Jun 2015&rdquo;
+output:
+  html_document:
+    fig_caption: yes
+    number_section: yes
+    toc: yes
+  pdf_document:
+    fig_caption: yes
+    number_section: yes</p>
+
+<h2>    toc: no</h2>
+
+<p><code>HydeNet</code> is a package intended to facilitate modeling of hybrid Bayesian networks and influence diagrams (a.k.a. decision networks). A Bayesian network, formally defined, is a joint probability distribution for a set of random variables for which the set of conditional independencies can be represented using a directed acyclic graph. Each node represents a random variable, and each link represents the direction of influence between two nodes. The probability distribution for any given node is defined as conditional (only) on its parent nodes, and every node is conditionally independent from all of its non-descendants given data on its parent nodes.</p>
+
+<p>Bayesian networks are powerful dynamic inference models that allow for updating predictions of unobserved nodes in the network as evidence is collected. They can be constructed using expert knowledge, or by using <em>structure learning</em> algorithms. <code>HydeNet</code> assumes the first approach: all networks are manually constructed through collaboration with subject matter experts. Users interested in structure learning problems &mdash; which are popular in -omics applications, for example &mdash; are encouraged to try the <a href="http://www.jstatsoft.org/v35/i03"><code>bnlearn</code> package</a> by Marco Scutari.</p>
+
+<p>Influence diagrams (or decision networks) are extended Bayesian networks which incorporate two additional types of nodes: decision nodes and utility nodes. Decision nodes are assumed to be manipulable by the actor, while utility nodes are deterministic functions of one or more parent nodes which produce numeric outputs. When there are multiple decision nodes in the network, specific combinations of decision node values are referred to as <em>policies</em>. We can use these networks to study the distribution of utility as it relates to various decision-making policies, and to conduct value-of-information analyses. An overview of using <code>HydeNet</code> for decision network analysis is provided in the <strong>&ldquo;Decision Networks&rdquo;</strong> vignette.</p>
+
+<p>Packages exist for <strong>exact</strong> inference on standard Bayesian networks (e.g., <code>gRain</code>, <code>gRim</code>) when the networks do not have decision/utility nodes and fit any of the following criteria:</p>
+
+<ul>
+<li>All nodes are discrete/categorical in nature</li>
+<li>All nodes are Gaussian in nature</li>
+<li>All nodes are either Gaussian or discrete/categorical in nature (i.e., conditional linear gaussian models)</li>
+</ul>
+
+<p>Exact inference on Bayesian networks is an <em>NP</em>-hard problem. When networks become large, either in the number of parameters in the number of nodes, exact inference algorithms such as junction tree are computationally expensive. In these situations, <strong>approximate</strong> inference may be an appealing alternative. Several methods for approximate inference on Bayesian networks exist. Popular methods include Markov Chain Monte Carlo sampling, application of the EM algorithm, and logic sampling (which is implemented in <a href="http://www.jstatsoft.org/v35/i03"><code>bnlearn</code></a>). <code>HydeNet</code> implements Markov Chain Monte Carlo inference through an interface to <a href="http://mcmc-jags.sourceforge.net/">JAGS</a>.</p>
+
+<p>Fundamentally, HydeNet works by writing a JAGS script according to the structure and parameterization of your graphical model, and calling JAGS with that script. </p>
+
+<h2><code>HydeNet</code> Installation</h2>
+
+<p>If you don&#39;t already have JAGS installed, you will receive an error when <code>HydeNet</code> tries to load the <code>rjags</code> package.  <code>rjags</code> searches your system for an installation of JAGS and throws an error if none is found.  You will need to <a href="http://sourceforge.net/projects/mcmc-jags/files/">download and install JAGS</a> before using <code>HydeNet</code>.</p>
+
+<p>Installing <code>HydeNet</code> from CRAN is straightforward and can be done with the usual syntax:</p>
+
+<pre><code class="r">install.packages(&quot;HydeNet&quot;)
+</code></pre>
+
+<p>If you wish to install a more recent or development version from GitHub, you may need to point R to the BioConductor repositories.  </p>
+
+<pre><code class="r">setRepositories(ind=1:2)
+devtools::install_github(&quot;nutterb/HydeNet&quot;)
+</code></pre>
+
+<h2>A Simple Bayesian Network Analysis</h2>
+
+<p>First we load the library, and do some preliminary manipulation of the <code>mtcars</code> data frame:</p>
+
+<pre><code class="r">library(HydeNet)
+
+mtcars2 &lt;- transform(mtcars,
+                     cyl = factor(cyl),
+                     gear=factor(gear),
+                     am = factor(am))
+</code></pre>
+
+<h3>Network Construction</h3>
+
+<p>The first step in the analysis is to set up the network structure. This is done using the <code>HydeNetwork()</code> function. The <code>formula</code> method for <code>HydeNetwork()</code> uses syntax similar to the <code>dag()</code> command in the <code>gRbase</code> library:</p>
+
+<pre><code class="r">carNet &lt;- HydeNetwork(~ cyl
+                      + disp | cyl
+                      + hp | disp
+                      + wt
+                      + gear
+                      + mpg | disp*hp*wt*gear,
+                      data=mtcars2)
+</code></pre>
+
+<p>In the above, we have passed the training data frame <code>mtcars2</code> to be used for populating the parameters of the network. But, there are several ways to populate the node distributions:</p>
+
+<p>1) automatically, by calling <code>HydeNetwork()</code> with a training dataset (as in the above);
+2) manually, by calling <code>HydeNetwork()</code> with a list of model objects; and 
+3) manually, by specifying only the network structure in the call to <code>HydeNetwork()</code> and then subsequently using the functions <code>setNode()</code> and <code>setNodeModels()</code> to specify distributions for each individual node.</p>
+
+<p>In the automatic approach, estimation of the conditional probability distribution for each node (given its parent nodes) is performed using different models, depending on the nature of the node and the nature of its parent nodes. For example, conditional distributions of categorical nodes with all categorical parents are estimated using tabulation (see <code>help(&#39;cpt&#39;)</code>), while conditional distributions for categorical nodes with at least one continuous parent node are estimated using <code>glm(, family=&quot;binomial&quot;)</code>.</p>
+
+<p>There are many options for manual specification of node distributions. Please refer to our <strong>&ldquo;Working with HydeNet Objects&rdquo;</strong> vignette (<code>vignette(&quot;WorkingWithHydeNetObjects&quot;, package = &quot;HydeNet&quot;)</code>)for all the details on how to use <code>HydeNetwork()</code>, <code>setNode()</code> and <code>setNodeModels()</code> to create and populate network objects.</p>
+
+<h3>Network Visualization</h3>
+
+<p>We have implemented a plot method for <code>HydeNetwork</code> objects, using the <a href="http://cran.r-project.org/package=DiagrammeR"><code>DiagrammeR</code></a> library by Richard Iannone et al. While not implemented in this simple example, there are different default node shapes and colors for random variable nodes, deterministic nodes, decision nodes and utility nodes. See our <strong>&ldquo;Building and Customizing HydeNet Plots&rdquo;</strong> vignette (<code>vignette(&quot;HydeNetPlots&quot;, package = &quot;HydeNet&quot;)</code>)for details on customization.</p>
+
+<pre><code class="r">plot(carNet)
+</code></pre>
+
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<div id="htmlwidget-4079" style="width:360px;height:504px;" class="grViz"></div>
+<script type="application/json" data-for="htmlwidget-4079">{&quot;x&quot;:{&quot;diagram&quot;:&quot;digraph {\n\n  \&quot;cyl\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;disp\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;hp\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;wt\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;gear\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;mpg\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;cyl\&quot;-&gt;\&quot;disp\&quot; \n  \&quot;disp\&quot;-&gt;\&quot;hp\&quot; \n  \&quot;disp\&quot;-&gt;\&quot;mpg\&quot; \n  \&quot;hp\&quot;-&gt;\&quot;mpg\&quot; \n  \&quot;wt\&quot;-&gt;\&quot;mpg\&quot; \n  \&quot;gear\&quot;-&gt;\&quot;mpg\&quot; \n}&quot;,&quot;config&quot;:{&quot;engine&quot;:&quot;dot&quot;,&quot;options&quot;:null}},&quot;evals&quot;:[]}</script>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
+
+<h2>Interfacing with JAGS</h2>
+
+<p><code>HydeNet</code> interfaces with JAGS through the <code>rjags</code> package. Given a fully-specified <code>HydeNetwork</code> model, the function <code>writeNetworkModel()</code> will create the JAGS model script (by calling the <code>writeJagsModel()</code> function for each node, which creates each node&#39;s portion of the script).  Here&#39;s an example (note, as indicated by the need to use a triple colon, that <code>writeJagsModel()</code> is not an exported function to the <code>HydeNet</code> namespace):</p>
+
+<pre><code class="r">HydeNet:::writeJagsModel(carNet, node = &quot;cyl&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;pi.cyl[1] &lt;- 0.34375; pi.cyl[2] &lt;- 0.21875; pi.cyl[3] &lt;- 0.4375&quot;
+## [2] &quot;cyl ~ dcat(pi.cyl)&quot;
+</code></pre>
+
+<pre><code class="r">HydeNet:::writeJagsModel(carNet, node = &quot;mpg&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;mpg ~ dnorm(35.02449 + 0.00858 * disp + 1.88654 * (gear == 2) + 2.38977 * (gear == 3) + -0.04032 * hp + -3.75433 * wt, 0.378)&quot;
+</code></pre>
+
+<pre><code class="r">writeNetworkModel(carNet, pretty = TRUE)
+</code></pre>
+
+<pre><code>## model{
+##    pi.cyl[1] &lt;- 0.34375; pi.cyl[2] &lt;- 0.21875; pi.cyl[3] &lt;- 0.4375
+##    cyl ~ dcat(pi.cyl)
+##    disp ~ dnorm(105.13636 + 78.17792 * (cyl == 2) + 247.96364 * (cyl == 3), 0.01937)
+##    hp ~ dnorm(45.73453 + 0.43755 * disp, 0.02345)
+##    wt ~ dnorm(3.21725, 1.02202)
+##    pi.gear[1] &lt;- 0.46875; pi.gear[2] &lt;- 0.375; pi.gear[3] &lt;- 0.15625
+##    gear ~ dcat(pi.gear)
+##    mpg ~ dnorm(35.02449 + 0.00858 * disp + 1.88654 * (gear == 2) + 2.38977 * (gear == 3) + -0.04032 * hp + -3.75433 * wt, 0.378)
+## }
+</code></pre>
+
+<p>In practice, though, the function <code>compileJagsModel()</code> (or <code>compileDecisionModel()</code>, if the network contains decision and utility nodes) will typically be called. This function is a wrapper for the <code>jags.model()</code> function in the <code>rjags</code> library which, in addition to the JAGS model script, passes any conditional probability tables from the network model into JAGS as arrays. (Note: all other arguments to <code>jags.model()</code>, such as the number of chains initial values, and the number of iterations for adaptation are passed through to the function.)</p>
+
+<p>The functions <code>compileJagsModel()</code> and <code>compileDecisionModel()</code> essentially return augmented objects of class <code>jags</code>. We label these objects with the class <code>compiledHydeNetwork</code>.</p>
+
+<pre><code class="r">carNet1 &lt;- compileJagsModel(carNet)
+</code></pre>
+
+<pre><code>## Compiling model graph
+##    Resolving undeclared variables
+##    Allocating nodes
+##    Graph Size: 49
+## 
+## Initializing model
+</code></pre>
+
+<p>Evidence on individual nodes can also be entered with <code>compileJagsModel()</code>, thus facilitating dynamic inference as data are observed. See the description of the <code>data</code> argument in <code>help(rjags::jags.model)</code> for details. </p>
+
+<pre><code class="r">carNet2 &lt;- compileJagsModel(carNet, data = list(cyl = &quot;8&quot;) )
+</code></pre>
+
+<pre><code>## Compiling model graph
+##    Resolving undeclared variables
+##    Allocating nodes
+##    Graph Size: 49
+## 
+## Initializing model
+</code></pre>
+
+<p>As a matter of convenience, <code>HydeNet</code> can also translate labels into the numeric codes</p>
+
+<pre><code class="r">carNet3 &lt;- compileJagsModel(carNet, data=list(cyl=&quot;8&quot;))
+</code></pre>
+
+<pre><code>## Compiling model graph
+##    Resolving undeclared variables
+##    Allocating nodes
+##    Graph Size: 49
+## 
+## Initializing model
+</code></pre>
+
+<h2>MCMC Inference</h2>
+
+<p>MCMC sampling is performed by calling <code>HydePosterior()</code>. This function calls <code>coda.samples()</code> from the <code>rjags</code> library and returns an augmented <code>mcmc.list</code> object.  MCMC diagnostics and inference from this point onward are performed in the same manner as would typically be done when using <code>rjags</code>.</p>
+
+<pre><code class="r">post1 &lt;- HydePosterior(carNet1,
+                       variable.names = c(&quot;cyl&quot;,&quot;hp&quot;,&quot;mpg&quot;),
+                       n.iter = 10000)
+
+post2 &lt;- HydePosterior(carNet2,
+                       variable.names = c(&quot;cyl&quot;,&quot;hp&quot;,&quot;mpg&quot;),
+                       n.iter = 10000)
+
+str(post1, max.level = 3)
+</code></pre>
+
+<pre><code>## List of 4
+##  $ codas    :List of 1
+##   ..$ : mcmc [1:10000, 1:3] 1 1 3 3 3 3 1 3 1 2 ...
+##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
+##   .. ..- attr(*, &quot;mcpar&quot;)= num [1:3] 1 10000 1
+##   ..- attr(*, &quot;class&quot;)= chr &quot;mcmc.list&quot;
+##  $ observed : NULL
+##  $ dag      :Formal class &#39;graphNEL&#39; [package &quot;graph&quot;] with 6 slots
+##   .. ..@ nodes     : chr [1:6] &quot;cyl&quot; &quot;disp&quot; &quot;hp&quot; &quot;wt&quot; ...
+##   .. ..@ edgeL     :List of 6
+##   .. ..@ edgeData  :Formal class &#39;attrData&#39; [package &quot;graph&quot;] with 2 slots
+##   .. ..@ nodeData  :Formal class &#39;attrData&#39; [package &quot;graph&quot;] with 2 slots
+##   .. ..@ renderInfo:Formal class &#39;renderInfo&#39; [package &quot;graph&quot;] with 4 slots
+##   .. ..@ graphData :List of 1
+##  $ factorRef:List of 3
+##   ..$ cyl :&#39;data.frame&#39;: 3 obs. of  2 variables:
+##   .. ..$ value: num [1:3] 1 2 3
+##   .. ..$ label: chr [1:3] &quot;4&quot; &quot;6&quot; &quot;8&quot;
+##   ..$ am  :&#39;data.frame&#39;: 2 obs. of  2 variables:
+##   .. ..$ value: num [1:2] 1 2
+##   .. ..$ label: chr [1:2] &quot;0&quot; &quot;1&quot;
+##   ..$ gear:&#39;data.frame&#39;: 3 obs. of  2 variables:
+##   .. ..$ value: num [1:3] 1 2 3
+##   .. ..$ label: chr [1:3] &quot;3&quot; &quot;4&quot; &quot;5&quot;
+##  - attr(*, &quot;class&quot;)= chr &quot;HydePosterior&quot;
+</code></pre>
+
+<pre><code class="r">plot(post1$codas[,c(&quot;hp&quot;,&quot;mpg&quot;)])
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-10"/> </p>
+
+<p>We have included a convenience function called <code>bindPosterior()</code> than can be used to combine multiple chains&#39; samples into a single data frame with all factors re-mapped to their original non-numeric values.</p>
+
+<p>Below, we apply the function to obtain posterior densities under each of the two scenarios (no observation of other nodes and after observation of cyl = &ldquo;8&rdquo;, respectively):</p>
+
+<pre><code class="r">bp1 &lt;- bindPosterior(post1)
+bp2 &lt;- bindPosterior(post2)
+
+head(bp1)
+</code></pre>
+
+<pre><code>##   cyl        hp      mpg
+## 1   4 101.72906 18.19084
+## 2   4  92.33265 21.32375
+## 3   8 200.06550 19.04609
+## 4   8 202.80194 18.00398
+## 5   8 195.68686 18.84492
+## 6   8 199.39834 22.49770
+</code></pre>
+
+<pre><code class="r">head(bp2) #notice cyl = &quot;8&quot; for all samples
+</code></pre>
+
+<pre><code>##   cyl       hp      mpg
+## 1   8 201.8832 22.91982
+## 2   8 204.7138 24.17380
+## 3   8 190.4924 19.09496
+## 4   8 192.3391 19.67189
+## 5   8 214.2389 15.87866
+## 6   8 197.7815 23.00670
+</code></pre>
+
+<pre><code class="r">plot(density(bp1$hp), ylim=c(0,0.06), main = &quot;hp&quot;);
+lines(density(bp2$hp), col=&quot;red&quot;, lty=5)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-11"/> </p>
+
+<pre><code class="r">plot(density(bp1$mpg), main = &quot;mpg&quot;);
+lines(density(bp2$mpg), col=&quot;red&quot;, lty=5)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAjVBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZpAAZrY6AAA6ADo6AGY6OpA6ZrY6kNtmAABmADpmAGZmOgBmOpBmZgBmkJBmtrZmtttmtv+QOgCQOjqQZgCQkGaQtpCQ2/+2ZgC2Zjq2tma225C2/7a2//++vr7bkDrb25Db/7bb////AAD/tmb/25D//7b//9v///8etEXbAAAACXBIWXMAAAsSAAALEgHS3X78AAARoUlEQVR4nO2di3rjthFGuU5dK95Ku00v8jaxs1lXqXV9/8crL6JIiaAEChjMDOY/XzayDYO4HA8IQKRYHIBJCu4KAB4g3igQbxSINwrEGwXijQLxRoF4o0C8USDeKBBvFIg3CsQbBeKNAvFGgXijQLxRIN4oEG8UiDcKxBsF4o0C8UaBeKNAvFEg3igQbxTL4jfFX1+Kh/dVUSwP+5eH70X5zaH8qnj4sXj84K4dMbbFtzy8l7orHj/qL36aQXzGbErh21mx3C0+vZa+54fdolhuZ2XYrwqIz5hN8VS6rqK9El8N86tiXv2w/CnEZ0wjvhrdId4U5+Ix1JvhQjwmd1a4GOq/F3Wcl2GP5ZwdmnN8ywZDvRVO4suAr5gz14cciG/oIr7e1nnirU0CIN4oEG8UiDcKxBsF4o0C8UaBeKNAvFEg3igQbxSINwrEGwXijQLxRoF4o0C8USDeKBBvFIg3CsQbJUR8ASRDKD4gL6AG4o0C8UaBeKNAvFEgfgpr7grEA+JvsS5p/n985a5QHCD+Og7PeaiH+Ks4HWdhHuKNAvHXGA1t/TEP8VcY1wvxRHlFMGK3foNDvXmIH8ctt9Je/tNuHuLHcblt385Ubx7iR3GaPTWqgHiKvBJwBrzjK51A/BSKs69VxzzEj+HQet4i3YM9xI9wfaAf/RU1QPwINwNeechD/AhDqcP2QHz0vPwMpLqao9g8xI/gJ15vGyHejZd3zW2EeDee4vU2EuL9GGnM+nDrXiSpQLwXY21Zq20mxDu5HOlH26LWPMQ7mSJeZ0Mh3oW3d73mId4FxEN8xdWWKDUP8S7OxV9vCMTHzMvMFPG+vyIMiHcxWby+xkL8bW4P9QobC/E3udEOiI+Zl5dpI71O8xDvAOJtip86tVNpHuKHQDzEe7Vi7f2bgoD4AdMX8RpDPlj8dlY8rYri4f2OvDKZLn7qb0ogVPz+2+th9VT6//wxOa8KIN7N7uv7YTVvXqfmVQGGejcZRvzUuZ3O2V2Mc/w843O8XyMUhjxm9QPuFq+qxRA/oC/esw0WxZdDfUWmQ71vG/SN9cGTu5dl/bp5zGVyd8dIrzHkYyzn+q9T8srknoC/9/cZQcRfAvEeySW7xeU53vPJZhrwb4K6kzxm9deAeIJDC+WuuZ3C2V0s8dlM7u48xZsVHzkvHxDvk0yWl497J/XaTvLYubugJ35SA7SFPNbxF9wrPiAPC9i5uwDifZKzjviJ9Vc21hPs3PnnlQ3E0xxaPFPrr2teD/Hn3D3SQ3yUvGxAvFcyWV4uQub0EB8hLxcQ75dMlpeLwFV8SL7EQPwZEO+XTJaXiTDvqsZ6iO8D8Z7JZHn5uaf2msxDvJu7Kg/xwXmZCNi+6bLraDfE9wkU3+TX0W6I73MSf2fdFYU8xPcJFR8hcyogvg/EeyaT5eUh9BSPoT44Lw8Q75tMlpcHiPdNJsvLzN1V17Oeg3gXYeJVtBziO4JHeogPzstCjMWcmrEe4k9ECHiID83LQRTxkQ5AD8SfiLNtF+kI5ED8iTjitYz1EH8C4v2TyfKyEi5eQdshfgjE2xIfcahX0HaIb4k0qYd4BY0/I9ZqTsnsDuJbIH5CMlne9ETct4t0DFog/kjEfbt4RyEE4o9EE69kdgfxRyB+SjJZXj7Ca63DPMRfAPE+yWR5kxNxbgfxAXmTE3NSr2IlD/EN0cVLbz7EN0Rexsc8EA0QXxN33y7ugWiA+JqoAY+hXg1xAx7i1QDxE5PJ8nIRpc4qHlkA8WfEqbOGkIf4isiLOYhXQuzFnIaxHuIP8XdvIF4J8bftCI4WmWDx29ly/1IUw8fOyW73GUTiRfdAqPjqgYNvy9L/Z8UPHIwuXsFYHyp+9/V9/+1V9yNG42/UGxBfhftmfjhsnu7IKwSIn5xc8VY/YnToXXSzR4hWZfkreczqe8SrsfyQh3iSSb0B8duZ9qdJE1yEcTqm3D6IsZyrUPz8eIifntwt4xQv56i2b8iOGQVEPEXAd4jthOBz/G5xeY4vWkLrlgYS8aSjSBQwq4f4O5LJ8iaExpH42V0s8Yondy0k4sX2AiL+BMT7J5PlTQjtUC+2G7BzRxSb0kPe/DqeKjSlh7z5nTt6QTL7ARHffkFWXZn9QLBz559XAHQBL/wkb31Wn0C8zI6A+BaIn5BMljc90WsL8ZIhtNMdWmRPQPwRiJ+STJY3FWnES+wKiG+IX1mIl0yixbbAroD4BoiflEyWNxWU4mXP7iC+AeInJZPlTQ6teIF9AfENED8pmSxvImi3VUWbh/gGiJ+UTJY3DcTvo0C8VCD+3mSyvGlI+c6ptN6A+BqaukoOecviyQMe4mUC8Xcnk+VNDMRPTCbLmxiIdyfvFo7PLww9ND/k78n2xUvrDs+I3xTFp9e4h+YH4r2Sqw8nX0Y8ND8Qfzt5O6si3nFn5P2H5iftTU7CusPzHO94DkHoodlJsG8nOOT9xNeRPi3epTV0CMTfSD7eD+t8/EjAodmB+JvJU2Pd69DspHiLRq55bOCQVlS1+N3XH6MffhBwaDlA/ORksrwJSPNmvNhdW4iH+CvJq8eP1cR9O2HtHMDwuQWiOsRvVv/ltfxv+5zTOR7iPZLL5VwZ8xAfVAx1SRPxHOqLT68bDPVBxVCXNBGzk7tE79BAvDQ4xEvqEj/xm4w3cCB+PHm3mHh69zm0FIirKXWst/omTbLVnGrxh7d5/EPzwvS5k3L6xHOoz+0cz/UxJXL6xOisPmHACx3rIT5dUSlK88ZP/P6lePzfl4kX1stp5ICUI71m8fuX+fbzh+PpIyGH5gTivZdzpfjcrrKtSVBJmW/JT4j4VT4R35FYvJxO8T7HT766Wk4bhyRdxWsWfwvnW/Vi2jgE4oPFn+62GO7uiGnjAM7HxUjpFS/x9fNjR/btdosyQVnEQ7yf+E19a/x2NvIW3W7x+CfE+5SWqkQfPMTvvzU7N+XEfuS3tjPXcCCliQMSb9Sfi5fSLR7irzw3OOTQfKR+h0ZkyFsU3wPiryRfF19P/NQ+VBjiryRfWbGpfIx4+vfiJa7kg9fx48OBkBYOgPiKUPGI+KkI6ZbgLdvhZVlFS2jdiOB+zLOMfjF4BQ6DeIFjvT3xHCN9xuL1TO7YxcvoGHsR35GughAvCoi/O/mgb+eOZTEn8H0ac+t4iG+wtnPHc8lrhuK1RbyIa50l9AzBzp1/XgaYxMub3Vmb1TNt1EM8N1zv0IgzD/HJy01dtBtr4jvSVk/cvB7i0wDxvLBdhAHxvLBdhHEhnr9zbIlnvuqqB3vnQDwP7J0D8emL5ih+gCnxnBv1EM8IxHtXIFvx6SsnzLwp8T0gPiiZLC85EB+UTJaXBt7VnCzzRsVz1A3iuZCzfVPDWweIZwPiU8F8m6ys92kMiecOeIhnglu8rNkdxLNUgK8SnqXnJL6HCPG8HWRSPFfNJIW8HfHsI72skId4RiA+BdwfduUA4lMgQbygsR7ieerQAPH0SPAO8QxA/KSi8xHfAfEeRUN8XORs4VgRL2QVLyfk7YkXVS2IJ0ZIwA+AeGLEiBcz1psTz1wriE+LGPFi5vXWxLNXSkrIGxF/gr1SEM8De6UgPiVyTvEQnxRB4i+BeEJEeRcyrYf41AgZ622JF1ElGSEP8cmB+GS0XS2jRjLGehPiW4TUSETIQ3x6ID4Rsk7xQsb6YPHbWfHpVfRz50Qt5lyoFF89d27/MlchXkqFLlEpvhH+9gTxE5Bwko8R8SWrn56lipfnPQvxh91iXr2sho+aFNLREO8k/1m9rN2bBgHmIZ6DHMSXyzkdDxUWVR3+B09GmtzJfYy4wFP8QULIx1nOCd7AkTjSD1AoXnrEywz4SxSKL5dzl+f4oiW0bjEQGvD82/WZz+rFBjz7Sd6IeAl1OSMb8UInd2LFsy/oEPFMQHwSJNWlgXusz3vnTm7As4d81ut4sXP6IerEi965kxzwl6SuY84RL9s780meYOfOPy8xssUzn+RzntWrEp+6lgbEs9djDNaQz1n8ESn1GADxJAgf6CvOzEN8JCD+KtmKV+D9grQ1hXgxQHwUpE/paxindxDPCcRHR4V3TvO5ihdThRuwTewzFa8k4CE+Mnqm9BAfFTUBz2c+Z/EavJ8D8WEoCni2kM9RvCrv5+YhPgTF4tNVOkfxQsr3BeLjosU701ifoXh9U3oO8/mJ1+f9nEQ1z068spldA0PIQ7wEGOZ3uYlX6Z0j5CFeBsnN5ylenff05nMTz1zy/aQ+zeclXutAfwnET0PP9RcOEod8juJVek9tPkPxSr0nNp+TeN0BD/H3ot172ovsMxLPW2wMUprPR7zqKb0T0pZkIz4/7xDvQybe0w32mYjPxPvgk7Do2gPxskj26Io8xCv60NpbpPr0uzzEMxYZm1Qhn4P4jOL9kMy8fvHrrqeyED+AplXqxfcCJBfvSU7z2sWv8xdP0y7l4nnuNKVmnWA5r1w8X3G00I/2qsXnGe8Vg5iPXoJm8ZyfAUzPxbZ97PYpFr/ON+Br1ucNjNxCteLXecd7zZrwb1uv+HRFsUK1XA0Wz/OkSeIToCT6O5MRGxoqnue5c+fhnrP2ChL1oeIZnjS5XtvyfrhYt8Zpr76It6e94lx9hFYHn+PTPmnyaL04QVCGTAa7uIFNVzWrL7Ub091jHXcHX4/4suFGlbdcmg9Sr2Q5t7Ya5xcMo/7eXhE/uVvXQHrLerCoua9vpC3n1k3D1keKYo1IH7COMMvni/jW7cVXxTm3yjdLr8sOlft+1/nkJ1jOtcX/t0frtv8ViETbnZcdfL2rQ8XT5AXU6FnOgajEEp9wrx7EABFvFIg3ipKdOxAb8Tt3gAZpO3cgEYh4oyi7EAPEArN6o0C8USDeKJTigWToxMc/jJhy8msQUcHZ9VN2DSIqOLt+yq5BRAVn10/ZNYio4Oz6KbsGERWcXT9l1yCigrPrp+waJKZgwAvEGwXijQLxRoF4o0C8USDeKBBvFIg3CsQbJYb43aIYXnsdn+3ze4qyqjuHlgkK2jRXLifqvAERxFdX3q+ewo9zg03VT/Rl7b68HrY/v5IXVP0ZlwUk6rwhEcRX99jU0UjK26ffyjLoy9pUFt6WSRpVFpCm8xxEEL/9/FHHCTVV/6QpqywhSUFlqKfqvAERxFc3V6USn6Ss/cs8RUHb2afXZJ03ABE/YLeYJ2pUqpHFhZpzfCM+QVnbWXWXaKKJS5q5hIsos/p5kolp1T/0ZTXe6Qs6jvGpOm8A1vEXrOq7UJZJCirP8ZrX8UAjEG8UiDcKxBsF4o0C8UaBeKNAvFEg3igQbxSINwrEGwXijQLxRoF4o0C8USDeKBBvFIg3CsQbRan45lpYx3XJ/SsynS/dEZqLKoe0T+E5Ha7+UfmV8zLo7rD7l/rqyWOm03dCUSu+utN0aKJ/Z6XzpTtClXf7s8NNX3z3oxHxvcO+LZsnNtV1OH0nFa3in78/OcSf3VnpfOkdoQrLb6/H26K3n//T3h39l7//u7RZ/U1sHv+sDlf96F+L4uGP538MxojusO3z2bo6iEat+PcypJoe3xS9Qbt3n5XzpX+E+kap+rboMppnzf1yb+VLsVzND6vyiKt59VvNj3q/0y+yO2z1p9MN9d13QtErfvfLx8g5/niTivOl+8X6HN8MxmV41rKacaEa1z9//P7rUzke9H703P7OWXndYatpR/VncBR/+k4oesUf49GR4B/x9en8rfpoiqPU+qfVHW0/vv7x/KP+ezj+aER8P+JPXyW7nzsAxeL3335zD/X+5/jK8WJ56KQew/vw9s+/7b/9+nQYifiuyN45/pe++O47oSgWf5zaDxOONyI6X86PUI0Elc2fX1upzQm9/Nec5c/P8Y6I7x32rT/Ud98JRbP4w8otfto6flWUk/ZlK7VcfpffNXP6h/6P9i/lrN5xS3Nz2G0z+2/q09bB8VRWOSgVD0KBeKNAvFEg3igQbxSINwrEGwXijQLxRoF4o0C8USDeKBBvFIg3CsQbBeKNAvFGgXij/B8dTcnbVWS+MQAAAABJRU5ErkJggg==" alt="plot of chunk unnamed-chunk-11"/> </p>
+
+<h2>Global <code>HydeNet</code> Options</h2>
+
+<p>There are a couple of global options <code>HydeNet</code> establishes that you should be aware of.  </p>
+
+<h3><code>Hyde_fitModel</code></h3>
+
+<p>The <code>Hyde_fitModel</code> controls the behavior of <code>setNode</code> function.  If <code>FALSE</code>, the model described by the arguments will not be fit until the JAGS model statement is written by <code>writeNetworkModel</code>.  </p>
+
+<p>The option can be set by using the code below.  The default setting is <code>FALSE</code>.</p>
+
+<pre><code class="r">options(Hyde_fitModel=FALSE)
+</code></pre>
+
+<p>Realistically, the time spent to fit the model will be spent one way or another, and it&#39;s a matter of preference for where you spend that time.  If you wish to do it
+all at once when calling <code>writeNetworkModel</code>, set the option to <code>FALSE</code>.  Your printed output when reviewing a network will appear as follows:</p>
+
+<pre><code>## A Probabilistic Graphical Network
+## Has data attached: Yes
+## 
+## treat | d.dimer * angio
+## dbern(p = fromData)
+## glm: treat ~ poly(d.dimer, 2) + angio
+</code></pre>
+
+<p>Notice that the <code>mu</code> and <code>tau</code> parameters are not explicitly defined, but only give a notice that they will be estimated from the data.</p>
+
+<p>If the <code>Hyde_fitModel</code> option is set to <code>TRUE</code>, the output would appear as follows:</p>
+
+<pre><code>## A Probabilistic Graphical Network
+## Has data attached: Yes
+## 
+## treat | d.dimer * angio
+## dbern(p = treat ~ ilogit(-1.40357 + 1.74183*(angio==2) + 81.96278*d.dimer + -3.60779*d.dimer))
+## glm: treat ~ poly(d.dimer, 2) + angio
+</code></pre>
+
+<h3><code>Hyde_maxDigits</code></h3>
+
+<p>This options, set to 5 by default, controls the number of decimal places printed in the JAGS model code.  It can be increased or decreased depending on the level of precision you need or want in your estimates.</p>
+
+<pre><code class="r">library(HydeNet)
+data(PE, package=&#39;HydeNet&#39;)
+autoNet &lt;- HydeNetwork(~ wells
+                       + pe | wells
+                       + d.dimer | pregnant*pe
+                       + angio | pe
+                       + treat | d.dimer*angio
+                       + death | pe*treat,
+                       data = PE)
+writeNetworkModel(autoNet, pretty=TRUE)
+</code></pre>
+
+<pre><code>## model{
+##    wells ~ dnorm(3.7942, 0.6305)
+##    pe ~ dbern(ilogit(-3.90355 + 0.5757 * wells))
+##    d.dimer ~ dnorm(210.24251 + 68.37938 * (pe == 2) + 29.29496 * (pregnant == 2), 0.03347)
+##    pi.pregnant[1] &lt;- 0.9014; pi.pregnant[2] &lt;- 0.0986
+##    pregnant ~ dcat(pi.pregnant)
+##    pi.angio &lt;- cpt.angio[(pe+1), ]
+##    angio ~ dcat(pi.angio)
+##    treat ~ dbern(ilogit(-5.89316 + 1.73354 * (angio == 2) + 0.01994 * d.dimer))
+##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
+##    death ~ dcat(pi.death)
+## }
+</code></pre>
+
+<p>If 5 digits is too much for your taste:</p>
+
+<pre><code class="r">library(HydeNet)
+options(Hyde_maxDigits=2)
+data(PE, package=&#39;HydeNet&#39;)
+autoNet &lt;- HydeNetwork(~ wells
+                       + pe | wells
+                       + d.dimer | pregnant*pe
+                       + angio | pe
+                       + treat | d.dimer*angio
+                       + death | pe*treat,
+                       data = PE)
+writeNetworkModel(autoNet, pretty=TRUE)
+</code></pre>
+
+<pre><code>## model{
+##    wells ~ dnorm(3.79, 0.63)
+##    pe ~ dbern(ilogit(-3.9 + 0.58 * wells))
+##    d.dimer ~ dnorm(210.24 + 68.38 * (pe == 2) + 29.29 * (pregnant == 2), 0.03)
+##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1
+##    pregnant ~ dcat(pi.pregnant)
+##    pi.angio &lt;- cpt.angio[(pe+1), ]
+##    angio ~ dcat(pi.angio)
+##    treat ~ dbern(ilogit(-5.89 + 1.73 * (angio == 2) + 0.02 * d.dimer))
+##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
+##    death ~ dcat(pi.death)
+## }
+</code></pre>
+
+<h2>A Note About Printing</h2>
+
+<p><strong>This note applies to R versions less than 3.2.</strong></p>
+
+<p>You may notice throughout the vignettes that we tend to call the print function explicitly.  That is, we use <code>print(object)</code> instead of simply submitting <code>object</code> to the console.  The <code>HydeNet</code> objects can get pretty large, and the implicit printing can become pretty slow as a result.  Consider the following comparison:</p>
+
+<pre><code class="r">&gt; #* Object based on a list of models
+&gt; g1 &lt;- lm(wells ~ 1, data=PE)
+&gt; g2 &lt;- glm(pe ~ wells, data=PE, family=&quot;binomial&quot;)
+&gt; g3 &lt;- lm(d.dimer ~ pe + pregnant, data=PE)
+&gt; g4 &lt;- xtabs(~ pregnant, data=PE)
+&gt; g5 &lt;- glm(angio ~ pe, data=PE, family=&quot;binomial&quot;)
+&gt; g6 &lt;- glm(treat ~ d.dimer + angio, data=PE, family=&quot;binomial&quot;)
+&gt; g7 &lt;- glm(death ~ pe + treat, data=PE, family=&quot;binomial&quot;)
+
+&gt; bagOfModels &lt;- list(g1,g2,g3,g4,g5,g6,g7)
+&gt; bagNet &lt;- HydeNetwork(bagOfModels)
+
+&gt; #* Time to print bagNet implicitly
+&gt; a &lt;- Sys.time()
+&gt; bagNet
+&gt; b &lt;- Sys.time()
+&gt; b-a
+Time difference of 33.53736 secs
+
+&gt; #* Time to print bagNet explicitly
+&gt; a &lt;- Sys.time()
+&gt; print(bagNet)
+&gt; b &lt;- Sys.time()
+&gt; b-a
+Time difference of 0 secs
+</code></pre>
+
+</body>
+
+</html>

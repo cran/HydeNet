@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>    toc: no</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Working With HydeNetwork Objects}
+-->
+
+<hr/>
+
+<p>title: &ldquo;Working with HydeNetwork Objects&rdquo;
+author: &ldquo;Jarrod Dalton and Benjamin Nutter&rdquo;
+date: &ldquo;3 Feb 2015&rdquo;
+output:
+  html_document:
+    fig_caption: yes
+    number_section: yes
+    toc: yes
+  pdf_document:
+    fig_caption: yes
+    number_section: yes</p>
+
+<h2>    toc: no</h2>
+
+<p><a name="top"></a></p>
+
+<p><strong>[Introduction]</strong><br/>
+<strong>[Example &ndash; Pulmonary Embolism]</strong><br/>
+<strong>[Creating &ldquo;Skeleton&rdquo; HydeNetwork Objects]</strong><br/>
+<strong>[Creating HydeNetwork Objects With a Training Dataset]</strong><br/>
+<strong>[Creating HydeNetwork Objects With a List of Models]</strong><br/>
+ &mdash; <em>[A Note on Factor Conversion]</em><br/>
+<strong>[Specifying Distributions for Individual Nodes]</strong><br/>
+ &mdash; <em>[Univariate Distributions for Root Nodes]</em><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt; [Binary Root Nodes]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt; [Normally-distributed Root Nodes]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt; [Multicategory Root Nodes]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt; [Other Univariate Distributions]<br/>
+<strong>[Regression Equations]</strong><br/>
+ &mdash; <em>[Ordinary Least Squares (OLS)]</em><br/>
+ &mdash; <em>[Logistic Regression]</em><br/>
+<strong>[Using **<code>R</code></strong> Model Objects]**<br/>
+ &mdash; <em>[Warning About Limited Scope of <code>writeJagsModel</code> Methods]</em><br/>
+ &mdash; <em>[Conditional Probability Tables (CPTs)]</em><br/>
+<strong>[Deterministic Nodes]</strong><br/>
+<strong>[Modifying the Graph Structure]</strong>  </p>
+
+<p>##Introduction</p>
+
+<p>Setting up Bayesian network models with **<code>HydeNet</code>** generally involves two components &ndash; specifying the <strong>network structure</strong> and specifying the <strong>(conditional) probability distribution of each node</strong> (given any parent nodes). Network structure is specified within the <code>HydeNetwork()</code> function, while node distributions can be set using either <code>HydeNetwork()</code>, <code>setNode()</code>, or <code>setNodeModels()</code>. Generally, <code>HydeNetwork()</code> would be used to simultaneously define the distributions for all the nodes in the network in a single function call, while <code>setNode()</code> and <code>setNodeModels()</code> are used to define the distribution of a specific node in an existing <code>HydeNetwork</code> object. Also, <code>HydeNetwork()</code> offers a relatively limited set of options in terms of the nature of the specified distributions, while the other two functions offer more flexibility.</p>
+
+<p><code>HydeNetwork()</code> can be called in three different ways. The first involves explicit specification by the user of the network structure (according to the formula syntax implemented in <code>gRbase::dag()</code>) but no specification of a training dataset or models to populate node distributions. This results in a &ldquo;skeleton&rdquo; <code>HydeNetwork</code> object. The second technique involves the same explicit specification of the network structure, but also passing a training dataset. In this case, conditional probability distributions for all the nodes in the network are estimated, using frequency tabulation, linear regression, logistic regression, or multinomial logistic regression, depending on the classes (and number of levels, for factors) of the variables in the data frame and the user-specified network structure. </p>
+
+<p>The third way to invoke <code>HydeNetwork()</code> is to pass a &ldquo;bag of models&rdquo;, or more specifically a list argument containing one or more model objects as elements. In this method, the network structure is automatically built using the names of the response and explanatory variables within each of the models included in the list argument.  Permissible model classes include <code>xtabs</code>, <code>cpt</code>, <code>lm</code>, <code>glm</code>, and <code>multinom</code>. Note that, in the <code>HydeNet</code> package, we have included the <code>cpt</code> model class. This stands for <em>conditional probablity table</em>, and is intended to facilitate the specification of categorical node distributions for which all parent nodes are also categorical. See <code>help(&quot;cpt&quot;)</code> for details and see below for examples. Note also that at this time the <code>glm</code> class only works with <code>family=&quot;binomial&quot;</code>; defining a node&#39;s distribution using other families is possible, however, using <code>setNode()</code>.</p>
+
+<p>In any of the above three cases, but especially in the first case (i.e., when <code>HydeNetwork()</code> is used with neither a training data nor a list of model objects to populate node distributions), the distributions for each node in the network can be manually specified, one-by-one. This is accomplished with either the <code>setNode()</code> function or the <code>setNodeModels()</code> function. As we discuss below, we have implemented a multitude of techniques for specifying node distributions with these functions.</p>
+
+<p>We start by loading the package:</p>
+
+<pre><code class="r">library(HydeNet)
+</code></pre>
+
+<p>In the above output, the required packages for **<code>HydeNet</code>** are listed. In addition, this package uses JAGS, which is stand-alone software for implementing Markov Chain Monte Carlo simulation. JAGS is called from <code>R</code> via a package called <code>rjags</code>.  See <code>help(&quot;rjags-package&quot;)</code> for details.</p>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<p>##Example &ndash; Pulmonary Embolism</p>
+
+<p>The network we will study involves the diagnosis and treatment of pulmonary embolism, or PE (node <strong>pe</strong>).  PE is a condition where the arteries carrying blood to the lungs get blocked, typically by a blood clot that dislodged from a vein in the leg. There are two commonly-used tests for diagnosing PE. One is a blood test called D-dimer (node <strong>d.dimer</strong>), and the other is pulmonary angiography (node <strong>angio</strong>). For each, the probability of positive and negative test values depends on the status of PE. In other words, the conditional distribution function for each test node can be defined using the sensitivity and specificity of each test. The D-dimer test also is affected by pregnancy (node <strong>pregnant</strong>), with higher false positive rates.  Clinicians prior beliefs about the likelihood of PE are captured in a score (node <strong>wells</strong>). Since PE cannot directly be observed, the likelihood of a patient receiving treatment (node <strong>treat</strong>) depends on the test results. And the likelihood of survival through hospital discharge (node <strong>death</strong>) depends on both the status of the disease and whether or not the patient received treatment.  </p>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<h2>Creating &ldquo;Skeleton&rdquo; HydeNetwork Objects</h2>
+
+<p>A graphical representation of the PE network can be constructed based on an unpopulated <strong>HydeNetwork</strong> object (i.e., a &ldquo;base&rdquo; object for which node distributions have not yet been specified):</p>
+
+<pre><code class="r">net &lt;- HydeNetwork(~ wells
+                   + pe | wells
+                   + d.dimer | pregnant*pe
+                   + angio | pe
+                   + treat | d.dimer*angio
+                   + death | pe*treat)
+
+plot(net)
+</code></pre>
+
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<div id="htmlwidget-6355" style="width:504px;height:504px;" class="grViz"></div>
+<script type="application/json" data-for="htmlwidget-6355">{&quot;x&quot;:{&quot;diagram&quot;:&quot;digraph {\n\n  \&quot;wells\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;pe\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;d.dimer\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;pregnant\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;angio\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;treat\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;death\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;wells\&quot;-&gt;\&quot;pe\&quot; \n  \&quot;pe\&quot;-&gt;\&quot;d.dimer\&quot; \n  \&quot;pregnant\&quot;-&gt;\&quot;d.dimer\&quot; \n  \&quot;pe\&quot;-&gt;\&quot;angio\&quot; \n  \&quot;d.dimer\&quot;-&gt;\&quot;treat\&quot; \n  \&quot;angio\&quot;-&gt;\&quot;treat\&quot; \n  \&quot;pe\&quot;-&gt;\&quot;death\&quot; \n  \&quot;treat\&quot;-&gt;\&quot;death\&quot; \n}&quot;,&quot;config&quot;:{&quot;engine&quot;:&quot;dot&quot;,&quot;options&quot;:null}},&quot;evals&quot;:[]}</script>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
+
+<p>The <strong>HydeNetwork</strong> object we created, called <code>net</code>, is worth exploring:</p>
+
+<pre><code>## A Probabilistic Graphical Network
+## Has data attached: No
+## 
+## wells
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : wells ~ 1
+## 
+## pe | wells
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : pe ~ wells
+## 
+## d.dimer | pe * pregnant
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : d.dimer ~ pe + pregnant
+## 
+## pregnant
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : pregnant ~ 1
+## 
+## angio | pe
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : angio ~ pe
+## 
+## treat | d.dimer * angio
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : treat ~ d.dimer + angio
+## 
+## death | pe * treat
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : death ~ pe + treat
+</code></pre>
+
+<p>Since we haven&#39;t given <code>HydeNetwork()</code> information on conditional probability distributions for the nodes in the network, we have a skeleton object where each node is distributed as normal given its parent nodes.  The parameters <code>mu</code> and <code>tau</code> are to this point unspecified (note: in JAGS, the mean and <em>precision</em> are specified for the normal distribution - the precision parameter \(\tau\) is equal to \(1/\sigma^2\)).</p>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<p>##Creating HydeNetwork Objects With a Training Dataset</p>
+
+<p>Using <code>HydeNetwork()</code> with a training dataset implements the following default node-specific model classes, depending on the class of the node (in other words, the class of the variable in the training dataset), whether or not the node has parent nodes, and if so, the classes of the parent nodes:</p>
+
+<table><thead>
+<tr>
+<th align="left">Node Class</th>
+<th align="left">Parents</th>
+<th align="left">Model Type</th>
+<th align="left">Function</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left"><code>factor</code> with any number of levels</td>
+<td align="left">None</td>
+<td align="left">Tabulation</td>
+<td align="left"><code>stats::xtabs()</code></td>
+</tr>
+<tr>
+<td align="left"><code>factor</code> with any number of levels</td>
+<td align="left">All of class <code>factor</code></td>
+<td align="left">Conditional Probabilility Table</td>
+<td align="left"><code>HydeNet::cpt()</code></td>
+</tr>
+<tr>
+<td align="left">Binary <code>factor</code></td>
+<td align="left">At least 1 <code>numeric</code> or <code>integer</code></td>
+<td align="left">Logistic Regression</td>
+<td align="left"><code>stats::glm(..., family=&quot;binomial&quot;)</code></td>
+</tr>
+<tr>
+<td align="left"><code>factor</code> with 3+ levels</td>
+<td align="left">At least 1 <code>numeric</code> or <code>integer</code></td>
+<td align="left">Multinomial Logistic Regression</td>
+<td align="left"><code>nnet::multinom()</code></td>
+</tr>
+<tr>
+<td align="left"><code>numeric</code> or <code>integer</code></td>
+<td align="left">&mdash;</td>
+<td align="left">Ordinary Least Squares</td>
+<td align="left"><code>stats::lm()</code></td>
+</tr>
+</tbody></table>
+
+<p>The syntax for building a Bayesian network using training data is rather simple:</p>
+
+<pre><code class="r">data(PE, package=&#39;HydeNet&#39;)
+autoNet &lt;- HydeNetwork(~ wells
+                       + pe | wells
+                       + d.dimer | pregnant*pe
+                       + angio | pe
+                       + treat | d.dimer*angio
+                       + death | pe*treat,
+                       data = PE)
+writeNetworkModel(autoNet, pretty=TRUE)
+</code></pre>
+
+<pre><code>## model{
+##    wells ~ dnorm(3.79, 0.63)
+##    pe ~ dbern(ilogit(-3.9 + 0.58 * wells))
+##    d.dimer ~ dnorm(210.24 + 68.38 * (pe == 2) + 29.29 * (pregnant == 2), 0.03)
+##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1
+##    pregnant ~ dcat(pi.pregnant)
+##    pi.angio &lt;- cpt.angio[(pe+1), ]
+##    angio ~ dcat(pi.angio)
+##    treat ~ dbern(ilogit(-5.89 + 1.73 * (angio == 2) + 0.02 * d.dimer))
+##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
+##    death ~ dcat(pi.death)
+## }
+</code></pre>
+
+<p>We can see by the output that the models have all been populated, and verify that these are indeed the coefficients we obtain from the functions in the above table:</p>
+
+<pre><code class="r">glm(treat ~ d.dimer+angio, data=PE, family=&quot;binomial&quot;)$coef
+</code></pre>
+
+<pre><code>##   (Intercept)       d.dimer angioPositive 
+##   -5.89315742    0.01993752    1.73353613
+</code></pre>
+
+<pre><code class="r">xtabs(~PE$pregnant) / nrow(PE)
+</code></pre>
+
+<pre><code>## PE$pregnant
+##     No    Yes 
+## 0.9014 0.0986
+</code></pre>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<p>##Creating HydeNetwork Objects With a List of Models</p>
+
+<p>The same network can be constructed by feeding <code>HydeNetwork()</code> a list of model objects:</p>
+
+<pre><code class="r">g1 &lt;- lm(wells ~ 1, data=PE)
+g2 &lt;- glm(pe ~ wells, data=PE, family=&quot;binomial&quot;)
+g3 &lt;- lm(d.dimer ~ pe + pregnant, data=PE)
+g4 &lt;- xtabs(~ pregnant, data=PE)
+g5 &lt;- cpt(angio ~ pe, data=PE)
+g6 &lt;- glm(treat ~ d.dimer + angio, data=PE, family=&quot;binomial&quot;)
+g7 &lt;- cpt(death ~ pe + treat, data=PE)
+
+bagOfModels &lt;- list(g1,g2,g3,g4,g5,g6,g7)
+
+bagNet &lt;- HydeNetwork(bagOfModels)
+writeNetworkModel(bagNet, pretty=TRUE)
+</code></pre>
+
+<pre><code>## model{
+##    wells ~ dnorm( 3.79, 0.630504251834359)
+##    pe ~ dbern( ilogit(-3.9 + 0.58*wells))
+##    d.dimer ~ dnorm( 210.24 + 68.38*(pe==2) + 29.29*(pregnant==2), 0.0334725036145318)
+##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1
+## pregnant ~ dcat(pi.pregnant)
+##    pi.angio &lt;- cpt.angio[(pe+1), ]
+##    angio ~ dcat(pi.angio)
+##    treat ~ dbern( ilogit(-5.89 + 1.73*(angio==2) + 0.02*d.dimer))
+##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
+##    death ~ dcat(pi.death)
+## }
+</code></pre>
+
+<p>The advantage of this approach is that it allows for somewhat increased flexibility in specifying the model parameterization for each node (e.g., inclusion of nonlinear effects and/or interactions). However, we caution that all these models ultimately get translated to JAGS code, and this translation is relatively limited in terms of the types of model parameterizations supported. We discuss this issue in greater detail below, under the heading &ldquo;[Warning About Limited Scope of <code>writeJagsModel</code> Methods]&rdquo;.</p>
+
+<p>####A Note on Factor Conversion</p>
+
+<p>JAGS uses integers to represent levels of factors. Levels of factors are retained as a list element (called <code>factorRef</code>) in the output of <code>compileJagsModel()</code>. In the function <code>bindPosterior()</code>, we have facilitated the process of converting posterior MCMC samples into a single data frame with an option to re-label factors.  This process is demonstrated in our &#39;Getting Started with HydeNet&#39; vignette.</p>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<p>##Specifying Distributions for Individual Nodes</p>
+
+<p>Below, we describe the usage of <code>setNode()</code> and <code>setNodeModels()</code>.</p>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<p>###Univariate Distributions for Root Nodes</p>
+
+<h4>Binary Root Nodes</h4>
+
+<p>The most straightforward way to specify distributions for root nodes, or nodes without parents is by using <code>setNode</code> with specific distributions and parameters.  For example, returning to our original unpopulated network (object <code>net</code>), we can define a Bernoulli distribution for node <strong>pregnant</strong>:</p>
+
+<pre><code class="r">net &lt;- setNode(network = net, node = pregnant,
+               nodeType = &quot;dbern&quot;, p=.4)
+net
+</code></pre>
+
+<pre><code>## A Probabilistic Graphical Network
+## Has data attached: No
+## 
+## wells
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : wells ~ 1
+## 
+## pe | wells
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : pe ~ wells
+## 
+## d.dimer | pe * pregnant
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : d.dimer ~ pe + pregnant
+## 
+## pregnant
+## dbern(p = 0.4)
+## : pregnant ~ 1
+## 
+## angio | pe
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : angio ~ pe
+## 
+## treat | d.dimer * angio
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : treat ~ d.dimer + angio
+## 
+## death | pe * treat
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : death ~ pe + treat
+</code></pre>
+
+<p>In the code above, we can see that <code>setNode</code> works by returning a modified <em>HydeNet</em> object. In the output, node <strong>pregnant</strong> is now Bernoulli with probability of 0.4.</p>
+
+<h4>Normally-distributed Root Nodes</h4>
+
+<p>Univariate normal distributions are specified using <code>nodeType = &quot;dnorm&quot;</code>. We will specify a normal distribution with a \(\mu = 5\) and \(\sigma = 1.5\) for node <strong>wells</strong>:</p>
+
+<pre><code class="r">net &lt;- setNode(net, wells,
+               nodeType = &quot;dnorm&quot;, 
+               mu = 5, tau = 1 / (1.5^2))
+
+net$nodeType$wells
+</code></pre>
+
+<pre><code>## [1] &quot;dnorm&quot;
+</code></pre>
+
+<pre><code class="r">net$nodeParams$wells
+</code></pre>
+
+<pre><code>## $mu
+## [1] 5
+## 
+## $tau
+## [1] 0.4444444
+</code></pre>
+
+<h4>Multicategory Root Nodes</h4>
+
+<p>Suppose instead that the Wells score was categorical in nature, with three values (e.g., low, medium and high).  We can specify categorical distributions as follows:</p>
+
+<pre><code class="r">net &lt;- setNode(net, wells,
+               nodeType = &quot;dcat&quot;,
+               pi = vectorProbs(p = c(.3, .6, .1), wells) )
+</code></pre>
+
+<pre><code>## Validation has been ignored for parameters defined with character strings
+</code></pre>
+
+<pre><code class="r">net$nodeType$wells
+</code></pre>
+
+<pre><code>## [1] &quot;dcat&quot;
+</code></pre>
+
+<pre><code class="r">net$nodeParams$wells
+</code></pre>
+
+<pre><code>## $pi
+## [1] &quot;pi.wells[1] &lt;- 0.3; pi.wells[2] &lt;- 0.6; pi.wells[3] &lt;- 0.1&quot;
+</code></pre>
+
+<p>Note here that we have overwritten the node distribution within the object <code>net</code> to be categorical in nature.</p>
+
+<p>The <code>vectorProbs()</code> function converts a probability vector into JAGS code, as seen above in the list element <code>net$nodeParams$wells</code>. This function will by default normalize probability vectors, so that counts can be directly fed into the model:</p>
+
+<pre><code class="r">net &lt;- setNode(net, wells,
+               nodeType = &quot;dcat&quot;,
+               pi = vectorProbs(p = c(37, 162, 48), wells) )
+</code></pre>
+
+<pre><code>## Validation has been ignored for parameters defined with character strings
+</code></pre>
+
+<pre><code class="r">net$nodeType$wells
+</code></pre>
+
+<pre><code>## [1] &quot;dcat&quot;
+</code></pre>
+
+<pre><code class="r">net$nodeParams$wells
+</code></pre>
+
+<pre><code>## $pi
+## [1] &quot;pi.wells[1] &lt;- 0.149797570850202; pi.wells[2] &lt;- 0.65587044534413; pi.wells[3] &lt;- 0.194331983805668&quot;
+</code></pre>
+
+<p>We could have achieved the same by directly inserting the JAGS code into the pi parameter:</p>
+
+<pre><code class="r">net &lt;- setNode(net, wells,
+               nodeType = &quot;dcat&quot;,
+               pi = &quot;pi.wells[1] &lt;- 0.15; pi.wells[2] &lt;- 0.66; pi.wells[3] &lt;- 0.19&quot;)
+</code></pre>
+
+<pre><code>## Validation has been ignored for parameters defined with character strings
+</code></pre>
+
+<h4>Other Univariate Distributions</h4>
+
+<p><code>HydeNet</code> supports all the statistical distributions supported by JAGS.  A table of these distributions is stored in the <code>jagsDists</code> dataset:</p>
+
+<pre><code class="r">data(jagsDists, package=&#39;HydeNet&#39;)
+jagsDists[,c(1,2,5,6)]
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">DistName</th>
+<th align="left">FnName</th>
+<th align="left">Parameters</th>
+<th align="left">paramLimit</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">Beta</td>
+<td align="left">dbeta</td>
+<td align="left">a</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Beta</td>
+<td align="left">dbeta</td>
+<td align="left">b</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Chi-square</td>
+<td align="left">dchisqr</td>
+<td align="left">k</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Double exponential</td>
+<td align="left">ddexp</td>
+<td align="left">mu</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Double exponential</td>
+<td align="left">ddexp</td>
+<td align="left">tau</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Exponential</td>
+<td align="left">dexp</td>
+<td align="left">lambda</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">F</td>
+<td align="left">df</td>
+<td align="left">n</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">F</td>
+<td align="left">df</td>
+<td align="left">mu</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Gamma</td>
+<td align="left">dgamma</td>
+<td align="left">r</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Gamma</td>
+<td align="left">dgamma</td>
+<td align="left">lambda</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Generalized gamma</td>
+<td align="left">dgen.gamma</td>
+<td align="left">r</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Generalized gamma</td>
+<td align="left">dgen.gamma</td>
+<td align="left">b</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Generalized gamma</td>
+<td align="left">dgen.gamma</td>
+<td align="left">lambda</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Logistic</td>
+<td align="left">dlogis</td>
+<td align="left">mu</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Logistic</td>
+<td align="left">dlogis</td>
+<td align="left">tau</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Log-normal</td>
+<td align="left">dlnorm</td>
+<td align="left">mu</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Log-normal</td>
+<td align="left">dlnorm</td>
+<td align="left">tau</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Noncentral chi-square</td>
+<td align="left">dnchisqr</td>
+<td align="left">k</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Noncentral chi-square</td>
+<td align="left">dnchisqr</td>
+<td align="left">delta</td>
+<td align="left">&gt;= 0</td>
+</tr>
+<tr>
+<td align="left">Normal</td>
+<td align="left">dnorm</td>
+<td align="left">mu</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Normal</td>
+<td align="left">dnorm</td>
+<td align="left">tau</td>
+<td align="left">&gt;= 0</td>
+</tr>
+<tr>
+<td align="left">Pareto</td>
+<td align="left">dpar</td>
+<td align="left">alpha</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Pareto</td>
+<td align="left">dpar</td>
+<td align="left">alpha</td>
+<td align="left">&gt; c</td>
+</tr>
+<tr>
+<td align="left">Student t</td>
+<td align="left">dt</td>
+<td align="left">mu</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Student t</td>
+<td align="left">dt</td>
+<td align="left">tau</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Student t</td>
+<td align="left">dt</td>
+<td align="left">k</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Uniform</td>
+<td align="left">dunif</td>
+<td align="left">a</td>
+<td align="left">&lt; b</td>
+</tr>
+<tr>
+<td align="left">Uniform</td>
+<td align="left">dunif</td>
+<td align="left">b</td>
+<td align="left">&gt; a</td>
+</tr>
+<tr>
+<td align="left">Weibull</td>
+<td align="left">dweib</td>
+<td align="left">nu</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Weibull</td>
+<td align="left">dweib</td>
+<td align="left">lambda</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Beta Binomial</td>
+<td align="left">dbetabin</td>
+<td align="left">a</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Beta Binomial</td>
+<td align="left">dbetabin</td>
+<td align="left">b</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Beta Binomial</td>
+<td align="left">dbetabin</td>
+<td align="left">n</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Bernoulli</td>
+<td align="left">dbern</td>
+<td align="left">p</td>
+<td align="left">0 &lt; p &lt; 1</td>
+</tr>
+<tr>
+<td align="left">Binomial</td>
+<td align="left">dbin</td>
+<td align="left">p</td>
+<td align="left">0 &lt; p &lt; 1</td>
+</tr>
+<tr>
+<td align="left">Binomial</td>
+<td align="left">dbin</td>
+<td align="left">n</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Categorical</td>
+<td align="left">dcat</td>
+<td align="left">pi</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Noncentral hypergeometric</td>
+<td align="left">dhyper</td>
+<td align="left">n1</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Noncentral hypergeometric</td>
+<td align="left">dhyper</td>
+<td align="left">n2</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Noncentral hypergeometric</td>
+<td align="left">dhyper</td>
+<td align="left">m1</td>
+<td align="left">0 &lt; m1 &lt; (n1 + n2)</td>
+</tr>
+<tr>
+<td align="left">Noncentral hypergeometric</td>
+<td align="left">dhyper</td>
+<td align="left">psi</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">Negative Binomial</td>
+<td align="left">dnegbin</td>
+<td align="left">p</td>
+<td align="left">0 &lt; p &lt; 1</td>
+</tr>
+<tr>
+<td align="left">Negative Binomial</td>
+<td align="left">dnegbin</td>
+<td align="left">r</td>
+<td align="left">&gt; 0</td>
+</tr>
+<tr>
+<td align="left">Poisson</td>
+<td align="left">dpois</td>
+<td align="left">lambda</td>
+<td align="left">&gt; 0</td>
+</tr>
+</tbody></table>
+
+<p>So, to assign a Weibull distribution to a node <em>XYZ</em>, we would use  the following code:</p>
+
+<pre><code class="r">net &lt;- setNode(net, XYZ, nodeType = &quot;dweib&quot;, nu=2, lambda=5)
+</code></pre>
+
+<p>Finally, note that there is built-in error handling when parameters are outside allowable limits:</p>
+
+<pre><code class="r">net &lt;- setNode(net, d.dimer, nodeType = &quot;dpois&quot;, lambda=-10)
+</code></pre>
+
+<pre><code>## Error in setNode(net, d.dimer, nodeType = &quot;dpois&quot;, lambda = -10): 
+## 1: Please define lambda such that lambda &gt; 0 (or use validate=FALSE).
+</code></pre>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<p>###Regression Equations</p>
+
+<p>####Ordinary Least Squares (OLS)</p>
+
+<p>For OLS models, <code>nodeType=&quot;dnorm&quot;</code> can be used. We use a regression equation to characterize the dependency of the node on its parents. We note again that normal distributions are specified using the mean and <em>precision</em> parameters, where the precision parameter is the inverse of the variance.</p>
+
+<p><code>setNode()</code> supports the use of formula syntax to define a regression equation for a given node. This is achieved using the <code>fromFormula()</code> function with the <em>nodeFormula</em> parameter, as follows:</p>
+
+<pre><code class="r">net &lt;- setNode(net, d.dimer, nodeType=&quot;dnorm&quot;,
+               mu=fromFormula(), tau=1/30,  #sigma^2 = 30
+               nodeFormula = d.dimer ~ 210 + 29*pregnant + 68*pe)
+
+net$nodeType$d.dimer
+</code></pre>
+
+<pre><code>## [1] &quot;dnorm&quot;
+</code></pre>
+
+<pre><code class="r">net$nodeParams$d.dimer
+</code></pre>
+
+<pre><code>## $mu
+## [1] &quot;fromFormula&quot;
+## 
+## $tau
+## [1] 0.03333333
+</code></pre>
+
+<pre><code class="r">net$nodeFormula$d.dimer
+</code></pre>
+
+<pre><code>## d.dimer ~ 210 + 29 * pregnant + 68 * pe
+</code></pre>
+
+<p>Or, alternatively, one may directly specify JAGS code for the parameters as character strings. Below, we do this for <code>mu</code>:</p>
+
+<pre><code class="r">net &lt;- setNode(net, d.dimer, nodeType=&quot;dnorm&quot;,
+               mu=&quot;210 + 29*pregnant + 68*pe&quot;, tau=1/30)
+</code></pre>
+
+<p>However, the model syntax is flexible, allowing for alternative distributions to be used if desired.  For example, maybe the distribution of the residuals has heavy tails; here, the (non-standardized) Student&#39;s <em>t</em> distribution could be used:</p>
+
+<pre><code class="r">net &lt;- setNode(net, d.dimer, nodeType=&quot;dt&quot;,
+               mu=&quot;210 + 29*pregnant + 68*pe&quot;, tau=1/20, k=2)
+</code></pre>
+
+<p>The decision of whether to give an <code>R</code>-style formula or JAGS code is a matter of preference.  But when using <code>R</code> code, one needs to ensure that any functions used in the formula can be translated to JAGS code.  A list of functions that can be translated between <code>R</code> and JAGS can be viewed by calling </p>
+
+<pre><code class="r">data(jagsFunctions, package=&#39;HydeNet&#39;)
+jagsFunctions
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">jags_function</th>
+<th align="left">r_function</th>
+<th align="left">r_package</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">abs</td>
+<td align="left">abs</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">arccos</td>
+<td align="left">acos</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">arccosh</td>
+<td align="left">acosh</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">arcsin</td>
+<td align="left">asin</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">arcsinh</td>
+<td align="left">asinh</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">arctan</td>
+<td align="left">atan</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">arctanh</td>
+<td align="left">atanh</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">cos</td>
+<td align="left">cos</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">cosh</td>
+<td align="left">cosh</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">cloglog</td>
+<td align="left">cloglog</td>
+<td align="left">VGAM</td>
+</tr>
+<tr>
+<td align="left">equals</td>
+<td align="left">==</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">exp</td>
+<td align="left">exp</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">icloglog</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">ifelse</td>
+<td align="left">ifelse</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">ilogit</td>
+<td align="left">logit</td>
+<td align="left">VGAM</td>
+</tr>
+<tr>
+<td align="left">log</td>
+<td align="left">log</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">logfact</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">loggam</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">logit</td>
+<td align="left">logit</td>
+<td align="left">VGAM</td>
+</tr>
+<tr>
+<td align="left">phi</td>
+<td align="left">pnorm</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">pow</td>
+<td align="left">^</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">probit</td>
+<td align="left">probit</td>
+<td align="left">VGAM</td>
+</tr>
+<tr>
+<td align="left">round</td>
+<td align="left">ceiling</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">sin</td>
+<td align="left">sin</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">sinh</td>
+<td align="left">sinh</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">sqrt</td>
+<td align="left">sqrt</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">step</td>
+<td align="left">&gt;= 0</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">tan</td>
+<td align="left">tan</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">tanh</td>
+<td align="left">tanh</td>
+<td align="left">base</td>
+</tr>
+<tr>
+<td align="left">trunc</td>
+<td align="left">floor</td>
+<td align="left">base</td>
+</tr>
+</tbody></table>
+
+<h4>Logistic Regression</h4>
+
+<p>If the intercept and slope coefficients of a logistic regression model are known, one may define a Bernoulli-distributed node using the <code>ilogit</code> function in JAGS (inverse logit):</p>
+
+<pre><code class="r">equation &lt;- &quot;-6.3 + 0.02*d.dimer + 2.9*angio - 0.005*d.dimer*angio&quot;
+net &lt;- setNode(net, treat, nodeType=&quot;dbern&quot;,
+               p=paste(&quot;ilogit(&quot;, equation, &quot;)&quot;), 
+               validate=FALSE)
+</code></pre>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<h3>Using <strong><code>R</code></strong> Model Objects</h3>
+
+<p>Above, we showed how <code>HydeNetwork()</code> can be used with a list of model objects to populate both the graph and the corresponding node distributions. In a similar fashion, certain <code>R</code> model classes can be used to populate the distribution for individual nodes in an existing <code>HydeNetwork</code> object. This is achieved using the <code>setNodeModels()</code> function. Currently, <code>setNodeModels()</code> is compatible with the following model classes: <code>xtabs</code>, <code>cpt</code>, <code>lm</code>, <code>glm</code>, (<code>family=&quot;binomial&quot;</code> only) and <code>multinom</code>.</p>
+
+<p>Above, we constructed a <code>HydeNetwork</code> object called <code>bagNet</code> for the PE network by passing a list of model objects.  Suppose we wanted to modify one of the models and repopulate the network, e.g., by introducing an interaction term.  This is achieved with the following code:</p>
+
+<pre><code class="r">bagNet$nodeType$d.dimer
+</code></pre>
+
+<pre><code>## [1] &quot;dnorm&quot;
+</code></pre>
+
+<pre><code class="r">bagNet$nodeParams$d.dimer
+</code></pre>
+
+<pre><code>## $mu
+## [1] &quot; 210.24 + 68.38*(pe==2) + 29.29*(pregnant==2)&quot;
+## 
+## $tau
+## [1] 0.0334725
+</code></pre>
+
+<pre><code class="r">bagNet$nodeFormula$d.dimer
+</code></pre>
+
+<pre><code>## d.dimer ~ pe + pregnant
+</code></pre>
+
+<pre><code class="r">new.DDimer.Model &lt;- lm(d.dimer ~ pe * pregnant, data=PE)
+bagNet &lt;- setNodeModels(bagNet, new.DDimer.Model)
+
+writeNetworkModel(bagNet, pretty=TRUE)
+</code></pre>
+
+<pre><code>## model{
+##    wells ~ dnorm( 3.79, 0.630504251834359)
+##    pe ~ dbern( ilogit(-3.9 + 0.58*wells))
+##    d.dimer ~ dnorm( 210.03 + 69.52*(pe==2) + 31.42*(pregnant==2) + -11.51*(pregnant==3), 0.0335041033258058)
+##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1
+## pregnant ~ dcat(pi.pregnant)
+##    pi.angio &lt;- cpt.angio[(pe+1), ]
+##    angio ~ dcat(pi.angio)
+##    treat ~ dbern( ilogit(-5.89 + 1.73*(angio==2) + 0.02*d.dimer))
+##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
+##    death ~ dcat(pi.death)
+## }
+</code></pre>
+
+<h4>Warning About Limited Scope of <code>writeJagsModel</code> Methods</h4>
+
+<p>Passing model objects to <code>HydeNetwork</code> objects, either using <code>HydeNetwork.list()</code> or <code>setNodeModels()</code>, is handled by invoking the <code>writeJagsModel()</code> methods.  These methods accept the model object (e.g., an <code>lm</code> object) as input and populate a variety of list elements within the <code>HydeNetwork</code> object (e.g., <code>$nodeFormula</code>, <code>$nodeFitter</code>, <code>$nodeFitterArgs</code>, <code>$nodeParams</code>, etc.).  The core functionality of these methods is to use the <code>R</code> model object to write JAGS code implementing the probability distribution described by the model. This is a difficult feature to standardize.</p>
+
+<p>Currently, only a limited set of model parameterizations are supported by the convenience functions <code>HydeNetwork.list()</code> and <code>setNodeModels()</code>.  In situations where more complex model equations are to be specified for certain node(s), <code>setNode()</code> should be used instead of these functions as it allows more flexibility.  Future versions of the package will allow for more flexibility in directly passing <code>R</code> model objects.</p>
+
+<p>The supported parameterizations include the following:</p>
+
+<ul>
+<li>Main effects</li>
+<li>Two-way interactions</li>
+<li>Polynomial terms involving continuous/integer predictors</li>
+</ul>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<p>####Conditional Probability Tables (CPTs)</p>
+
+<p>When a given node as well as all of its parent nodes are categorical (or binary) in nature, the conditional distribution of that node is also fully categorical. We have included two functions &mdash; <code>cpt()</code> and <code>inputCPT()</code> &mdash; which facilitate the process of populating the conditional distributions for such nodes.</p>
+
+<p>Each of these two functions produce an object of class <code>cpt</code>, which is a <em>k-*dimensional array (with *k</em> equal to the number of parent nodes) with a specific structure: the last dimension corresponds to the child node and the array, when summed across this dimension, is equal to a *(k-1)-*dimensional array of ones. It therefore is an array containing conditional distributions of the child node for each combination of parent nodes.</p>
+
+<p>The function <code>cpt()</code> will compute this array given an input dataset and a formula which represents the conditional probability structure.  In the code below, the variable <code>death</code> is the child node and the variables <code>pe</code> and <code>treat</code> are the parent nodes.</p>
+
+<pre><code class="r">h &lt;- cpt(death ~ pe + treat, data=PE)
+</code></pre>
+
+<p><code>inputCPT()</code> is similar, although instead of using an input dataset to estimate the conditional distributions, it runs through a dialogue to manually specify the conditional densities.  This can be useful for small conditional probability tables, such as the conditional probability of a diagnostic test being positive given disease status:</p>
+
+<pre><code class="r">h &lt;- inputCPT(test ~ disease)
+</code></pre>
+
+<pre><code>------------------------------------------------------------------
+Enter Factor Levels for node &#39;test&#39;:
+
+If this is a binary variable, enter &#39;&lt;yn&gt;&#39; as a shortcut.
+When finished, enter &#39;&lt;z&gt;&#39;.
+To repeat entry of the last inputted factor level, enter &#39;&lt;b&gt;&#39;.
+To start over entirely, enter &#39;&lt;s&gt;&#39;
+------------------------------------------------------------------
+Level 1 of &#39;test&#39;:   ---
+Level 2 of &#39;test&#39;:   +++
+Level 3 of &#39;test&#39;:   &lt;z&gt;
+------------------------------------------------------------------
+Enter Factor Levels for node &#39;disease&#39;:
+
+If this is a binary variable, enter &#39;&lt;yn&gt;&#39; as a shortcut.
+When finished, enter &#39;&lt;z&gt;&#39;.
+To repeat entry of the last inputted factor level, enter &#39;&lt;b&gt;&#39;.
+To start over entirely, enter &#39;&lt;s&gt;&#39;
+------------------------------------------------------------------
+Level 1 of &#39;disease&#39;:   Healthy
+Level 2 of &#39;disease&#39;:   Diseased
+Level 3 of &#39;disease&#39;:   &lt;z&gt;
+------------------------------------------------------------------
+NOTE: parameter &#39;reduce&#39; is set to TRUE in inputCPT().
+      Conditional probabilities Pr(test=--- | disease)
+      will be calculated as the complement of the
+      inputted probabilities Pr(test != --- | disease).
+------------------------------------------------------------------
+Enter the following conditional probabilities:
+Use &#39;&lt;q&gt;&#39; to halt execution.
+To go back one step and re-enter, enter &#39;&lt;b&gt;&#39;.
+------------------------------------------------------------------
+Pr(test=+++ | Healthy ):   0.23
+Pr(test=+++ | Diseased):   0.85
+</code></pre>
+
+<pre><code class="r">print(h)
+</code></pre>
+
+<pre><code>          test
+disease     ---  +++
+  Healthy  0.77 0.23
+  Diseased 0.15 0.85
+attr(,&quot;model&quot;)
+   disease test   wt
+1  Healthy  +++ 0.23
+2 Diseased  +++ 0.85
+3  Healthy  --- 0.77
+4 Diseased  --- 0.15
+attr(,&quot;class&quot;)
+[1] &quot;cpt&quot;   &quot;array&quot;
+</code></pre>
+
+<p><a href="#top">[Link to top]</a></p>
+
+<h2>Deterministic Nodes</h2>
+
+<p>In many cases, the user may desire to specify nodes that are non-random in nature. For example, we might construct a network for the first roll of dice within a game of craps.  In craps, if the &ldquo;shooter&rdquo; (the person rolling the dice) rolls a 2, 3, or 12, you immediately lose. If the &ldquo;shooter&rdquo; rolls a 7 or 11, you immediately win. Anything else and the &ldquo;point&rdquo; gets set (and then the shooter rolls again).</p>
+
+<pre><code class="r">craps &lt;- HydeNetwork(~ d1 + d2 + diceSum | d1*d2
+                       + firstRollOutcome | diceSum)
+
+craps &lt;- setNode(craps, d1, nodeType=&quot;dcat&quot;,
+                 pi = vectorProbs(p = rep(1/6,6), d1),
+                 validate = FALSE)
+craps &lt;- setNode(craps, d2, nodeType=&quot;dcat&quot;,
+                 pi = vectorProbs(p = rep(1/6,6), d2),
+                 validate = FALSE)
+
+craps &lt;- setNode(craps, diceSum, nodeType = &quot;determ&quot;,
+                 define = fromFormula(),
+                 nodeFormula = diceSum ~ di1 + di2)
+
+craps &lt;- setNode(craps, firstRollOutcome, nodeType = &quot;determ&quot;,
+                 define = fromFormula(),
+                 nodeFormula = firstRollOutcome ~ 
+                                 ifelse(diceSum &lt; 4 | diceSum &gt; 11, -1,
+                                    ifelse(diceSum == 7 | diceSum == 11, 1,0)))
+
+plot(craps)
+</code></pre>
+
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<div id="htmlwidget-2408" style="width:216px;height:504px;" class="grViz"></div>
+<script type="application/json" data-for="htmlwidget-2408">{&quot;x&quot;:{&quot;diagram&quot;:&quot;digraph {\n\n  \&quot;d1\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;d2\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;diceSum\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;gray70\&quot;, color = \&quot;gray70\&quot;, style = \&quot;filled\&quot;] \n  \&quot;firstRollOutcome\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;gray70\&quot;, color = \&quot;gray70\&quot;, style = \&quot;filled\&quot;] \n  \&quot;d1\&quot;-&gt;\&quot;diceSum\&quot; \n  \&quot;d2\&quot;-&gt;\&quot;diceSum\&quot; \n  \&quot;diceSum\&quot;-&gt;\&quot;firstRollOutcome\&quot; \n}&quot;,&quot;config&quot;:{&quot;engine&quot;:&quot;dot&quot;,&quot;options&quot;:null}},&quot;evals&quot;:[]}</script>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
+
+<pre><code class="r">writeNetworkModel(craps, pretty=TRUE)
+</code></pre>
+
+<pre><code>## model{
+##    pi.d1[1] &lt;- 0.166666666666667; pi.d1[2] &lt;- 0.166666666666667; pi.d1[3] &lt;- 0.166666666666667; pi.d1[4] &lt;- 0.166666666666667; pi.d1[5] &lt;- 0.166666666666667; pi.d1[6] &lt;- 0.166666666666667
+## d1 ~ dcat(pi.d1)
+##    pi.d2[1] &lt;- 0.166666666666667; pi.d2[2] &lt;- 0.166666666666667; pi.d2[3] &lt;- 0.166666666666667; pi.d2[4] &lt;- 0.166666666666667; pi.d2[5] &lt;- 0.166666666666667; pi.d2[6] &lt;- 0.166666666666667
+## d2 ~ dcat(pi.d2)
+##    diceSum &lt;- di1 + di2
+##    firstRollOutcome &lt;- ifelse(diceSum &lt; 4 | diceSum &gt; 11, -1, ifelse(diceSum == 7 | diceSum == 11, 1, 0))
+## }
+</code></pre>
+
+<p>The formulas follow the same rules as described above in the [Regression Equations] section.</p>
+
+<!--
+#### "Helper" Deterministic Functions
+
+We have implemented a series of "helper" deterministic functions to facilitate model specification.  These include `and()` (intersection of binary parent nodes), `or()` (union of parent nodes), and `xor()` (exclusive or of parent nodes).
+-->
+
+<p><a href="#top">[Link to top]</a></p>
+
+<p>##Modifying the Graph Structure</p>
+
+<p>Nodes and/or links may be added or removed from an existing <code>HydeNetwork</code> object, using an <code>update</code> method we have implemented for <code>HydeNetwork</code> objects. Syntactically, this function acts in a similar fashion to <code>update.lm()</code>, in that you add or subtract terms from the model equation.  Suppose that a new diagnostic test for PE was invented and we wish to incorporate it into the PE network.  We can achieve this by the following code:</p>
+
+<pre><code class="r">net2 &lt;- update(net, . ~ . + newTest | pe
+                          + treat | newTest
+                          - pregnant)
+</code></pre>
+
+<pre><code>## Warning in update.HydeNetwork(net, . ~ . + newTest | pe + treat | newTest - : The following nodes lost parents in the update:
+##     d.dimer: pregnant
+</code></pre>
+
+<pre><code class="r">plot(net2)
+</code></pre>
+
+<p>&lt;!&ndash;html_preserve&ndash;&gt;<div id="htmlwidget-1174" style="width:504px;height:504px;" class="grViz"></div>
+<script type="application/json" data-for="htmlwidget-1174">{&quot;x&quot;:{&quot;diagram&quot;:&quot;digraph {\n\n  \&quot;newTest\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;pe\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;treat\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;angio\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;d.dimer\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;death\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;wells\&quot; [fillcolor = \&quot;white\&quot;, shape = \&quot;ellipse\&quot;, fontcolor = \&quot;black\&quot;, color = \&quot;black\&quot;, style = \&quot;filled\&quot;] \n  \&quot;pe\&quot;-&gt;\&quot;newTest\&quot; \n  \&quot;wells\&quot;-&gt;\&quot;pe\&quot; \n  \&quot;newTest\&quot;-&gt;\&quot;treat\&quot; \n  \&quot;angio\&quot;-&gt;\&quot;treat\&quot; \n  \&quot;d.dimer\&quot;-&gt;\&quot;treat\&quot; \n  \&quot;pe\&quot;-&gt;\&quot;angio\&quot; \n  \&quot;pe\&quot;-&gt;\&quot;d.dimer\&quot; \n  \&quot;pe\&quot;-&gt;\&quot;death\&quot; \n  \&quot;treat\&quot;-&gt;\&quot;death\&quot; \n}&quot;,&quot;config&quot;:{&quot;engine&quot;:&quot;dot&quot;,&quot;options&quot;:null}},&quot;evals&quot;:[]}</script>&lt;!&ndash;/html_preserve&ndash;&gt;</p>
+
+<p>The <code>update()</code> method for <code>HydeNetwork</code> objects processes terms in the given model equation sequentially. In the above example, the original object <code>net</code> did not contain a node called <code>newTest</code>.  But there were nodes called <code>pregnant</code>, <code>pe</code>, and <code>treat</code>.  The first term within the model equation (<code>+ newTest | pe</code>) specifies the addition of the node <code>newTest</code> as a child of node <code>pe</code>.  The second term (<code>+ treat | newTest</code>) specifies the addition of a link from the now-existing node <code>newTest</code> into node <code>treat</code>.  The third term (<code>- pregnant</code>) specifies the removal of node <code>pregnant</code>.  Examining the network object, two important points are worth mentioning:</p>
+
+<pre><code class="r">net2
+</code></pre>
+
+<pre><code>## A Probabilistic Graphical Network
+## Has data attached: No
+## 
+## newTest | pe
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : newTest ~ pe
+## 
+## pe | wells
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : pe ~ wells
+## 
+## treat | newTest * angio * d.dimer
+## dbern(p = ilogit( -6.3 + 0.02*d.dimer + 2.9*angio - 0.005*d.dimer*angio ))
+## : treat ~ d.dimer + angio
+## 
+## angio | pe
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : angio ~ pe
+## 
+## d.dimer | pe
+## dnorm(mu = fromFormula, tau = 0.0333333333333333)
+## : d.dimer ~ 210 + 29 * pregnant + 68 * pe
+## 
+## death | pe * treat
+## dnorm(mu = Unspecified, tau = Unspecified)
+## : death ~ pe + treat
+## 
+## wells
+## dcat(pi = pi.wells[1] &lt;- 0.15; pi.wells[2] &lt;- 0.66; pi.wells[3] &lt;- 0.19)
+## : wells ~ 1
+</code></pre>
+
+<p>First, while the graph has changed &ndash; and now node <code>treat</code> has three parents &ndash; the model for node <code>treat</code> has not changed.  The user must specify a new model (with either <code>setNode()</code> or <code>setNodeModels()</code>) to account for this new dependency if desired.</p>
+
+<p>Second, a warning message indicates that a parent node (<code>pregnant</code>) has been removed. Since that node was involved in characterizing the distribution of its child node(s) (<code>d.dimer</code>), the function by default removes the distribution from all child nodes still existing in the network.  The user then is required to use either <code>setNode()</code> or <code>setNodeModels()</code> to repopulate the distribution(s) for the affected node(s).</p>
+
+<p><a href="#top">[Link to top]</a></p>
+
+</body>
+
+</html>
