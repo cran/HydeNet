@@ -22,8 +22,8 @@ carNet <- HydeNetwork(~ cyl
                       + mpg | disp*hp*wt*gear,
                       data=mtcars2)
 
-## ---- fig.width = 5------------------------------------------------------
-plot(carNet)
+## ---- fig.width = 5, eval=FALSE------------------------------------------
+#  plot(carNet)
 
 ## ------------------------------------------------------------------------
 HydeNet:::writeJagsModel(carNet, node = "cyl")
@@ -40,14 +40,16 @@ carNet2 <- compileJagsModel(carNet, data = list(cyl = "8") )
 ## ------------------------------------------------------------------------
 carNet3 <- compileJagsModel(carNet, data=list(cyl="8"))
 
-## ------------------------------------------------------------------------
+## ---- fig.width=6, fig.height=6------------------------------------------
 post1 <- HydePosterior(carNet1,
                        variable.names = c("cyl","hp","mpg"),
-                       n.iter = 10000)
+                       n.iter = 10000,
+                       bind=FALSE)
 
 post2 <- HydePosterior(carNet2,
                        variable.names = c("cyl","hp","mpg"),
-                       n.iter = 10000)
+                       n.iter = 10000,
+                       bind = FALSE)
 
 str(post1, max.level = 3)
 plot(post1$codas[,c("hp","mpg")])

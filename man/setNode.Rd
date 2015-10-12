@@ -8,7 +8,8 @@
 \usage{
 setNode(network, node, nodeType, nodeFitter, nodeFormula, fitterArgs = list(),
   decision = "current", utility = "current",
-  fromData = !is.null(network$data), ..., validate = TRUE,
+  fromData = !is.null(network$data), ..., nodeData = NULL,
+  factorLevels = NULL, validate = TRUE,
   fitModel = getOption("Hyde_fitModel"))
 
 fromData()
@@ -65,6 +66,21 @@ The required parameters can be looked up using the
 \code{expectedParameters} function.  If parameters are to be estimated
 from the data, the functions \code{fromData} and \code{fromFormula} may
 be used as placeholders.}
+
+\item{nodeData}{A data frame with the appropriate data to fit the model for the node.
+Data passed in this argument are applied only to this specific node.  No checks are
+performed to ensure that all of the appropriate variables (the node and its parents)
+are included.}
+
+\item{factorLevels}{A character vector used to specify the levels of factors
+when data are not provided for a node.  The order of factors follows the
+order provided by the user.  This argument is only used when the node type
+is either \code{dcat} or \code{dbern}, the node Fitter is not \code{cpt},
+\code{nodeData} is \code{NULL}, and no variable for the node exists in
+the network's \code{data} element.  If any of those conditions is not met,
+\code{factorLevels} is ignored.  This proves particularly important when
+data are specified in order to prevent a user specification from conflicting
+with expected factors across nodes.}
 
 \item{validate}{Logical.  Toggles validation of parameters given in \code{...}.
 When passing raw JAGS code (ie, character strings), this will be ignored

@@ -49,6 +49,19 @@
 #'   \code{expectedParameters} function.  If parameters are to be estimated 
 #'   from the data, the functions \code{fromData} and \code{fromFormula} may 
 #'   be used as placeholders.
+#' @param nodeData A data frame with the appropriate data to fit the model for the node.
+#'   Data passed in this argument are applied only to this specific node.  No checks are 
+#'   performed to ensure that all of the appropriate variables (the node and its parents)
+#'   are included.
+#' @param factorLevels A character vector used to specify the levels of factors
+#'   when data are not provided for a node.  The order of factors follows the 
+#'   order provided by the user.  This argument is only used when the node type 
+#'   is either \code{dcat} or \code{dbern}, the node Fitter is not \code{cpt}, 
+#'   \code{nodeData} is \code{NULL}, and no variable for the node exists in 
+#'   the network's \code{data} element.  If any of those conditions is not met,
+#'   \code{factorLevels} is ignored.  This proves particularly important when 
+#'   data are specified in order to prevent a user specification from conflicting 
+#'   with expected factors across nodes.
 #' @param validate Logical.  Toggles validation of parameters given in \code{...}.
 #'   When passing raw JAGS code (ie, character strings), this will be ignored 
 #'   (with a message), 
@@ -119,28 +132,23 @@ setNode <- function(network, node, nodeType,
                     decision = "current",
                     utility = "current",
                     fromData=!is.null(network$data), ...,
+                    nodeData = NULL, factorLevels = NULL,
                     validate=TRUE, fitModel=getOption("Hyde_fitModel")){
   
   network.t <- as.character(substitute(network))
   node.t <- as.character(substitute(node))
   
 #   data(jagsDists, package='Hyde')
-  
-  err.flag <- 0
-  err.msg <- ""
-  
-  wrn.flag <- 0
-  wrn.msg <- ""
+  Check <- ArgumentCheck::newArgCheck()
   
   if (is.character(decision))
   {
     if (decision != "current")
     {
-      wrn.flag <- wrn.flag + 1
-      wrn.msg <- c(wrn.msg,
-                   paste0(wrn.flag, ": 'decision' must be logical or 'current'.  You provided ",
-                          "an unrecognized character value.  'HydeNet' is assuming you mean ",
-                          "'current'."))
+      ArgumentCheck::addWarning(paste0("'decision' must be logical or 'current'.  You provided ",
+                                       "an unrecognized character value.  'HydeNet' is assuming you mean ",
+                                       "'current'."),
+                                Check)
       decision <- "current"
     }
     decision <- network$nodeDecision[[node.t]]
@@ -150,11 +158,10 @@ setNode <- function(network, node, nodeType,
   {
     if (utility != "current")
     {
-      wrn.flag <- wrn.flag + 1
-      wrn.msg <- c(wrn.msg,
-                   paste0(wrn.flag, ": 'utility' must be logical or 'current'.  You provided ",
-                          "an unrecognized character value.  'HydeNet' is assuming you mean ",
-                          "'current'."))
+      ArgumentCheck::addWarning(paste0("'utility' must be logical or 'current'.  You provided ",
+                                       "an unrecognized character value.  'HydeNet' is assuming you mean ",
+                                       "'current'."),
+                                Check)
       utility <- "current"
     }
     utility <- network$nodeUtility[[node.t]]
@@ -162,34 +169,28 @@ setNode <- function(network, node, nodeType,
 
   if (!missing(nodeType)){
     if (length(nodeType) > 1){
-      wrn.flag <- wrn.flag + 1
-      wrn.msg <- c(wrn.msg,
-                   paste0(wrn.flag, ": nodeType must have length 1. The first element is being used."))
+      ArgumentCheck::addWarning("nodeType must have length 1. The first element is being used.",
+                                Check)
       nodeType <- nodeType[1]
     }
   }
   
   if (!missing(nodeType)){
-    if (!nodeType %in% jagsDists$FnName){
-      err.flag <- err.flag + 1
-      err.msg <- c(err.msg,
-                   paste0(err.flag, ": nodeType must be one of the following -\n    ",
-                          paste(unique(jagsDists$FnName), collapse=", ")))
-    }
+    if (!nodeType %in% jagsDists$FnName)
+    ArgumentCheck::addError(paste0("nodeType must be one of the following -\n    ",
+                                   paste(unique(jagsDists$FnName), collapse=", ")),
+                            Check)
   }
 
   if (!missing(nodeType)) network$nodeType[[node.t]] <- nodeType
- 
   exp_param <- eval(substitute(expectedParameters(network, node, TRUE)))
   params <- list(...)[exp_param]
   
-  if (!all(exp_param %in% names(params))){
-    err.flag <- err.flag + 1
-    err.msg <- c(err.msg,
-                 paste0(err.flag, ": Nodes of type ", network$nodeType[[node.t]], 
-                        " must have all of the following parameters--",
-                        paste(exp_param, collapse=", "), "."), collapse="\n")
-  }
+  if (!all(exp_param %in% names(params)))
+  ArgumentCheck::addError(paste0("Nodes of type ", network$nodeType[[node.t]], 
+                                 " must have all of the following parameters--",
+                                 paste(exp_param, collapse=", "), "."),
+                          Check)
 
   if (validate){
     valid <- validateParameters(params, network$nodeType[[node.t]]) 
@@ -197,8 +198,9 @@ setNode <- function(network, node, nodeType,
     if (any(sapply(params, is.character) & 
             !sapply(params, function(p) p %in% c("fromData", "fromFormula"))))
     {
+      ArgumentCheck::addMessage("Validation has been ignored for parameters defined with character strings",
+                                Check)
       valid[sapply(params, is.character)] <- TRUE
-      message("Validation has been ignored for parameters defined with character strings")
     }
 
     if (!all(valid)){
@@ -206,43 +208,80 @@ setNode <- function(network, node, nodeType,
       msg <- paste0("Please define ", names(params)[not_valid], " such that ", names(valid)[not_valid], 
                     " (or use validate=FALSE).")
       msg <- paste(msg, collapse="\n")
-      err.flag <- err.flag + 1
-      err.msg <- c(err.msg,
-                   paste0(err.flag, ": ", msg)) 
+      ArgumentCheck::addError(msg,
+                              Check)
     }
   }
 
   if (decision){
     if (!nodeType %in% c("dbern", "dcat")){
-      wrn.flag <- wrn.flag + 1
-      wrn.msg <- c(wrn.msg,
-                   paste0(wrn.flag, 
-                          ": Only nodes of type 'dbern' and 'dcat' may be decision nodes. ",
-                          "'decision' has been set to FALSE"))
+      ArgumentCheck::addWarning(paste0("Only nodes of type 'dbern' and 'dcat' may be decision nodes. ",
+                                       "'decision' has been set to FALSE"),
+                                Check)
       decision <- FALSE
     }
   }
 
   if (utility){
-    if (!nodeType %in% c("determ")){
-      err.flag <- err.flag + 1
-      err.msg <- c(err.msg,
-                   paste0(err.flag, 
-                          ": Utility nodes must be of type 'determ'."))
-    }
+    if (!nodeType %in% c("determ"))
+    ArgumentCheck::addError("Utility nodes must be of type 'determ'.",
+                            Check)
     
-    if (any(sapply(network$parents, function(p, t) t %in% p, node.t))){
-      err.flag <- err.flag + 1
-      err.msg <- c(err.msg,
-                   paste0(err.flag,
-                          ": Utility nodes may not have children."))
-    }
+    if (any(sapply(network$parents, function(p, t) t %in% p, node.t)))
+    ArgumentCheck::addError("Utility nodes may not have children.",
+                            Check)
+
   }
 
   if (length(list(...))) network$nodeParams[[node.t]] <- list(...)
   if (!missing(nodeFormula)) network$nodeFormula[[node.t]] <- nodeFormula
   if (!missing(nodeFitter)) network$nodeFitter[[node.t]] <- nodeFitter
   if (length(fitterArgs)) network$nodeFitterArgs[[node.t]] <- fitterArgs
+  if (!is.null(nodeData)) network$nodeData[[node.t]] <- nodeData
+ 
+  if (!is.null(factorLevels)){
+    nodeFitter <- if (is.null(network$nodeFitter[[node.t]])) "" else network$nodeFitter[[node.t]]
+    if (!(network$nodeType[[node.t]] %in% c("dcat", "dbern")) ||
+          nodeFitter == "cpt" ||
+          !is.null(network$nodeData[[node.t]]) || 
+          (node.t %in% names(network$data))){
+      ArgumentCheck::addWarning(
+        msg = paste0("'", node.t, "' does not satisfy the conditions ",
+                     "to use 'factorLevels'.  See '?setNode' for details."),
+        argcheck = Check)
+      
+      if (nodeFitter == "cpt"){
+        if (!is.null(network$nodeData[[node.t]])){
+          network$factorLevels[[node.t]] <- 
+            if (!is.factor(network$nodeData[[node.t]][[node.t]]))
+              sort(unique(network$nodeData[[node.t]][[node.t]]))
+            else levels(network$nodeData[[node.t]][[node.t]])
+        }
+        else if (!is.null(network$data[[node.t]])){
+          network$factorLevels[[node.t]] <- 
+            if (!is.factor(network$data[[node.t]]))
+              sort(unique(network$data[[node.t]]))
+          else levels(network$data[[node.t]])
+        }
+      }
+    } 
+    else{
+      network$factorLevels[[node.t]] <- factorLevels
+    }
+  }
+  else{
+    if (!is.null(network$nodeData[[node.t]])){
+      network$factorLevels[[node.t]] <- 
+        levels(network$nodeData[[node.t]][[node.t]])
+    }
+    else if (!is.null(network$data)){
+      network$factorLevels[[node.t]] <- 
+        levels(network$data[[node.t]])
+    }
+    else{
+      network$factorLevels[[node.t]] <- NULL
+    }
+  }
   network$nodeDecision[[node.t]] <- decision
   network$nodeUtility[[node.t]] <- utility
 
@@ -269,8 +308,7 @@ setNode <- function(network, node, nodeType,
                    
   }
   
-  if (wrn.flag) warning(paste(wrn.msg, collapse="\n"))
-  if (err.flag) stop(paste(err.msg, collapse="\n"))
+  ArgumentCheck::finishArgCheck(Check)
   return(network)  
 }
 

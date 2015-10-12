@@ -3,7 +3,7 @@ install.packages("HydeNet")
 library(HydeNet)
 options(Hyde_fitModel = FALSE)
 
-## ---- fig.width=7--------------------------------------------------------
+## ---- fig.width=7, eval=1------------------------------------------------
 net <- HydeNetwork(~ wells
                    + pe | wells
                    + d.dimer | pregnant*pe
@@ -138,7 +138,7 @@ h <- cpt(death ~ pe + treat, data=PE)
 ## ---- eval=FALSE---------------------------------------------------------
 #  print(h)
 
-## ---- fig.width=3--------------------------------------------------------
+## ---- fig.width=3, eval = -10--------------------------------------------
 craps <- HydeNetwork(~ d1 + d2 + diceSum | d1*d2
                        + firstRollOutcome | diceSum)
 
@@ -161,16 +161,16 @@ craps <- setNode(craps, firstRollOutcome, nodeType = "determ",
 
 plot(craps)
 
+## ------------------------------------------------------------------------
 writeNetworkModel(craps, pretty=TRUE)
 
-## ---- fig.width=7--------------------------------------------------------
+## ---- fig.width=7, eval=1------------------------------------------------
 net2 <- update(net, . ~ . + newTest | pe
                           + treat | newTest
                           - pregnant)
 
 
 plot(net2)
-
 
 ## ------------------------------------------------------------------------
 net2

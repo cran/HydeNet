@@ -1,7 +1,7 @@
 ## ---- echo=FALSE, message=FALSE------------------------------------------
 library(HydeNet)
 
-## ---- fig.width=7--------------------------------------------------------
+## ---- fig.width=7, eval = 1----------------------------------------------
 net <- HydeNetwork(~ initialAces | card1*card2
                    + initialPoints | card1*card2
                    + highUpcard | dealerUpcard
@@ -167,8 +167,8 @@ net <- setUtilityNodes(net, payoff)
 
 c(net$nodeDecision$hit2, net$nodeUtility$payoff)
 
-## ---- fig.width=7--------------------------------------------------------
-plot(net)
+## ---- fig.width=7, eval=FALSE--------------------------------------------
+#  plot(net)
 
 ## ------------------------------------------------------------------------
 data(BlackJackTrain)
@@ -222,7 +222,6 @@ compiledNet <- compileJagsModel(net, data = evidence,
 post <- HydePosterior(compiledNet,
                       variable.names = trackedVars,
                       n.iter=10000)
-post <- bindPosterior(post)
 
 dplyr::sample_n(post, 20)
 
@@ -244,9 +243,7 @@ compiledNets <- compileDecisionModel(net, policyMatrix = policies)
 samples <- lapply(compiledNets,
                   HydePosterior,
                   variable.names = trackedVars,
-                  n.iter=100000)
-
-samples <- lapply(samples, bindPosterior)
+                  n.iter=10000)
 
 lapply(samples, head)
 
