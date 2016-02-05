@@ -10,7 +10,7 @@
 
 <meta name="author" content="Jarrod Dalton and Benjamin Nutter" />
 
-<meta name="date" content="2015-10-11" />
+<meta name="date" content="2016-02-05" />
 
 <title>Working with HydeNetwork Objects</title>
 
@@ -72,7 +72,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Working with HydeNetwork Objects</h1>
 <h4 class="author"><em>Jarrod Dalton and Benjamin Nutter</em></h4>
-<h4 class="date"><em>2015-10-11</em></h4>
+<h4 class="date"><em>2016-02-05</em></h4>
 </div>
 
 
@@ -219,13 +219,13 @@ autoNet &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(~<span
 <span class="kw">writeNetworkModel</span>(autoNet, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## model{
 ##    wells ~ dnorm(3.79, 0.63)
-##    pe ~ dbern(ilogit(-3.9 + 0.58 * wells))
-##    d.dimer ~ dnorm(210.24 + 68.38 * (pe == 2) + 29.29 * (pregnant == 2), 0.03)
+##    pe ~ dbern(ilogit(0.58 * wells + -3.9))
+##    d.dimer ~ dnorm(210.24 + 68.38 * pe + 29.29 * pregnant, 0.03)
 ##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1
 ##    pregnant ~ dcat(pi.pregnant)
 ##    pi.angio &lt;- cpt.angio[(pe+1), ]
 ##    angio ~ dcat(pi.angio)
-##    treat ~ dbern(ilogit(-5.89 + 1.73 * (angio == 2) + 0.02 * d.dimer))
+##    treat ~ dbern(ilogit(1.73 * angio + 0.02 * d.dimer + -5.89))
 ##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
 ##    death ~ dcat(pi.death)
 ## }</code></pre>
@@ -256,13 +256,13 @@ bagNet &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(bagOfMo
 <span class="kw">writeNetworkModel</span>(bagNet, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## model{
 ##    wells ~ dnorm( 3.79, 0.630504251834359)
-##    pe ~ dbern( ilogit(-3.9 + 0.58*wells))
-##    d.dimer ~ dnorm( 210.24 + 68.38*(pe==2) + 29.29*(pregnant==2), 0.0334725036145318)
+##    pe ~ dbern( ilogit(0.58*wells + -3.9))
+##    d.dimer ~ dnorm( 210.24 + 68.38*pe + 29.29*pregnant, 0.0334725036145318)
 ##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1
-## pregnant ~ dcat(pi.pregnant)
+##    pregnant ~ dcat(pi.pregnant)
 ##    pi.angio &lt;- cpt.angio[(pe+1), ]
 ##    angio ~ dcat(pi.angio)
-##    treat ~ dbern( ilogit(-5.89 + 1.73*(angio==2) + 0.02*d.dimer))
+##    treat ~ dbern( ilogit(1.73*angio + 0.02*d.dimer + -5.89))
 ##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
 ##    death ~ dcat(pi.death)
 ## }</code></pre>
@@ -680,7 +680,8 @@ net$nodeType$d.dimer</code></pre></div>
 ## $tau
 ## [1] 0.03333333</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeFormula$d.dimer</code></pre></div>
-<pre><code>## d.dimer ~ 210 + 29 * pregnant + 68 * pe</code></pre>
+<pre><code>## d.dimer ~ 210 + 29 * pregnant + 68 * pe
+## &lt;environment: 0x00000000154da4f0&gt;</code></pre>
 <p>Or, alternatively, one may directly specify JAGS code for the parameters as character strings. Below, we do this for <code>mu</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType=</span><span class="st">&quot;dnorm&quot;</span>,
                <span class="dt">mu=</span><span class="st">&quot;210 + 29*pregnant + 68*pe&quot;</span>, <span class="dt">tau=</span><span class="dv">1</span>/<span class="dv">30</span>)</code></pre></div>
@@ -870,7 +871,7 @@ net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, treat, <s
 <pre><code>## [1] &quot;dnorm&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bagNet$nodeParams$d.dimer</code></pre></div>
 <pre><code>## $mu
-## [1] &quot; 210.24 + 68.38*(pe==2) + 29.29*(pregnant==2)&quot;
+## [1] &quot; 210.24 + 68.38*pe + 29.29*pregnant&quot;
 ## 
 ## $tau
 ## [1] 0.0334725</code></pre>
@@ -882,13 +883,13 @@ bagNet &lt;-<span class="st"> </span><span class="kw">setNodeModels</span>(bagNe
 <span class="kw">writeNetworkModel</span>(bagNet, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## model{
 ##    wells ~ dnorm( 3.79, 0.630504251834359)
-##    pe ~ dbern( ilogit(-3.9 + 0.58*wells))
-##    d.dimer ~ dnorm( 210.03 + 69.52*(pe==2) + 31.42*(pregnant==2) + -11.51*(pregnant==3), 0.0335041033258058)
+##    pe ~ dbern( ilogit(0.58*wells + -3.9))
+##    d.dimer ~ dnorm( 69.52*pe + -11.51*pe*pregnant + 31.42*pregnant + 210.03, 0.0335041033258058)
 ##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1
-## pregnant ~ dcat(pi.pregnant)
+##    pregnant ~ dcat(pi.pregnant)
 ##    pi.angio &lt;- cpt.angio[(pe+1), ]
 ##    angio ~ dcat(pi.angio)
-##    treat ~ dbern( ilogit(-5.89 + 1.73*(angio==2) + 0.02*d.dimer))
+##    treat ~ dbern( ilogit(1.73*angio + 0.02*d.dimer + -5.89))
 ##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
 ##    death ~ dcat(pi.death)
 ## }</code></pre>
@@ -994,9 +995,9 @@ craps &lt;-<span class="st"> </span><span class="kw">setNode</span>(craps, first
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">writeNetworkModel</span>(craps, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## model{
 ##    pi.d1[1] &lt;- 0.166666666666667; pi.d1[2] &lt;- 0.166666666666667; pi.d1[3] &lt;- 0.166666666666667; pi.d1[4] &lt;- 0.166666666666667; pi.d1[5] &lt;- 0.166666666666667; pi.d1[6] &lt;- 0.166666666666667
-## d1 ~ dcat(pi.d1)
+##    d1 ~ dcat(pi.d1)
 ##    pi.d2[1] &lt;- 0.166666666666667; pi.d2[2] &lt;- 0.166666666666667; pi.d2[3] &lt;- 0.166666666666667; pi.d2[4] &lt;- 0.166666666666667; pi.d2[5] &lt;- 0.166666666666667; pi.d2[6] &lt;- 0.166666666666667
-## d2 ~ dcat(pi.d2)
+##    d2 ~ dcat(pi.d2)
 ##    diceSum &lt;- di1 + di2
 ##    firstRollOutcome &lt;- ifelse(diceSum &lt; 4 | diceSum &gt; 11, -1, ifelse(diceSum == 7 | diceSum == 11, 1, 0))
 ## }</code></pre>
@@ -1014,7 +1015,7 @@ We have implemented a series of "helper" deterministic functions to facilitate m
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net2 &lt;-<span class="st"> </span><span class="kw">update</span>(net, . ~<span class="st"> </span>. +<span class="st"> </span>newTest |<span class="st"> </span>pe
                           +<span class="st"> </span>treat |<span class="st"> </span>newTest
                           -<span class="st"> </span>pregnant)</code></pre></div>
-<pre><code>## Warning in update.HydeNetwork(net, . ~ . + newTest | pe + treat | newTest - : The following nodes lost parents in the update:
+<pre><code>## Warning in update.HydeNetwork(net, . ~ . + newTest | pe + treat | newTest - : The following nodes lost parents in the update--please redefine the node formula:
 ##     d.dimer: pregnant</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## 
 ## 
