@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jarrod Dalton and Benjamin Nutter" />
 
-<meta name="date" content="2016-07-08" />
+<meta name="date" content="2017-01-07" />
 
 <title>Working with HydeNetwork Objects</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Working with HydeNetwork Objects</h1>
 <h4 class="author"><em>Jarrod Dalton and Benjamin Nutter</em></h4>
-<h4 class="date"><em>2016-07-08</em></h4>
+<h4 class="date"><em>2017-01-07</em></h4>
 
 
 
@@ -222,14 +222,14 @@ autoNet &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(~<span
                        <span class="dt">data =</span> PE)
 <span class="kw">writeNetworkModel</span>(autoNet, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## model{
-##    wells ~ dnorm(3.79, 0.63)
-##    pe ~ dbern(ilogit(0.58 * wells + -3.9))
-##    d.dimer ~ dnorm(210.24 + 68.38 * pe + 29.29 * pregnant, 0.03)
+##    wells ~ dnorm(3.79, 0.4)
+##    pe ~ dbern(ilogit(-3.9 + 0.58 * wells))
+##    d.dimer ~ dnorm(210.24 + 68.38 * (pe == 1) + 29.29 * (pregnant == 2), 0)
 ##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1 
 ## pregnant ~ dcat(pi.pregnant)
 ##    pi.angio &lt;- cpt.angio[(pe+1), ]
 ##    angio ~ dcat(pi.angio)
-##    treat ~ dbern(ilogit(1.73 * angio + 0.02 * d.dimer + -5.89))
+##    treat ~ dbern(ilogit(-5.89 + 0.02 * d.dimer + 1.73 * angio))
 ##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
 ##    death ~ dcat(pi.death)
 ## }</code></pre>
@@ -260,13 +260,13 @@ bagNet &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(bagOfMo
 <span class="kw">writeNetworkModel</span>(bagNet, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## model{
 ##    wells ~ dnorm( 3.79, 0.630504251834359)
-##    pe ~ dbern( ilogit(0.58*wells + -3.9))
-##    d.dimer ~ dnorm( 210.24 + 68.38*pe + 29.29*pregnant, 0.0334725036145318)
+##    pe ~ dbern( ilogit(-3.9 + 0.58*wells))
+##    d.dimer ~ dnorm( 210.24 + 68.38*(pe==1) + 29.29*(pregnant==1), 0.0334725036145318)
 ##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1 
 ##    pregnant ~ dcat(pi.pregnant)
 ##    pi.angio &lt;- cpt.angio[(pe+1), ]
 ##    angio ~ dcat(pi.angio)
-##    treat ~ dbern( ilogit(1.73*angio + 0.02*d.dimer + -5.89))
+##    treat ~ dbern( ilogit(-5.89 + 0.02*d.dimer + 1.73*angio))
 ##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
 ##    death ~ dcat(pi.death)
 ## }</code></pre>
@@ -677,7 +677,7 @@ net$nodeType$d.dimer</code></pre></div>
 ## [1] 0.03333333</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeFormula$d.dimer</code></pre></div>
 <pre><code>## d.dimer ~ 210 + 29 * pregnant + 68 * pe
-## &lt;environment: 0x000000000f8e1ab0&gt;</code></pre>
+## &lt;environment: 0x0000000012354fc0&gt;</code></pre>
 <p>Or, alternatively, one may directly specify JAGS code for the parameters as character strings. Below, we do this for <code>mu</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType=</span><span class="st">&quot;dnorm&quot;</span>,
                <span class="dt">mu=</span><span class="st">&quot;210 + 29*pregnant + 68*pe&quot;</span>, <span class="dt">tau=</span><span class="dv">1</span>/<span class="dv">30</span>)</code></pre></div>
@@ -867,7 +867,7 @@ net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, treat, <s
 <pre><code>## [1] &quot;dnorm&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bagNet$nodeParams$d.dimer</code></pre></div>
 <pre><code>## $mu
-## [1] &quot; 210.24 + 68.38*pe + 29.29*pregnant&quot;
+## [1] &quot; 210.24 + 68.38*(pe==1) + 29.29*(pregnant==1)&quot;
 ## 
 ## $tau
 ## [1] 0.0334725</code></pre>
@@ -879,13 +879,13 @@ bagNet &lt;-<span class="st"> </span><span class="kw">setNodeModels</span>(bagNe
 <span class="kw">writeNetworkModel</span>(bagNet, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## model{
 ##    wells ~ dnorm( 3.79, 0.630504251834359)
-##    pe ~ dbern( ilogit(0.58*wells + -3.9))
-##    d.dimer ~ dnorm( 69.52*pe + -11.51*pe*pregnant + 31.42*pregnant + 210.03, 0.0335041033258058)
+##    pe ~ dbern( ilogit(-3.9 + 0.58*wells))
+##    d.dimer ~ dnorm( 210.03 + 69.52*(pe==1) + 31.42*(pregnant==1) + -11.51*(pe==1)*(pregnant==1), 0.0335041033258058)
 ##    pi.pregnant[1] &lt;- 0.9; pi.pregnant[2] &lt;- 0.1 
 ##    pregnant ~ dcat(pi.pregnant)
 ##    pi.angio &lt;- cpt.angio[(pe+1), ]
 ##    angio ~ dcat(pi.angio)
-##    treat ~ dbern( ilogit(1.73*angio + 0.02*d.dimer + -5.89))
+##    treat ~ dbern( ilogit(-5.89 + 0.02*d.dimer + 1.73*angio))
 ##    pi.death &lt;- cpt.death[(pe+1), (treat+1), ]
 ##    death ~ dcat(pi.death)
 ## }</code></pre>

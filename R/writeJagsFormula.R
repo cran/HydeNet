@@ -12,6 +12,7 @@
 #'   
 #' @param fit a model object
 #' @param nodes a vector of node names, usually passed from \code{network$nodes}
+#' @param bern a vector of bernoulli node names
 #' @param ... Additional arguments to be passed to other methods
 #' 
 #' @details Methods for different model objects can be written so that 
@@ -64,7 +65,7 @@ writeJagsFormula.cpt <- function(fit, nodes, ...)
 #' @importFrom stringr str_trim
 #' 
 
-writeJagsFormula.glm <- function(fit, nodes, ...)
+writeJagsFormula.glm <- function(fit, nodes, bern = bern, ...)
 {
   if (fit[["family"]][["family"]] == "gaussian" & fit[["family"]][["link"]] == "identity")
   {
@@ -80,8 +81,8 @@ writeJagsFormula.glm <- function(fit, nodes, ...)
   regex <- factorRegex(fit)
   
   mdl <- makeJagsReady(mdl, 
-                       regex, 
-                       nodes) %>%
+                       factorRef = factor_reference(stats::model.frame(fit)),
+                       bern = bern) %>%
     mutate(term_plain = gsub(pattern = ":", 
                              replacement = "*", 
                              x = term_plain))
@@ -119,7 +120,7 @@ writeJagsFormula.glm <- function(fit, nodes, ...)
 #' @importFrom stringr str_trim
 #' 
 
-writeJagsFormula.lm <- function(fit, nodes, ...)
+writeJagsFormula.lm <- function(fit, nodes, bern, ...)
 {
   mdl <- pixiedust::dust(fit, 
                          descriptors = c("term", "term_plain", "level")) %>%
@@ -128,8 +129,8 @@ writeJagsFormula.lm <- function(fit, nodes, ...)
   regex <- factorRegex(fit)
   
   mdl <- makeJagsReady(mdl, 
-                       regex, 
-                       nodes) %>%
+                       factorRef = factor_reference(stats::model.frame(fit)),
+                       bern = bern) %>%
     mutate(term_plain = gsub(pattern = ":", 
                              replacement = "*", 
                              x = term_plain))
@@ -142,7 +143,7 @@ writeJagsFormula.lm <- function(fit, nodes, ...)
                       no = "*"),
                ifelse(test = is.na(mdl$term_plain), 
                       yes = "", 
-                      no = mdl$term_plain), 
+                      no = mdl$jagsVar), 
                collapse=" + ")
   
   out_fm <- paste0(as.character(fit[["call"]][["formula"]])[2], " ~ ", rhs)
@@ -154,104 +155,61 @@ writeJagsFormula.lm <- function(fit, nodes, ...)
 #' @import nnet
 #'
 
-writeJagsFormula.multinom <- function(fit, nodes, ...)
+writeJagsFormula.multinom <- function(fit, nodes, bern = bern, ...)
 {
-#   mdl <- broom::tidy(fit, exponentiate=FALSE)[, c("y.level", "term", "estimate")] 
-#   
-#   regex <- factorRegex(fit)
-#   
-#   mdl <- makeJagsReady(mdl, regex)
-#   mdl <- dplyr::arrange(mdl, y.level, term_name)
-#   
-#   right_side <- function(l, m=mdl)
-#   {
-#     m <- m[m$y.level == l, ]
-#     paste(round(m$estimate, getOption("Hyde_maxDigits")), 
-#           ifelse(m$jagsVar == "(Intercept)", "", "*"),
-#           ifelse(m$jagsVar == "(Intercept)", "", m$jagsVar), 
-#           collapse=" + ")
-#   }
-#   
-#   sapply(unique(as.character(mdl$y.level)), right_side)
-         
+  mdl <- pixiedust::dust(fit, 
+                         exponentiate = FALSE, 
+                         descriptors = c("term", "term_plain", "level")) %>%
+    as.data.frame(sprinkled = FALSE)
   
-  
-  if (is.null(fit[["model"]]))
-  {
-    fit <- stats::update(fit, model = TRUE)
-  }
-  fm <- as.character(fit[["call"]][["formula"]])
-  out_fm <- paste0("pi.", fm[2])
-  fm <- trimws(unlist(strsplit(x = fm[-(1:2)], 
-                               split = "[+]")))
+  mdl <- makeJagsReady(mdl, 
+                       factorRef = factor_reference(stats::model.frame(fit)),
+                       bern = bern)
+  mdl <- dplyr::arrange(mdl, y.level, term_plain)
 
-  fm <- 
-    unlist(
-      sapply(X = fm, 
-             function(x)
-             {
-               if (! x %in% names(attributes(fit[["terms"]])[["dataClasses"]]))
-               {
-                 return(NULL)
-               }
-               if (attributes(fit[["terms"]])[["dataClasses"]][x] == "factor")
-               {
-                 return(paste0("(", x, " == ", 2:nlevels(fit[["model"]][, x]), ")"))
-               }
-               else 
-               {
-                 return(x)
-               }
-             }
-      )
-    )
-
-  fm <- lapply(X = 1:nrow(stats::coef(fit)), 
-               function(r)
-               {
-                 if (is.null(fm)) 
-                 {
-                   stats::coef(fit)[r, 1]
-                 }
-                 else 
-                 {
-                   paste0(round(stats::coef(fit)[r, 1], getOption("Hyde_maxDigits")),
-                             " + ", 
-                             paste(round(stats::coef(fit)[r, -1], getOption("Hyde_maxDigits")), 
-                                   fm, sep="*", collapse=" + "))
-                 }
-               }
-          )
+  mdl <- split(mdl, mdl$y.level)
   
-  fm <- sapply(X = fm, 
-               FUN = 
-                 function(x)
-                 {
-                   paste0("exp(", x, ") / (1 + ", 
-                          paste(
-                            sapply(X = fm, 
-                                   FUN = 
-                                     function(x) 
-                                     {
-                                       paste0("exp(", x, ")")
-                                     }
-                                   ), 
-                            collapse=" + "),
-                          ")"
-                   )
-                 }
-  )
-                 
-  fm <- c(paste0("1 - (", paste(fm, collapse=" + "), ")"), fm)
-  fm <- paste0(out_fm, "[", 1:length(fm), "] <- ", fm, collapse="; ")
+  fm <- lapply(mdl,
+         function(x)
+         {
+           sprintf("%s %s %s",
+                   round(x[["estimate"]], getOption("Hyde_maxDigits")),
+                   ifelse(is.na(x[["term_plain"]]), 
+                          "",
+                          "*"),
+                   ifelse(is.na(x[["term_plain"]]),
+                          "",
+                          x[["jagsVar"]]))
+         }
+  ) %>%
+    lapply(
+      paste0,
+      collapse = " + "
+    ) %>%
+    vapply(
+      function(x) sprintf("exp(%s) / (1 + exp(%s))", x, x),
+      character(1)
+    ) 
   
-  return(fm) 
+  
+   fm <- c(sprintf("(%s)", fm) %>%
+             paste0(collapse = " - ") %>%
+             sprintf("1 - %s", .),
+           fm)
+   
+   fm <- sprintf("pi.%s[%s] <- %s",
+                 names(attributes(fit$terms)$dataClasses)[1],
+                 seq_along(fm),
+                 fm) %>%
+     paste0(collapse = " ")
+  
+  fm
 }
 
 #' @rdname writeJagsFormula
 #' @export
 
-writeJagsFormula.survreg <- function(fit, ...)
+writeJagsFormula.survreg <- function(fit, ..., bern = bern)
 {
   mdl <- pixiedust::dust(fit, descriptors = c("term", "term_plain", "level")) %>%
     as.data.frame(sprinkled = FALSE)
@@ -259,8 +217,8 @@ writeJagsFormula.survreg <- function(fit, ...)
   regex <- factorRegex(fit)
   
   mdl <- makeJagsReady(mdl, 
-                       regex, 
-                       nodes) %>%
+                       factorRef = factor_reference(stats::model.frame(fit)),
+                       bern = bern) %>%
     dplyr::mutate(term_plain = gsub(pattern = ":", 
                                     replacement = "*", 
                                     x = term_plain))
@@ -323,4 +281,4 @@ writeJagsFormula.xtabs <- function(fit, ...)
   return(pi)
 }
 
-utils::globalVariables(c("term_plain", "."))
+utils::globalVariables(c("term_plain", ".", "y.level"))

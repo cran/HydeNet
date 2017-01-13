@@ -142,43 +142,65 @@ decisionOptions <- function(node, network)
 
 #' @rdname HydeUtilities 
 #' @param mdl Output from \code{broom::tidy()}
-#' @param regex A regular expression, usually returned by \code{factorRegex}
-#' @param nodes A vector of node names, usually passed from \code{network$nodes}.
+#' @param factorRef A list of data frames mapping factors to levels
+#' @param bern bernoulli node names.
 
-makeJagsReady <- function(mdl, regex, nodes)
+makeJagsReady <- function(mdl, factorRef, bern)
 {
-  factorRef <- mdl[mdl$level != "" & !grepl(":", mdl$term_plain), 
-                   c("term_plain", "level"), 
-                   drop=FALSE]
-  if (nrow(factorRef) > 0)
-  {
-    factorRef <- factorRef %>%
-      dplyr::group_by(term_plain) %>%
-      dplyr::mutate(level_value = 2:(length(term_plain) + 1))
-  }
-
-  mdl <- merge(mdl, factorRef,
-               by = c("term_plain", "level"), 
-               all=TRUE)
+  factorRef[bern] <- 
+    lapply(factorRef[bern],
+           function(x)
+           {
+             if (is.null(x)) return(NULL)
+             x$level <- x$level - 1
+             x
+           }
+    )
   
-  mdl[["jagsVar"]] <- 
-    if (nrow(factorRef) > 0)
-    {
-      mapply(FUN = matchLevelNumber, 
-             mdl[["term_plain"]], 
-             mdl[["level_value"]]
-      )
-    }
-    else 
-    {
-      mdl[["term_plain"]]
-    }
+  factors <- 
+    dplyr::filter(.data = mdl, 
+                  !grepl(":", level) & !is.na(level) & level != "") %>%
+    dplyr::distinct(term_plain) %$%
+    term_plain
   
+  mdl
   
-  #* Change 'poly' to 'pow'
-  mdl[["jagsVar"]] <- vapply(X = mdl[["jagsVar"]], 
-                             FUN = polyToPow,
-                             FUN.VALUE = character(1))
+  mdl$jagsVar <- 
+    mapply(
+      function(term, level, factors, factorRef)
+      {
+        val <- 
+          mapply(
+            function(fr, term, level)
+            {
+              val <- fr[[term]]$level[fr[[term]]$label == level]
+              if (is.null(val)) val <- NA
+              val
+            },
+            term = term,
+            level = level,
+            MoreArgs = list(fr = factorRef),
+            SIMPLIFY = FALSE
+          ) %>%
+            unlist()
+          
+        ifelse(term %in% factors,
+               sprintf("(%s == %s)", 
+                       term, 
+                       val),
+               term)
+      },
+      term = stringr::str_split(mdl$term_plain, ":"),
+      level = stringr::str_split(mdl$level, ":"),
+      MoreArgs = list(factors = factors, 
+                      factorRef = factorRef),
+      SIMPLIFY = FALSE
+    ) %>%
+    vapply(
+      paste0,
+      character(1),
+      collapse = "*"
+    )
   
   mdl
 }
@@ -373,3 +395,23 @@ dataframeFactors <- function(dataframe)
   names(reference_list) <- factor_vars
   reference_list
 }
+
+#' @rdname HydeUtilities
+#' @param data A data frame.  
+
+factor_reference <- function(data)
+{
+  Ref <- 
+    lapply(data,
+           function(x)
+           {
+             if (is.factor(x)) data.frame(level = seq_along(levels(x)),
+                                          label = levels(x))
+             else NULL
+           }
+    )
+  
+  Ref[!vapply(Ref, is.null, logical(1))]
+}
+
+utils::globalVariables("level")

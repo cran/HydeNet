@@ -14,13 +14,13 @@ writeJagsFormula(fit, nodes, ...)
 
 \method{writeJagsFormula}{cpt}(fit, nodes, ...)
 
-\method{writeJagsFormula}{glm}(fit, nodes, ...)
+\method{writeJagsFormula}{glm}(fit, nodes, bern = bern, ...)
 
-\method{writeJagsFormula}{lm}(fit, nodes, ...)
+\method{writeJagsFormula}{lm}(fit, nodes, bern, ...)
 
-\method{writeJagsFormula}{multinom}(fit, nodes, ...)
+\method{writeJagsFormula}{multinom}(fit, nodes, bern = bern, ...)
 
-\method{writeJagsFormula}{survreg}(fit, ...)
+\method{writeJagsFormula}{survreg}(fit, ..., bern = bern)
 
 \method{writeJagsFormula}{xtabs}(fit, ...)
 }
@@ -30,6 +30,8 @@ writeJagsFormula(fit, nodes, ...)
 \item{nodes}{a vector of node names, usually passed from \code{network$nodes}}
 
 \item{...}{Additional arguments to be passed to other methods}
+
+\item{bern}{a vector of bernoulli node names}
 }
 \description{
 Based on the information provided about the node,

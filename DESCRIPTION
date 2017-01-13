@@ -1,7 +1,7 @@
 Package: HydeNet
 Type: Package
 Title: Hybrid Bayesian Networks Using R and JAGS
-Version: 0.10.4
+Version: 0.10.5
 Author: Jarrod E. Dalton <daltonj@ccf.org> and Benjamin Nutter
     <benjamin.nutter@gmail.com>
 Maintainer: Benjamin Nutter <benjamin.nutter@gmail.com>
@@ -19,10 +19,10 @@ Description: Facilities for easy implementation of hybrid Bayesian networks
     expected utility under competing policies, value of information) involving
     decision and utility nodes are also supported.
 License: MIT + file LICENSE
-Depends: R (>= 3.0.0), nnet, rjags
-Imports: checkmate, DiagrammeR (>= 0.8), plyr, dplyr, graph, gRbase,
-        magrittr, pixiedust (>= 0.6.1), stats, stringr, utils
-Suggests: knitr, survival, testthat
+Depends: R (>= 3.0.0), nnet
+Imports: checkmate, DiagrammeR (>= 0.9.0), plyr, dplyr, graph, gRbase,
+        magrittr, pixiedust (>= 0.6.1), rjags, stats, stringr, utils
+Suggests: knitr, RCurl, survival, testthat
 VignetteBuilder: knitr
 SystemRequirements: JAGS (http://mcmc-jags.sourceforge.net)
 LazyLoad: yes
@@ -31,6 +31,6 @@ URL: https://github.com/nutterb/HydeNet,
 BugReports: https://github.com/nutterb/HydeNet/issues
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2016-07-08 17:20:12 UTC; nutterb
+Packaged: 2017-01-07 13:31:34 UTC; Nutter
 Repository: CRAN
-Date/Publication: 2016-07-08 19:51:53
+Date/Publication: 2017-01-13 15:26:14
