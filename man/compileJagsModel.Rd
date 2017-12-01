@@ -45,9 +45,9 @@ Net <- HydeNetwork(~ wells +
 compiledNet <- compileJagsModel(Net, n.chains=5)
 
 #* Generate the posterior distribution
-Posterior <- HydePosterior(compiledNet, 
-                           variable.names = c("d.dimer", "death"), 
-                           n.iter = 1000)
+Posterior <- HydeSim(compiledNet, 
+                     variable.names = c("d.dimer", "death"), 
+                     n.iter = 1000)
 Posterior
 
 #* For a single model (ie, not a decision model), the user may choose to 
@@ -59,10 +59,9 @@ s <- coda.samples(compiledNet$jags,
                   n.iter=1000)
                 
 }
-\author{
-Benjamin Nutter
-}
 \seealso{
 \code{jags.model}
 }
-
+\author{
+Benjamin Nutter
+}

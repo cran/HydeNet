@@ -81,7 +81,7 @@ autoNet <- HydeNetwork(~ wells
                        data = PE)
 autoNet <- setNode(autoNet, treat,
                    nodeFormula = treat ~ poly(d.dimer, 2) + angio,
-                   p = fromData())
+                   prob = fromData())
 
 ## ---- echo=FALSE---------------------------------------------------------
 print(autoNet, treat)
@@ -99,7 +99,7 @@ autoNet <- HydeNetwork(~ wells
                        data = PE)
 autoNet <- setNode(autoNet, treat,
                    nodeFormula = treat ~ poly(d.dimer, 2) + angio,
-                   p = fromData())
+                   prob = fromData())
 print(autoNet, treat)
 
 ## ------------------------------------------------------------------------

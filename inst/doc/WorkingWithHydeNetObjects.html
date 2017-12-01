@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jarrod Dalton and Benjamin Nutter" />
 
-<meta name="date" content="2017-01-07" />
+<meta name="date" content="2017-12-01" />
 
 <title>Working with HydeNetwork Objects</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Working with HydeNetwork Objects</h1>
 <h4 class="author"><em>Jarrod Dalton and Benjamin Nutter</em></h4>
-<h4 class="date"><em>2017-01-07</em></h4>
+<h4 class="date"><em>2017-12-01</em></h4>
 
 
 
@@ -287,7 +287,7 @@ bagNet &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(bagOfMo
 <h4>Binary Root Nodes</h4>
 <p>The most straightforward way to specify distributions for root nodes, or nodes without parents is by using <code>setNode</code> with specific distributions and parameters. For example, returning to our original unpopulated network (object <code>net</code>), we can define a Bernoulli distribution for node <strong>pregnant</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(<span class="dt">network =</span> net, <span class="dt">node =</span> pregnant,
-               <span class="dt">nodeType =</span> <span class="st">&quot;dbern&quot;</span>, <span class="dt">p=</span>.<span class="dv">4</span>)
+               <span class="dt">nodeType =</span> <span class="st">&quot;dbern&quot;</span>, <span class="dt">prob=</span>.<span class="dv">4</span>)
 net</code></pre></div>
 <pre><code>## A Probabilistic Graphical Network
 ## Has data attached: No
@@ -305,7 +305,7 @@ net</code></pre></div>
 ## : d.dimer ~ pe + pregnant
 ## 
 ## pregnant
-## dbern(p = 0.4)
+## dbern(prob = 0.4)
 ## : pregnant ~ 1
 ## 
 ## angio | pe
@@ -326,16 +326,16 @@ net</code></pre></div>
 <p>Univariate normal distributions are specified using <code>nodeType = &quot;dnorm&quot;</code>. We will specify a normal distribution with a <span class="math inline">\(\mu = 5\)</span> and <span class="math inline">\(\sigma = 1.5\)</span> for node <strong>wells</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, wells,
                <span class="dt">nodeType =</span> <span class="st">&quot;dnorm&quot;</span>, 
-               <span class="dt">mu =</span> <span class="dv">5</span>, <span class="dt">tau =</span> <span class="dv">1</span> /<span class="st"> </span>(<span class="fl">1.5</span>^<span class="dv">2</span>))
+               <span class="dt">mean =</span> <span class="dv">5</span>, <span class="dt">sd =</span> <span class="fl">1.5</span>)
 
 net$nodeType$wells</code></pre></div>
 <pre><code>## [1] &quot;dnorm&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeParams$wells</code></pre></div>
-<pre><code>## $mu
+<pre><code>## $mean
 ## [1] 5
 ## 
-## $tau
-## [1] 0.4444444</code></pre>
+## $sd
+## [1] 1.5</code></pre>
 </div>
 <div id="multicategory-root-nodes" class="section level4">
 <h4>Multicategory Root Nodes</h4>
@@ -370,13 +370,15 @@ net$nodeType$wells</code></pre></div>
 <h4>Other Univariate Distributions</h4>
 <p><code>HydeNet</code> supports all the statistical distributions supported by JAGS. A table of these distributions is stored in the <code>jagsDists</code> dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(jagsDists, <span class="dt">package=</span><span class="st">'HydeNet'</span>)
-jagsDists[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>)]</code></pre></div>
+jagsDists[,<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">3</span>, <span class="dv">6</span>:<span class="dv">8</span>)]</code></pre></div>
 <table>
 <thead>
 <tr class="header">
 <th align="left">DistName</th>
 <th align="left">FnName</th>
+<th align="left">FnNameR</th>
 <th align="left">Parameters</th>
+<th align="left">RParameter</th>
 <th align="left">paramLimit</th>
 </tr>
 </thead>
@@ -384,271 +386,367 @@ jagsDists[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">
 <tr class="odd">
 <td align="left">Beta</td>
 <td align="left">dbeta</td>
+<td align="left">dbeta</td>
 <td align="left">a</td>
+<td align="left">shape1</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Beta</td>
 <td align="left">dbeta</td>
+<td align="left">dbeta</td>
 <td align="left">b</td>
+<td align="left">shape2</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Chi-square</td>
 <td align="left">dchisqr</td>
+<td align="left">dchisq</td>
 <td align="left">k</td>
+<td align="left">df</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Double exponential</td>
 <td align="left">ddexp</td>
+<td align="left"></td>
+<td align="left"></td>
 <td align="left">mu</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">Double exponential</td>
 <td align="left">ddexp</td>
+<td align="left"></td>
+<td align="left"></td>
 <td align="left">tau</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Exponential</td>
 <td align="left">dexp</td>
+<td align="left">dexp</td>
 <td align="left">lambda</td>
+<td align="left">rate</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">F</td>
+<td align="left">df</td>
 <td align="left">df</td>
 <td align="left">n</td>
+<td align="left">df1</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">F</td>
 <td align="left">df</td>
+<td align="left">df</td>
 <td align="left">mu</td>
+<td align="left">df2</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Gamma</td>
 <td align="left">dgamma</td>
+<td align="left">dgamma</td>
 <td align="left">r</td>
+<td align="left">shape</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Gamma</td>
+<td align="left">dgamma</td>
 <td align="left">dgamma</td>
 <td align="left">lambda</td>
+<td align="left">rate</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Generalized gamma</td>
 <td align="left">dgen.gamma</td>
+<td align="left"></td>
 <td align="left">r</td>
+<td align="left"></td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Generalized gamma</td>
 <td align="left">dgen.gamma</td>
+<td align="left"></td>
 <td align="left">b</td>
+<td align="left"></td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Generalized gamma</td>
 <td align="left">dgen.gamma</td>
+<td align="left"></td>
 <td align="left">lambda</td>
+<td align="left"></td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Logistic</td>
 <td align="left">dlogis</td>
+<td align="left">dlogis</td>
 <td align="left">mu</td>
+<td align="left">location</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">Logistic</td>
 <td align="left">dlogis</td>
+<td align="left">dlogis</td>
 <td align="left">tau</td>
+<td align="left">scale</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Log-normal</td>
 <td align="left">dlnorm</td>
+<td align="left">dlnorm</td>
 <td align="left">mu</td>
+<td align="left">meanlog</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">Log-normal</td>
 <td align="left">dlnorm</td>
+<td align="left">dlnorm</td>
 <td align="left">tau</td>
+<td align="left">sdlog</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Noncentral chi-square</td>
 <td align="left">dnchisqr</td>
+<td align="left"></td>
 <td align="left">k</td>
+<td align="left"></td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Noncentral chi-square</td>
 <td align="left">dnchisqr</td>
+<td align="left"></td>
 <td align="left">delta</td>
+<td align="left"></td>
 <td align="left">&gt;= 0</td>
 </tr>
 <tr class="even">
 <td align="left">Normal</td>
 <td align="left">dnorm</td>
+<td align="left">dnorm</td>
 <td align="left">mu</td>
+<td align="left">mean</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">Normal</td>
 <td align="left">dnorm</td>
+<td align="left">dnorm</td>
 <td align="left">tau</td>
+<td align="left">sd</td>
 <td align="left">&gt;= 0</td>
 </tr>
 <tr class="even">
 <td align="left">Pareto</td>
 <td align="left">dpar</td>
+<td align="left"></td>
 <td align="left">alpha</td>
+<td align="left"></td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Pareto</td>
 <td align="left">dpar</td>
+<td align="left"></td>
 <td align="left">alpha</td>
+<td align="left"></td>
 <td align="left">&gt; c</td>
 </tr>
 <tr class="even">
 <td align="left">Student t</td>
 <td align="left">dt</td>
+<td align="left">dt</td>
 <td align="left">mu</td>
+<td align="left"></td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">Student t</td>
 <td align="left">dt</td>
+<td align="left">dt</td>
 <td align="left">tau</td>
+<td align="left"></td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Student t</td>
 <td align="left">dt</td>
+<td align="left">dt</td>
 <td align="left">k</td>
+<td align="left">df</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Uniform</td>
 <td align="left">dunif</td>
+<td align="left">dunif</td>
 <td align="left">a</td>
+<td align="left">min</td>
 <td align="left">&lt; b</td>
 </tr>
 <tr class="even">
 <td align="left">Uniform</td>
 <td align="left">dunif</td>
+<td align="left">dunif</td>
 <td align="left">b</td>
+<td align="left">max</td>
 <td align="left">&gt; a</td>
 </tr>
 <tr class="odd">
 <td align="left">Weibull</td>
 <td align="left">dweib</td>
+<td align="left">dweib</td>
 <td align="left">nu</td>
+<td align="left">shape</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Weibull</td>
 <td align="left">dweib</td>
+<td align="left">dweib</td>
 <td align="left">lambda</td>
+<td align="left">scale</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta Binomial</td>
 <td align="left">dbetabin</td>
+<td align="left"></td>
+<td align="left"></td>
 <td align="left">a</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Beta Binomial</td>
 <td align="left">dbetabin</td>
+<td align="left"></td>
+<td align="left"></td>
 <td align="left">b</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Beta Binomial</td>
 <td align="left">dbetabin</td>
+<td align="left"></td>
+<td align="left"></td>
 <td align="left">n</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Bernoulli</td>
 <td align="left">dbern</td>
+<td align="left"></td>
 <td align="left">p</td>
+<td align="left">prob</td>
 <td align="left">0 &lt; p &lt; 1</td>
 </tr>
 <tr class="odd">
 <td align="left">Binomial</td>
 <td align="left">dbin</td>
+<td align="left">dbin</td>
 <td align="left">p</td>
+<td align="left">prob</td>
 <td align="left">0 &lt; p &lt; 1</td>
 </tr>
 <tr class="even">
 <td align="left">Binomial</td>
 <td align="left">dbin</td>
+<td align="left">dbin</td>
 <td align="left">n</td>
+<td align="left">size</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Categorical</td>
 <td align="left">dcat</td>
+<td align="left"></td>
+<td align="left">pi</td>
 <td align="left">pi</td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Noncentral hypergeometric</td>
 <td align="left">dhyper</td>
+<td align="left">dhyper</td>
 <td align="left">n1</td>
+<td align="left"></td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="odd">
 <td align="left">Noncentral hypergeometric</td>
 <td align="left">dhyper</td>
+<td align="left">dhyper</td>
 <td align="left">n2</td>
+<td align="left"></td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Noncentral hypergeometric</td>
 <td align="left">dhyper</td>
+<td align="left">dhyper</td>
 <td align="left">m1</td>
+<td align="left"></td>
 <td align="left">0 &lt; m1 &lt; (n1 + n2)</td>
 </tr>
 <tr class="odd">
 <td align="left">Noncentral hypergeometric</td>
 <td align="left">dhyper</td>
+<td align="left">dhyper</td>
 <td align="left">psi</td>
+<td align="left"></td>
 <td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">Negative Binomial</td>
 <td align="left">dnegbin</td>
+<td align="left"></td>
 <td align="left">p</td>
+<td align="left"></td>
 <td align="left">0 &lt; p &lt; 1</td>
 </tr>
 <tr class="odd">
 <td align="left">Negative Binomial</td>
 <td align="left">dnegbin</td>
+<td align="left"></td>
 <td align="left">r</td>
+<td align="left"></td>
 <td align="left">&gt; 0</td>
 </tr>
 <tr class="even">
 <td align="left">Poisson</td>
 <td align="left">dpois</td>
+<td align="left">dpois</td>
+<td align="left">lambda</td>
 <td align="left">lambda</td>
 <td align="left">&gt; 0</td>
+</tr>
+<tr class="odd">
+<td align="left">Deterministic</td>
+<td align="left">determ</td>
+<td align="left"></td>
+<td align="left">define</td>
+<td align="left">define</td>
+<td align="left"></td>
 </tr>
 </tbody>
 </table>
 <p>So, to assign a Weibull distribution to a node <em>XYZ</em>, we would use the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, XYZ, <span class="dt">nodeType =</span> <span class="st">&quot;dweib&quot;</span>, <span class="dt">nu=</span><span class="dv">2</span>, <span class="dt">lambda=</span><span class="dv">5</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, XYZ, <span class="dt">nodeType =</span> <span class="st">&quot;dweib&quot;</span>, <span class="dt">shape=</span><span class="dv">2</span>, <span class="dt">scale=</span><span class="dv">5</span>)</code></pre></div>
 <p>Finally, note that there is built-in error handling when parameters are outside allowable limits:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType =</span> <span class="st">&quot;dpois&quot;</span>, <span class="dt">lambda=</span>-<span class="dv">10</span>)</code></pre></div>
 <pre><code>## Error in tools::buildVignettes(dir = &quot;.&quot;, tangle = TRUE): 1 assertions failed:
@@ -664,26 +762,26 @@ jagsDists[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">
 <p>For OLS models, <code>nodeType=&quot;dnorm&quot;</code> can be used. We use a regression equation to characterize the dependency of the node on its parents. We note again that normal distributions are specified using the mean and <em>precision</em> parameters, where the precision parameter is the inverse of the variance.</p>
 <p><code>setNode()</code> supports the use of formula syntax to define a regression equation for a given node. This is achieved using the <code>fromFormula()</code> function with the <em>nodeFormula</em> parameter, as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType=</span><span class="st">&quot;dnorm&quot;</span>,
-               <span class="dt">mu=</span><span class="kw">fromFormula</span>(), <span class="dt">tau=</span><span class="dv">1</span>/<span class="dv">30</span>,  <span class="co">#sigma^2 = 30</span>
+               <span class="dt">mean=</span><span class="kw">fromFormula</span>(), <span class="dt">sd=</span><span class="kw">sqrt</span>(<span class="dv">30</span>),  <span class="co">#sigma^2 = 30</span>
                <span class="dt">nodeFormula =</span> d.dimer ~<span class="st"> </span><span class="dv">210</span> +<span class="st"> </span><span class="dv">29</span>*pregnant +<span class="st"> </span><span class="dv">68</span>*pe)
 
 net$nodeType$d.dimer</code></pre></div>
 <pre><code>## [1] &quot;dnorm&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeParams$d.dimer</code></pre></div>
-<pre><code>## $mu
+<pre><code>## $mean
 ## [1] &quot;fromFormula&quot;
 ## 
-## $tau
-## [1] 0.03333333</code></pre>
+## $sd
+## [1] 5.477226</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeFormula$d.dimer</code></pre></div>
 <pre><code>## d.dimer ~ 210 + 29 * pregnant + 68 * pe
-## &lt;environment: 0x0000000012354fc0&gt;</code></pre>
+## &lt;environment: 0xdd26da0&gt;</code></pre>
 <p>Or, alternatively, one may directly specify JAGS code for the parameters as character strings. Below, we do this for <code>mu</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType=</span><span class="st">&quot;dnorm&quot;</span>,
-               <span class="dt">mu=</span><span class="st">&quot;210 + 29*pregnant + 68*pe&quot;</span>, <span class="dt">tau=</span><span class="dv">1</span>/<span class="dv">30</span>)</code></pre></div>
+               <span class="dt">mean=</span><span class="st">&quot;210 + 29*pregnant + 68*pe&quot;</span>, <span class="dt">sd =</span> <span class="kw">sqrt</span>(<span class="dv">30</span>))</code></pre></div>
 <p>However, the model syntax is flexible, allowing for alternative distributions to be used if desired. For example, maybe the distribution of the residuals has heavy tails; here, the (non-standardized) Student’s <em>t</em> distribution could be used:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType=</span><span class="st">&quot;dt&quot;</span>,
-               <span class="dt">mu=</span><span class="st">&quot;210 + 29*pregnant + 68*pe&quot;</span>, <span class="dt">tau=</span><span class="dv">1</span>/<span class="dv">20</span>, <span class="dt">k=</span><span class="dv">2</span>)</code></pre></div>
+               <span class="dt">mean=</span><span class="st">&quot;210 + 29*pregnant + 68*pe&quot;</span>, <span class="dt">sd=</span><span class="kw">sqrt</span>(<span class="dv">20</span>), <span class="dt">df=</span><span class="dv">2</span>)</code></pre></div>
 <p>The decision of whether to give an <code>R</code>-style formula or JAGS code is a matter of preference. But when using <code>R</code> code, one needs to ensure that any functions used in the formula can be translated to JAGS code. A list of functions that can be translated between <code>R</code> and JAGS can be viewed by calling</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(jagsFunctions, <span class="dt">package=</span><span class="st">'HydeNet'</span>)
 jagsFunctions</code></pre></div>
@@ -768,8 +866,8 @@ jagsFunctions</code></pre></div>
 </tr>
 <tr class="odd">
 <td align="left">ilogit</td>
-<td align="left">logit</td>
-<td align="left">VGAM</td>
+<td align="left">plogis</td>
+<td align="left">base</td>
 </tr>
 <tr class="even">
 <td align="left">log</td>
@@ -788,8 +886,8 @@ jagsFunctions</code></pre></div>
 </tr>
 <tr class="odd">
 <td align="left">logit</td>
-<td align="left">logit</td>
-<td align="left">VGAM</td>
+<td align="left">qlogis</td>
+<td align="left">base</td>
 </tr>
 <tr class="even">
 <td align="left">phi</td>
@@ -854,7 +952,7 @@ jagsFunctions</code></pre></div>
 <p>If the intercept and slope coefficients of a logistic regression model are known, one may define a Bernoulli-distributed node using the <code>ilogit</code> function in JAGS (inverse logit):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">equation &lt;-<span class="st"> &quot;-6.3 + 0.02*d.dimer + 2.9*angio - 0.005*d.dimer*angio&quot;</span>
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, treat, <span class="dt">nodeType=</span><span class="st">&quot;dbern&quot;</span>,
-               <span class="dt">p=</span><span class="kw">paste</span>(<span class="st">&quot;ilogit(&quot;</span>, equation, <span class="st">&quot;)&quot;</span>), 
+               <span class="dt">prob=</span><span class="kw">paste</span>(<span class="st">&quot;ilogit(&quot;</span>, equation, <span class="st">&quot;)&quot;</span>), 
                <span class="dt">validate=</span><span class="ot">FALSE</span>)</code></pre></div>
 <p><a href="#top">[Link to top]</a></p>
 </div>
@@ -1034,7 +1132,7 @@ We have implemented a series of "helper" deterministic functions to facilitate m
 ## : pe ~ wells
 ## 
 ## treat | newTest * angio * d.dimer
-## dbern(p = ilogit( -6.3 + 0.02*d.dimer + 2.9*angio - 0.005*d.dimer*angio ))
+## dbern(prob = ilogit( -6.3 + 0.02*d.dimer + 2.9*angio - 0.005*d.dimer*angio ))
 ## : treat ~ d.dimer + angio
 ## 
 ## angio | pe
@@ -1042,7 +1140,7 @@ We have implemented a series of "helper" deterministic functions to facilitate m
 ## : angio ~ pe
 ## 
 ## d.dimer | pe
-## dnorm(mu = fromFormula, tau = 0.0333333333333333)
+## dnorm(mean = fromFormula, sd = 5.47722557505166)
 ## : d.dimer ~ 210 + 29 * pregnant + 68 * pe
 ## 
 ## death | pe * treat
@@ -1064,7 +1162,7 @@ We have implemented a series of "helper" deterministic functions to facilitate m
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

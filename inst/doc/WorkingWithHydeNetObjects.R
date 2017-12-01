@@ -49,13 +49,13 @@ writeNetworkModel(bagNet, pretty=TRUE)
 
 ## ------------------------------------------------------------------------
 net <- setNode(network = net, node = pregnant,
-               nodeType = "dbern", p=.4)
+               nodeType = "dbern", prob=.4)
 net
 
 ## ------------------------------------------------------------------------
 net <- setNode(net, wells,
                nodeType = "dnorm", 
-               mu = 5, tau = 1 / (1.5^2))
+               mean = 5, sd = 1.5)
 
 net$nodeType$wells
 net$nodeParams$wells
@@ -83,17 +83,20 @@ net <- setNode(net, wells,
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  data(jagsDists, package='HydeNet')
-#  jagsDists[,c(1,2,5,6)]
+#  jagsDists[,c(1:3, 6:8)]
+
+## ---- echo = FALSE-------------------------------------------------------
+knitr::kable(jagsDists[, c(1:3, 6:8)])
 
 ## ---- eval=FALSE---------------------------------------------------------
-#  net <- setNode(net, XYZ, nodeType = "dweib", nu=2, lambda=5)
+#  net <- setNode(net, XYZ, nodeType = "dweib", shape=2, scale=5)
 
 ## ---- error=TRUE---------------------------------------------------------
 net <- setNode(net, d.dimer, nodeType = "dpois", lambda=-10)
 
 ## ------------------------------------------------------------------------
 net <- setNode(net, d.dimer, nodeType="dnorm",
-               mu=fromFormula(), tau=1/30,  #sigma^2 = 30
+               mean=fromFormula(), sd=sqrt(30),  #sigma^2 = 30
                nodeFormula = d.dimer ~ 210 + 29*pregnant + 68*pe)
 
 net$nodeType$d.dimer
@@ -102,20 +105,23 @@ net$nodeFormula$d.dimer
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  net <- setNode(net, d.dimer, nodeType="dnorm",
-#                 mu="210 + 29*pregnant + 68*pe", tau=1/30)
+#                 mean="210 + 29*pregnant + 68*pe", sd = sqrt(30))
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  net <- setNode(net, d.dimer, nodeType="dt",
-#                 mu="210 + 29*pregnant + 68*pe", tau=1/20, k=2)
+#                 mean="210 + 29*pregnant + 68*pe", sd=sqrt(20), df=2)
 
 ## ---- eval=FALSE---------------------------------------------------------
 #  data(jagsFunctions, package='HydeNet')
 #  jagsFunctions
 
+## ---- echo = FALSE-------------------------------------------------------
+knitr::kable(jagsFunctions)
+
 ## ------------------------------------------------------------------------
 equation <- "-6.3 + 0.02*d.dimer + 2.9*angio - 0.005*d.dimer*angio"
 net <- setNode(net, treat, nodeType="dbern",
-               p=paste("ilogit(", equation, ")"), 
+               prob=paste("ilogit(", equation, ")"), 
                validate=FALSE)
 
 ## ------------------------------------------------------------------------

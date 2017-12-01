@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jarrod Dalton and Benjamin Nutter" />
 
-<meta name="date" content="2017-01-07" />
+<meta name="date" content="2017-12-01" />
 
 <title>Decision Network (Influence Diagram) Analyses in HydeNet</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Decision Network (Influence Diagram) Analyses in HydeNet</h1>
 <h4 class="author"><em>Jarrod Dalton and Benjamin Nutter</em></h4>
-<h4 class="date"><em>2017-01-07</em></h4>
+<h4 class="date"><em>2017-12-01</em></h4>
 
 
 
@@ -642,60 +642,60 @@ compiledNet &lt;-<span class="st"> </span><span class="kw">compileJagsModel</spa
 ##    Total graph size: 1022
 ## 
 ## Initializing model</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">post &lt;-<span class="st"> </span><span class="kw">HydePosterior</span>(compiledNet,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">post &lt;-<span class="st"> </span><span class="kw">HydeSim</span>(compiledNet,
                       <span class="dt">variable.names =</span> trackedVars,
-                      <span class="dt">n.iter=</span><span class="dv">10000</span>)
-
-dplyr::<span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code></pre></div>
+                      <span class="dt">n.iter=</span><span class="dv">10000</span>)</code></pre></div>
+<pre><code>## `bindPosterior` is deprecated and replaced by `bindSim`</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr::<span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code></pre></div>
 <pre><code>##       card1 dealerOutcome dealerUpcard payoff playerFinalPoints
-## 14860     3          Bust            9      1                16
-## 1996      3          Bust            3      1                16
-## 14767     3            20            9      0                20
-## 20627     3            17            6     -1                14
-## 9422      3            18            4     -1                15
-## 4317      3            18            2     -1                17
-## 13693     3            19            2     -1                14
-## 11876     3            17            3     -1                15
-## 2872      3     Blackjack            9     -1                15
-## 5055      3            19            8     -1                14
-## 16027     3            17            9      0                17
-## 27074     3            19            4      1                20
-## 3653      3          Bust            2      1                14
-## 23338     3            20            9     -1                15
-## 17143     3            18            7     -1                24
-## 14312     3            20            9     -1                18
-## 20063     3            18            5     -1                 9
-## 8454      3            20            8     -1                19
-## 348       3            19            8     -1                14
-## 10280     3            18            8     -1                12
+## 19893     3            19            9     -1                17
+## 17335     3            18            9     -1                14
+## 25963     3          Bust            9      1                13
+## 9062      3            20            2     -1                14
+## 26249     3            18            7      1                21
+## 21607     3            20            9     -1                14
+## 14422     3            18            7     -1                14
+## 6616      3          Bust            3      1                13
+## 515       3          Bust            2     -1                24
+## 4846      3            20            9     -1                12
+## 8375      3            20            9     -1                16
+## 22824     3          Bust           10     -1                24
+## 27427     3            19            4     -1                15
+## 11621     3          Bust            9      1                20
+## 19235     3            17            5     -1                16
+## 26519     3          Bust            6      1                17
+## 20509     3            21            3     -1                11
+## 4360      3            18            9     -1                14
+## 11369     3            19            1     -1                11
+## 444       3            17            9     -1                14
 ##       chain_index obs_index
-## 14860           2      4860
-## 1996            1      1996
-## 14767           2      4767
-## 20627           3       627
-## 9422            1      9422
-## 4317            1      4317
-## 13693           2      3693
-## 11876           2      1876
-## 2872            1      2872
-## 5055            1      5055
-## 16027           2      6027
-## 27074           3      7074
-## 3653            1      3653
-## 23338           3      3338
-## 17143           2      7143
-## 14312           2      4312
-## 20063           3        63
-## 8454            1      8454
-## 348             1       348
-## 10280           2       280</code></pre>
+## 19893           2      9893
+## 17335           2      7335
+## 25963           3      5963
+## 9062            1      9062
+## 26249           3      6249
+## 21607           3      1607
+## 14422           2      4422
+## 6616            1      6616
+## 515             1       515
+## 4846            1      4846
+## 8375            1      8375
+## 22824           3      2824
+## 27427           3      7427
+## 11621           2      1621
+## 19235           2      9235
+## 26519           3      6519
+## 20509           3       509
+## 4360            1      4360
+## 11369           2      1369
+## 444             1       444</code></pre>
 <p>And, we can do things like compute expected utility (under the distribution of hit decisions observed in the sample, i.e., absent any specific hit strategy) when dealt a 3:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(post$payoff)</code></pre></div>
 <pre><code>## 
 ##    -1     0     1 
-## 18621  1426  9953</code></pre>
+## 18598  1373 10029</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(post$payoff)</code></pre></div>
-<pre><code>## [1] -0.2889333</code></pre>
+<pre><code>## [1] -0.2856333</code></pre>
 </div>
 <div id="maximum-expected-utility-analysis" class="section level2">
 <h2>Maximum Expected Utility Analysis</h2>
@@ -705,7 +705,7 @@ dplyr::<span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code>
                        <span class="dt">hit2 =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>),
                        <span class="dt">hit3 =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>))</code></pre></div>
 <p>(Note: we have included a convenience function called <code>policyMatrix()</code> when all combinations of decision node values are of interest. This function is a wrapper for <code>expand.grid()</code>; see <code>help(policyMatrix)</code> for details.)</p>
-<p>In the MEU analysis, the goal is to characterize the distribution of utility under the competing policies. This amounts to sampling posterior distributions of utility nodes under varying sets of values for the decision nodes. In <code>HydeNet</code>, this is done by 1) using the function <code>compileDecisionModel()</code> to create a list of <code>compiledHydeNetwork</code> objects (one object corresponding to each policy); 2) feeding that list to <code>HydePosterior()</code> to get a list of <code>coda.samples</code> objects; and finally 3) feeding the list of <code>coda.samples</code> objects to <code>bindPosterior()</code> to get a single posterior sample matrix for each policy:</p>
+<p>In the MEU analysis, the goal is to characterize the distribution of utility under the competing policies. This amounts to sampling posterior distributions of utility nodes under varying sets of values for the decision nodes. In <code>HydeNet</code>, this is done by 1) using the function <code>compileDecisionModel()</code> to create a list of <code>compiledHydeNetwork</code> objects (one object corresponding to each policy); 2) feeding that list to <code>HydeSim()</code> to get a list of <code>coda.samples</code> objects; and finally 3) feeding the list of <code>coda.samples</code> objects to <code>bindPosterior()</code> to get a single posterior sample matrix for each policy:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">compiledNets &lt;-<span class="st"> </span><span class="kw">compileDecisionModel</span>(net, <span class="dt">policyMatrix =</span> policies)</code></pre></div>
 <pre><code>## Compiling model graph
 ##    Resolving undeclared variables
@@ -757,19 +757,22 @@ dplyr::<span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code>
 ## 
 ## Initializing model</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">samples &lt;-<span class="st"> </span><span class="kw">lapply</span>(compiledNets,
-                  HydePosterior,
+                  HydeSim,
                   <span class="dt">variable.names =</span> trackedVars,
-                  <span class="dt">n.iter=</span><span class="dv">10000</span>)
-
-<span class="kw">lapply</span>(samples, head)</code></pre></div>
+                  <span class="dt">n.iter=</span><span class="dv">10000</span>)</code></pre></div>
+<pre><code>## `bindPosterior` is deprecated and replaced by `bindSim`
+## `bindPosterior` is deprecated and replaced by `bindSim`
+## `bindPosterior` is deprecated and replaced by `bindSim`
+## `bindPosterior` is deprecated and replaced by `bindSim`</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(samples, head)</code></pre></div>
 <pre><code>## [[1]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1            19            9    0    0    0      1                20
-## 2          Bust            6    0    0    0      1                18
-## 3            21            5    0    0    0     -1                13
-## 4            19            8    0    0    0     -1                15
-## 5          Bust            4    0    0    0      1                10
-## 6            17            9    0    0    0      1                19
+## 1          Bust            1    0    0    0      1                17
+## 2            21            8    0    0    0     -1                16
+## 3            17            6    0    0    0      1                20
+## 4            19            4    0    0    0     -1                18
+## 5            20           10    0    0    0     -1                10
+## 6          Bust            2    0    0    0      1                21
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -780,12 +783,12 @@ dplyr::<span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code>
 ## 
 ## [[2]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1            17            4    1    0    0      0                17
-## 2            18            5    1    0    0      1                19
-## 3          Bust            5    1    0    0      1                17
-## 4          Bust            4    1    0    0      1                14
-## 5            18            9    1    0    0     -1                22
-## 6            20            1    1    0    0     -1                17
+## 1          Bust            9    1    0    0     -1                23
+## 2          Bust            8    1    0    0      1                14
+## 3            21            3    1    0    0     -1                15
+## 4          Bust            1    1    0    0      1                19
+## 5            18            6    1    0    0     -1                15
+## 6            21            3    1    0    0     -1                16
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -796,12 +799,12 @@ dplyr::<span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code>
 ## 
 ## [[3]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1            20            9    1    1    0     -1                19
-## 2            20            5    1    1    0     -1                18
-## 3            17            6    1    1    0     -1                16
-## 4            19            7    1    1    0     -1                24
-## 5          Bust            2    1    1    0     -1                22
-## 6          Bust            9    1    1    0      1                13
+## 1            20            9    1    1    0     -1                17
+## 2            20            9    1    1    0      0                20
+## 3            17            9    1    1    0     -1                24
+## 4            21            9    1    1    0     -1                14
+## 5            18           10    1    1    0      1                20
+## 6          Bust            5    1    1    0     -1                24
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -812,12 +815,12 @@ dplyr::<span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code>
 ## 
 ## [[4]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1          Bust            1    1    1    1      1                19
-## 2            20            9    1    1    1      1                21
-## 3            17            6    1    1    1     -1                13
-## 4          Bust            9    1    1    1     -1                24
-## 5            19            3    1    1    1      1                21
-## 6            20            9    1    1    1     -1                28
+## 1          Bust            3    1    1    1      1                21
+## 2          Bust            9    1    1    1      1                16
+## 3            19            9    1    1    1     -1                23
+## 4            20            9    1    1    1     -1                16
+## 5            18            8    1    1    1     -1                13
+## 6            17            8    1    1    1     -1                14
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -829,16 +832,16 @@ dplyr::<span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#summary of expected utility under each policy</span>
 <span class="kw">lapply</span>(samples, function(l) <span class="kw">mean</span>(l$payoff))</code></pre></div>
 <pre><code>## [[1]]
-## [1] -0.04
+## [1] -0.0241
 ## 
 ## [[2]]
-## [1] -0.2374
+## [1] -0.2195
 ## 
 ## [[3]]
-## [1] -0.3263
+## [1] -0.3177
 ## 
 ## [[4]]
-## [1] -0.4378</code></pre>
+## [1] -0.4406</code></pre>
 <p>We see that, among these four strategies, taking no cards appears to maximize expected utility (i.e., leads to losing the least amount of money.</p>
 <!--
 
@@ -862,7 +865,7 @@ Decision/data process:  (A1, D1, A2, D2, ..., A_n-1, D_n-1, An)
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

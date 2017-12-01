@@ -55,7 +55,7 @@ plot(BlackJack)
 #       useHydeDefaults = FALSE)
 
 ## ---- include = FALSE----------------------------------------------------
-if (!RCurl::url.exists("http://www.graphviz.org/About.php"))
+if (!RCurl::url.exists("http://www.graphviz.org/about"))
 {
   stop("Graphviz link does not exist. Find a new link")
 }

@@ -219,7 +219,7 @@ compiledNet <- compileJagsModel(net, data = evidence,
                                 n.chains = 3,
                                 n.adapt = 5000)
 
-post <- HydePosterior(compiledNet,
+post <- HydeSim(compiledNet,
                       variable.names = trackedVars,
                       n.iter=10000)
 
@@ -241,7 +241,7 @@ set.seed(39482820)
 compiledNets <- compileDecisionModel(net, policyMatrix = policies)
 
 samples <- lapply(compiledNets,
-                  HydePosterior,
+                  HydeSim,
                   variable.names = trackedVars,
                   n.iter=10000)
 

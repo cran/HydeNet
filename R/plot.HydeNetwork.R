@@ -4,7 +4,7 @@
 #' @method plot HydeNetwork
 #' 
 #' 
-#' @title Plotting Utilities Probabilistic Graphical Network
+#' @title Plotting Utilities for Probabilistic Graphical Network
 #' @description Generate and customize plots of a \code{HydeNetwork} 
 #'   class network. \code{HydeNet} provides some initial defaults for standard 
 #'   variable nodes, deterministic nodes, decision nodes, and utility nodes.
@@ -61,8 +61,7 @@
 #'   \url{http://rich-iannone.github.io/DiagrammeR/graphviz_and_mermaid.html}\cr
 #'   See especially the section on Attributes
 #'   
-#'   \url{http://graphviz.org/}\cr
-#'   \url{http://graphviz.org/content/attrs}
+#'   \url{http://graphviz.org/}
 #' 
 #' @examples
 #' \dontrun{
@@ -209,7 +208,6 @@ mergeCustomNodes <- function(node_df, customNodes)
     }
   }
   
-  
   if (any(grepl(pattern = "[.]y", 
                 x = names(node_df))))
     node_df <- dplyr::select(node_df, -dplyr::ends_with('.y'))
@@ -217,7 +215,7 @@ mergeCustomNodes <- function(node_df, customNodes)
   names(node_df) <- gsub(pattern = "[.]x", 
                          replacement = "", 
                          x = names(node_df))
-  
+ 
   node_df[, -which(names(node_df) == "nodes")] <- 
     lapply(X = node_df[, -which(names(node_df) == "nodes")],
            FUN = function(x) ifelse(test = is.na(x), 
