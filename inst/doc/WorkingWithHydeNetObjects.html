@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jarrod Dalton and Benjamin Nutter" />
 
-<meta name="date" content="2017-12-01" />
+<meta name="date" content="2018-01-01" />
 
 <title>Working with HydeNetwork Objects</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Working with HydeNetwork Objects</h1>
 <h4 class="author"><em>Jarrod Dalton and Benjamin Nutter</em></h4>
-<h4 class="date"><em>2017-12-01</em></h4>
+<h4 class="date"><em>2018-01-01</em></h4>
 
 
 
@@ -114,12 +114,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="creating-skeleton-hydenetwork-objects" class="section level2">
 <h2>Creating “Skeleton” HydeNetwork Objects</h2>
 <p>A graphical representation of the PE network can be constructed based on an unpopulated <strong>HydeNetwork</strong> object (i.e., a “base” object for which node distributions have not yet been specified):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(~<span class="st"> </span>wells
-                   +<span class="st"> </span>pe |<span class="st"> </span>wells
-                   +<span class="st"> </span>d.dimer |<span class="st"> </span>pregnant*pe
-                   +<span class="st"> </span>angio |<span class="st"> </span>pe
-                   +<span class="st"> </span>treat |<span class="st"> </span>d.dimer*angio
-                   +<span class="st"> </span>death |<span class="st"> </span>pe*treat)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(<span class="op">~</span><span class="st"> </span>wells
+                   <span class="op">+</span><span class="st"> </span>pe <span class="op">|</span><span class="st"> </span>wells
+                   <span class="op">+</span><span class="st"> </span>d.dimer <span class="op">|</span><span class="st"> </span>pregnant<span class="op">*</span>pe
+                   <span class="op">+</span><span class="st"> </span>angio <span class="op">|</span><span class="st"> </span>pe
+                   <span class="op">+</span><span class="st"> </span>treat <span class="op">|</span><span class="st"> </span>d.dimer<span class="op">*</span>angio
+                   <span class="op">+</span><span class="st"> </span>death <span class="op">|</span><span class="st"> </span>pe<span class="op">*</span>treat)
 ## 
 ## plot(net)</code></pre></div>
 <div class="figure">
@@ -213,12 +213,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </table>
 <p>The syntax for building a Bayesian network using training data is rather simple:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(PE, <span class="dt">package=</span><span class="st">'HydeNet'</span>)
-autoNet &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(~<span class="st"> </span>wells
-                       +<span class="st"> </span>pe |<span class="st"> </span>wells
-                       +<span class="st"> </span>d.dimer |<span class="st"> </span>pregnant*pe
-                       +<span class="st"> </span>angio |<span class="st"> </span>pe
-                       +<span class="st"> </span>treat |<span class="st"> </span>d.dimer*angio
-                       +<span class="st"> </span>death |<span class="st"> </span>pe*treat,
+autoNet &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(<span class="op">~</span><span class="st"> </span>wells
+                       <span class="op">+</span><span class="st"> </span>pe <span class="op">|</span><span class="st"> </span>wells
+                       <span class="op">+</span><span class="st"> </span>d.dimer <span class="op">|</span><span class="st"> </span>pregnant<span class="op">*</span>pe
+                       <span class="op">+</span><span class="st"> </span>angio <span class="op">|</span><span class="st"> </span>pe
+                       <span class="op">+</span><span class="st"> </span>treat <span class="op">|</span><span class="st"> </span>d.dimer<span class="op">*</span>angio
+                       <span class="op">+</span><span class="st"> </span>death <span class="op">|</span><span class="st"> </span>pe<span class="op">*</span>treat,
                        <span class="dt">data =</span> PE)
 <span class="kw">writeNetworkModel</span>(autoNet, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## model{
@@ -234,10 +234,10 @@ autoNet &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(~<span
 ##    death ~ dcat(pi.death)
 ## }</code></pre>
 <p>We can see by the output that the models have all been populated, and verify that these are indeed the coefficients we obtain from the functions in the above table:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glm</span>(treat ~<span class="st"> </span>d.dimer+angio, <span class="dt">data=</span>PE, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)$coef</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glm</span>(treat <span class="op">~</span><span class="st"> </span>d.dimer<span class="op">+</span>angio, <span class="dt">data=</span>PE, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)<span class="op">$</span>coef</code></pre></div>
 <pre><code>##   (Intercept)       d.dimer angioPositive 
 ##   -5.89315742    0.01993752    1.73353613</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xtabs</span>(~PE$pregnant) /<span class="st"> </span><span class="kw">nrow</span>(PE)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xtabs</span>(<span class="op">~</span>PE<span class="op">$</span>pregnant) <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(PE)</code></pre></div>
 <pre><code>## PE$pregnant
 ##     No    Yes 
 ## 0.9014 0.0986</code></pre>
@@ -246,13 +246,13 @@ autoNet &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(~<span
 <div id="creating-hydenetwork-objects-with-a-list-of-models" class="section level2">
 <h2>Creating HydeNetwork Objects With a List of Models</h2>
 <p>The same network can be constructed by feeding <code>HydeNetwork()</code> a list of model objects:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g1 &lt;-<span class="st"> </span><span class="kw">lm</span>(wells ~<span class="st"> </span><span class="dv">1</span>, <span class="dt">data=</span>PE)
-g2 &lt;-<span class="st"> </span><span class="kw">glm</span>(pe ~<span class="st"> </span>wells, <span class="dt">data=</span>PE, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
-g3 &lt;-<span class="st"> </span><span class="kw">lm</span>(d.dimer ~<span class="st"> </span>pe +<span class="st"> </span>pregnant, <span class="dt">data=</span>PE)
-g4 &lt;-<span class="st"> </span><span class="kw">xtabs</span>(~<span class="st"> </span>pregnant, <span class="dt">data=</span>PE)
-g5 &lt;-<span class="st"> </span><span class="kw">cpt</span>(angio ~<span class="st"> </span>pe, <span class="dt">data=</span>PE)
-g6 &lt;-<span class="st"> </span><span class="kw">glm</span>(treat ~<span class="st"> </span>d.dimer +<span class="st"> </span>angio, <span class="dt">data=</span>PE, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
-g7 &lt;-<span class="st"> </span><span class="kw">cpt</span>(death ~<span class="st"> </span>pe +<span class="st"> </span>treat, <span class="dt">data=</span>PE)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g1 &lt;-<span class="st"> </span><span class="kw">lm</span>(wells <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data=</span>PE)
+g2 &lt;-<span class="st"> </span><span class="kw">glm</span>(pe <span class="op">~</span><span class="st"> </span>wells, <span class="dt">data=</span>PE, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
+g3 &lt;-<span class="st"> </span><span class="kw">lm</span>(d.dimer <span class="op">~</span><span class="st"> </span>pe <span class="op">+</span><span class="st"> </span>pregnant, <span class="dt">data=</span>PE)
+g4 &lt;-<span class="st"> </span><span class="kw">xtabs</span>(<span class="op">~</span><span class="st"> </span>pregnant, <span class="dt">data=</span>PE)
+g5 &lt;-<span class="st"> </span><span class="kw">cpt</span>(angio <span class="op">~</span><span class="st"> </span>pe, <span class="dt">data=</span>PE)
+g6 &lt;-<span class="st"> </span><span class="kw">glm</span>(treat <span class="op">~</span><span class="st"> </span>d.dimer <span class="op">+</span><span class="st"> </span>angio, <span class="dt">data=</span>PE, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
+g7 &lt;-<span class="st"> </span><span class="kw">cpt</span>(death <span class="op">~</span><span class="st"> </span>pe <span class="op">+</span><span class="st"> </span>treat, <span class="dt">data=</span>PE)
 
 bagOfModels &lt;-<span class="st"> </span><span class="kw">list</span>(g1,g2,g3,g4,g5,g6,g7)
 
@@ -328,9 +328,9 @@ net</code></pre></div>
                <span class="dt">nodeType =</span> <span class="st">&quot;dnorm&quot;</span>, 
                <span class="dt">mean =</span> <span class="dv">5</span>, <span class="dt">sd =</span> <span class="fl">1.5</span>)
 
-net$nodeType$wells</code></pre></div>
+net<span class="op">$</span>nodeType<span class="op">$</span>wells</code></pre></div>
 <pre><code>## [1] &quot;dnorm&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeParams$wells</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net<span class="op">$</span>nodeParams<span class="op">$</span>wells</code></pre></div>
 <pre><code>## $mean
 ## [1] 5
 ## 
@@ -344,9 +344,9 @@ net$nodeType$wells</code></pre></div>
                <span class="dt">nodeType =</span> <span class="st">&quot;dcat&quot;</span>,
                <span class="dt">pi =</span> <span class="kw">vectorProbs</span>(<span class="dt">p =</span> <span class="kw">c</span>(.<span class="dv">3</span>, .<span class="dv">6</span>, .<span class="dv">1</span>), wells) )</code></pre></div>
 <pre><code>## Validation has been ignored for parameters defined with character strings</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeType$wells</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net<span class="op">$</span>nodeType<span class="op">$</span>wells</code></pre></div>
 <pre><code>## [1] &quot;dcat&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeParams$wells</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net<span class="op">$</span>nodeParams<span class="op">$</span>wells</code></pre></div>
 <pre><code>## $pi
 ## [1] &quot;pi.wells[1] &lt;- 0.3; pi.wells[2] &lt;- 0.6; pi.wells[3] &lt;- 0.1&quot;</code></pre>
 <p>Note here that we have overwritten the node distribution within the object <code>net</code> to be categorical in nature.</p>
@@ -355,9 +355,9 @@ net$nodeType$wells</code></pre></div>
                <span class="dt">nodeType =</span> <span class="st">&quot;dcat&quot;</span>,
                <span class="dt">pi =</span> <span class="kw">vectorProbs</span>(<span class="dt">p =</span> <span class="kw">c</span>(<span class="dv">37</span>, <span class="dv">162</span>, <span class="dv">48</span>), wells) )</code></pre></div>
 <pre><code>## Validation has been ignored for parameters defined with character strings</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeType$wells</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net<span class="op">$</span>nodeType<span class="op">$</span>wells</code></pre></div>
 <pre><code>## [1] &quot;dcat&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeParams$wells</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net<span class="op">$</span>nodeParams<span class="op">$</span>wells</code></pre></div>
 <pre><code>## $pi
 ## [1] &quot;pi.wells[1] &lt;- 0.149797570850202; pi.wells[2] &lt;- 0.65587044534413; pi.wells[3] &lt;- 0.194331983805668&quot;</code></pre>
 <p>We could have achieved the same by directly inserting the JAGS code into the pi parameter:</p>
@@ -370,7 +370,7 @@ net$nodeType$wells</code></pre></div>
 <h4>Other Univariate Distributions</h4>
 <p><code>HydeNet</code> supports all the statistical distributions supported by JAGS. A table of these distributions is stored in the <code>jagsDists</code> dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(jagsDists, <span class="dt">package=</span><span class="st">'HydeNet'</span>)
-jagsDists[,<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">3</span>, <span class="dv">6</span>:<span class="dv">8</span>)]</code></pre></div>
+jagsDists[,<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">6</span><span class="op">:</span><span class="dv">8</span>)]</code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -748,7 +748,7 @@ jagsDists[,<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">
 <p>So, to assign a Weibull distribution to a node <em>XYZ</em>, we would use the following code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, XYZ, <span class="dt">nodeType =</span> <span class="st">&quot;dweib&quot;</span>, <span class="dt">shape=</span><span class="dv">2</span>, <span class="dt">scale=</span><span class="dv">5</span>)</code></pre></div>
 <p>Finally, note that there is built-in error handling when parameters are outside allowable limits:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType =</span> <span class="st">&quot;dpois&quot;</span>, <span class="dt">lambda=</span>-<span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType =</span> <span class="st">&quot;dpois&quot;</span>, <span class="dt">lambda=</span><span class="op">-</span><span class="dv">10</span>)</code></pre></div>
 <pre><code>## Error in tools::buildVignettes(dir = &quot;.&quot;, tangle = TRUE): 1 assertions failed:
 ##  * Please define lambda such that lambda &gt; 0 (or use
 ##  * validate=FALSE).</code></pre>
@@ -763,19 +763,19 @@ jagsDists[,<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">
 <p><code>setNode()</code> supports the use of formula syntax to define a regression equation for a given node. This is achieved using the <code>fromFormula()</code> function with the <em>nodeFormula</em> parameter, as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType=</span><span class="st">&quot;dnorm&quot;</span>,
                <span class="dt">mean=</span><span class="kw">fromFormula</span>(), <span class="dt">sd=</span><span class="kw">sqrt</span>(<span class="dv">30</span>),  <span class="co">#sigma^2 = 30</span>
-               <span class="dt">nodeFormula =</span> d.dimer ~<span class="st"> </span><span class="dv">210</span> +<span class="st"> </span><span class="dv">29</span>*pregnant +<span class="st"> </span><span class="dv">68</span>*pe)
+               <span class="dt">nodeFormula =</span> d.dimer <span class="op">~</span><span class="st"> </span><span class="dv">210</span> <span class="op">+</span><span class="st"> </span><span class="dv">29</span><span class="op">*</span>pregnant <span class="op">+</span><span class="st"> </span><span class="dv">68</span><span class="op">*</span>pe)
 
-net$nodeType$d.dimer</code></pre></div>
+net<span class="op">$</span>nodeType<span class="op">$</span>d.dimer</code></pre></div>
 <pre><code>## [1] &quot;dnorm&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeParams$d.dimer</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net<span class="op">$</span>nodeParams<span class="op">$</span>d.dimer</code></pre></div>
 <pre><code>## $mean
 ## [1] &quot;fromFormula&quot;
 ## 
 ## $sd
 ## [1] 5.477226</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net$nodeFormula$d.dimer</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net<span class="op">$</span>nodeFormula<span class="op">$</span>d.dimer</code></pre></div>
 <pre><code>## d.dimer ~ 210 + 29 * pregnant + 68 * pe
-## &lt;environment: 0xdd26da0&gt;</code></pre>
+## &lt;environment: 0x101aac30&gt;</code></pre>
 <p>Or, alternatively, one may directly specify JAGS code for the parameters as character strings. Below, we do this for <code>mu</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType=</span><span class="st">&quot;dnorm&quot;</span>,
                <span class="dt">mean=</span><span class="st">&quot;210 + 29*pregnant + 68*pe&quot;</span>, <span class="dt">sd =</span> <span class="kw">sqrt</span>(<span class="dv">30</span>))</code></pre></div>
@@ -961,17 +961,17 @@ net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, treat, <s
 <h3>Using <strong><code>R</code></strong> Model Objects</h3>
 <p>Above, we showed how <code>HydeNetwork()</code> can be used with a list of model objects to populate both the graph and the corresponding node distributions. In a similar fashion, certain <code>R</code> model classes can be used to populate the distribution for individual nodes in an existing <code>HydeNetwork</code> object. This is achieved using the <code>setNodeModels()</code> function. Currently, <code>setNodeModels()</code> is compatible with the following model classes: <code>xtabs</code>, <code>cpt</code>, <code>lm</code>, <code>glm</code>, (<code>family=&quot;binomial&quot;</code> only) and <code>multinom</code>.</p>
 <p>Above, we constructed a <code>HydeNetwork</code> object called <code>bagNet</code> for the PE network by passing a list of model objects. Suppose we wanted to modify one of the models and repopulate the network, e.g., by introducing an interaction term. This is achieved with the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bagNet$nodeType$d.dimer</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bagNet<span class="op">$</span>nodeType<span class="op">$</span>d.dimer</code></pre></div>
 <pre><code>## [1] &quot;dnorm&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bagNet$nodeParams$d.dimer</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bagNet<span class="op">$</span>nodeParams<span class="op">$</span>d.dimer</code></pre></div>
 <pre><code>## $mu
 ## [1] &quot; 210.24 + 68.38*(pe==1) + 29.29*(pregnant==1)&quot;
 ## 
 ## $tau
 ## [1] 0.0334725</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bagNet$nodeFormula$d.dimer</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bagNet<span class="op">$</span>nodeFormula<span class="op">$</span>d.dimer</code></pre></div>
 <pre><code>## d.dimer ~ pe + pregnant</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new.DDimer.Model &lt;-<span class="st"> </span><span class="kw">lm</span>(d.dimer ~<span class="st"> </span>pe *<span class="st"> </span>pregnant, <span class="dt">data=</span>PE)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new.DDimer.Model &lt;-<span class="st"> </span><span class="kw">lm</span>(d.dimer <span class="op">~</span><span class="st"> </span>pe <span class="op">*</span><span class="st"> </span>pregnant, <span class="dt">data=</span>PE)
 bagNet &lt;-<span class="st"> </span><span class="kw">setNodeModels</span>(bagNet, new.DDimer.Model)
 
 <span class="kw">writeNetworkModel</span>(bagNet, <span class="dt">pretty=</span><span class="ot">TRUE</span>)</code></pre></div>
@@ -1004,9 +1004,9 @@ bagNet &lt;-<span class="st"> </span><span class="kw">setNodeModels</span>(bagNe
 <p>When a given node as well as all of its parent nodes are categorical (or binary) in nature, the conditional distribution of that node is also fully categorical. We have included two functions — <code>cpt()</code> and <code>inputCPT()</code> — which facilitate the process of populating the conditional distributions for such nodes.</p>
 <p>Each of these two functions produce an object of class <code>cpt</code>, which is a <em>k-</em>dimensional array (with <em>k</em> equal to the number of parent nodes) with a specific structure: the last dimension corresponds to the child node and the array, when summed across this dimension, is equal to a <em>(k-1)-</em>dimensional array of ones. It therefore is an array containing conditional distributions of the child node for each combination of parent nodes.</p>
 <p>The function <code>cpt()</code> will compute this array given an input dataset and a formula which represents the conditional probability structure. In the code below, the variable <code>death</code> is the child node and the variables <code>pe</code> and <code>treat</code> are the parent nodes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h &lt;-<span class="st"> </span><span class="kw">cpt</span>(death ~<span class="st"> </span>pe +<span class="st"> </span>treat, <span class="dt">data=</span>PE)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h &lt;-<span class="st"> </span><span class="kw">cpt</span>(death <span class="op">~</span><span class="st"> </span>pe <span class="op">+</span><span class="st"> </span>treat, <span class="dt">data=</span>PE)</code></pre></div>
 <p><code>inputCPT()</code> is similar, although instead of using an input dataset to estimate the conditional distributions, it runs through a dialogue to manually specify the conditional densities. This can be useful for small conditional probability tables, such as the conditional probability of a diagnostic test being positive given disease status:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h &lt;-<span class="st"> </span><span class="kw">inputCPT</span>(test ~<span class="st"> </span>disease)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h &lt;-<span class="st"> </span><span class="kw">inputCPT</span>(test <span class="op">~</span><span class="st"> </span>disease)</code></pre></div>
 <pre><code>------------------------------------------------------------------
 Enter Factor Levels for node 'test':
 
@@ -1061,25 +1061,25 @@ attr(,&quot;class&quot;)
 <div id="deterministic-nodes" class="section level2">
 <h2>Deterministic Nodes</h2>
 <p>In many cases, the user may desire to specify nodes that are non-random in nature. For example, we might construct a network for the first roll of dice within a game of craps. In craps, if the “shooter” (the person rolling the dice) rolls a 2, 3, or 12, you immediately lose. If the “shooter” rolls a 7 or 11, you immediately win. Anything else and the “point” gets set (and then the shooter rolls again).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">craps &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(~<span class="st"> </span>d1 +<span class="st"> </span>d2 +<span class="st"> </span>diceSum |<span class="st"> </span>d1*d2
-                       +<span class="st"> </span>firstRollOutcome |<span class="st"> </span>diceSum)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">craps &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(<span class="op">~</span><span class="st"> </span>d1 <span class="op">+</span><span class="st"> </span>d2 <span class="op">+</span><span class="st"> </span>diceSum <span class="op">|</span><span class="st"> </span>d1<span class="op">*</span>d2
+                       <span class="op">+</span><span class="st"> </span>firstRollOutcome <span class="op">|</span><span class="st"> </span>diceSum)
 
 craps &lt;-<span class="st"> </span><span class="kw">setNode</span>(craps, d1, <span class="dt">nodeType=</span><span class="st">&quot;dcat&quot;</span>,
-                 <span class="dt">pi =</span> <span class="kw">vectorProbs</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="dv">1</span>/<span class="dv">6</span>,<span class="dv">6</span>), d1),
+                 <span class="dt">pi =</span> <span class="kw">vectorProbs</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>,<span class="dv">6</span>), d1),
                  <span class="dt">validate =</span> <span class="ot">FALSE</span>)
 craps &lt;-<span class="st"> </span><span class="kw">setNode</span>(craps, d2, <span class="dt">nodeType=</span><span class="st">&quot;dcat&quot;</span>,
-                 <span class="dt">pi =</span> <span class="kw">vectorProbs</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="dv">1</span>/<span class="dv">6</span>,<span class="dv">6</span>), d2),
+                 <span class="dt">pi =</span> <span class="kw">vectorProbs</span>(<span class="dt">p =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">6</span>,<span class="dv">6</span>), d2),
                  <span class="dt">validate =</span> <span class="ot">FALSE</span>)
 
 craps &lt;-<span class="st"> </span><span class="kw">setNode</span>(craps, diceSum, <span class="dt">nodeType =</span> <span class="st">&quot;determ&quot;</span>,
                  <span class="dt">define =</span> <span class="kw">fromFormula</span>(),
-                 <span class="dt">nodeFormula =</span> diceSum ~<span class="st"> </span>di1 +<span class="st"> </span>di2)
+                 <span class="dt">nodeFormula =</span> diceSum <span class="op">~</span><span class="st"> </span>di1 <span class="op">+</span><span class="st"> </span>di2)
 
 craps &lt;-<span class="st"> </span><span class="kw">setNode</span>(craps, firstRollOutcome, <span class="dt">nodeType =</span> <span class="st">&quot;determ&quot;</span>,
                  <span class="dt">define =</span> <span class="kw">fromFormula</span>(),
-                 <span class="dt">nodeFormula =</span> firstRollOutcome ~<span class="st"> </span>
-<span class="st">                                 </span><span class="kw">ifelse</span>(diceSum &lt;<span class="st"> </span><span class="dv">4</span> |<span class="st"> </span>diceSum &gt;<span class="st"> </span><span class="dv">11</span>, -<span class="dv">1</span>,
-                                    <span class="kw">ifelse</span>(diceSum ==<span class="st"> </span><span class="dv">7</span> |<span class="st"> </span>diceSum ==<span class="st"> </span><span class="dv">11</span>, <span class="dv">1</span>,<span class="dv">0</span>)))
+                 <span class="dt">nodeFormula =</span> firstRollOutcome <span class="op">~</span><span class="st"> </span>
+<span class="st">                                 </span><span class="kw">ifelse</span>(diceSum <span class="op">&lt;</span><span class="st"> </span><span class="dv">4</span> <span class="op">|</span><span class="st"> </span>diceSum <span class="op">&gt;</span><span class="st"> </span><span class="dv">11</span>, <span class="op">-</span><span class="dv">1</span>,
+                                    <span class="kw">ifelse</span>(diceSum <span class="op">==</span><span class="st"> </span><span class="dv">7</span> <span class="op">|</span><span class="st"> </span>diceSum <span class="op">==</span><span class="st"> </span><span class="dv">11</span>, <span class="dv">1</span>,<span class="dv">0</span>)))
 
 ## plot(craps)</code></pre></div>
 <div class="figure">
@@ -1106,9 +1106,9 @@ We have implemented a series of "helper" deterministic functions to facilitate m
 <div id="modifying-the-graph-structure" class="section level2">
 <h2>Modifying the Graph Structure</h2>
 <p>Nodes and/or links may be added or removed from an existing <code>HydeNetwork</code> object, using an <code>update</code> method we have implemented for <code>HydeNetwork</code> objects. Syntactically, this function acts in a similar fashion to <code>update.lm()</code>, in that you add or subtract terms from the model equation. Suppose that a new diagnostic test for PE was invented and we wish to incorporate it into the PE network. We can achieve this by the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net2 &lt;-<span class="st"> </span><span class="kw">update</span>(net, . ~<span class="st"> </span>. +<span class="st"> </span>newTest |<span class="st"> </span>pe
-                          +<span class="st"> </span>treat |<span class="st"> </span>newTest
-                          -<span class="st"> </span>pregnant)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net2 &lt;-<span class="st"> </span><span class="kw">update</span>(net, . <span class="op">~</span><span class="st"> </span>. <span class="op">+</span><span class="st"> </span>newTest <span class="op">|</span><span class="st"> </span>pe
+                          <span class="op">+</span><span class="st"> </span>treat <span class="op">|</span><span class="st"> </span>newTest
+                          <span class="op">-</span><span class="st"> </span>pregnant)</code></pre></div>
 <pre><code>## Warning in update.HydeNetwork(net, . ~ . + newTest | pe + treat | newTest - : The following nodes lost parents in the update--please redefine the node formula:
 ##     d.dimer: pregnant</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## 

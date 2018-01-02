@@ -137,7 +137,7 @@
 #' The validation of parameters is performed by comparing the values provided with 
 #' the limits defined in the \code{jagsDists$paramLogic} variable. (look at 
 #' \code{data(jagsDists, data='HydeNet')}.  For most node types, validation will 
-#' be peformed for numeric variables.  For deterministic variables, the validation
+#' be performed for numeric variables.  For deterministic variables, the validation
 #' will only check that the parameter definition is a formula.  
 #' 
 #' It is possible to pass character strings as definitions, but when this is done, 
@@ -234,9 +234,15 @@ setNode <- function(network, node, nodeType,
   exp_param <- eval(substitute(expectedParameters(network = network, 
                                                   node = node, 
                                                   returnVector = TRUE)))
-
-  params <- list(...)[exp_param]
   
+  params <- list(...)
+  
+  names(params)[!exp_param %in% names(params)] <- 
+    exp_param[!exp_param %in% names(params)]
+    
+  
+  params <- params[exp_param]
+
   # JAGS dnorm expects tau = 1/variance.  
   # HydeNet accepts sd, so we need to transform this.
   if (nodeType == "dnorm")

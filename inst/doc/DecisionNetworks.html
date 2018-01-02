@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jarrod Dalton and Benjamin Nutter" />
 
-<meta name="date" content="2017-12-01" />
+<meta name="date" content="2018-01-01" />
 
 <title>Decision Network (Influence Diagram) Analyses in HydeNet</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Decision Network (Influence Diagram) Analyses in HydeNet</h1>
 <h4 class="author"><em>Jarrod Dalton and Benjamin Nutter</em></h4>
-<h4 class="date"><em>2017-12-01</em></h4>
+<h4 class="date"><em>2018-01-01</em></h4>
 
 
 
@@ -395,22 +395,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 <p>To begin the modeling, we first construct a skeleton <code>HydeNet</code> model object, (i.e., a graphical model for which node characteristics have not yet been populated. See our vignette titled “Working with HydeNetwork Objects” for a general overview of network construction.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(~<span class="st"> </span>initialAces |<span class="st"> </span>card1*card2
-                   +<span class="st"> </span>initialPoints |<span class="st"> </span>card1*card2
-                   +<span class="st"> </span>highUpcard |<span class="st"> </span>dealerUpcard
-                   +<span class="st"> </span>hit1 |<span class="st"> </span>initialPoints*highUpcard
-                   +<span class="st"> </span>acesAfterCard3 |<span class="st"> </span>initialAces*card3
-                   +<span class="st"> </span>pointsAfterCard3 |<span class="st"> </span>card1*card2*card3*acesAfterCard3
-                   +<span class="st"> </span>hit2 |<span class="st"> </span>pointsAfterCard3*highUpcard
-                   +<span class="st"> </span>acesAfterCard4 |<span class="st"> </span>acesAfterCard3*card4
-                   +<span class="st"> </span>pointsAfterCard4 |<span class="st"> </span>card1*card2*card3*card4*acesAfterCard4
-                   +<span class="st"> </span>hit3 |<span class="st"> </span>pointsAfterCard4*highUpcard
-                   +<span class="st"> </span>acesAfterCard5 |<span class="st"> </span>acesAfterCard4*card5
-                   +<span class="st"> </span>pointsAfterCard5 |<span class="st"> </span>card1*card2*card3*card4*card5*acesAfterCard5
-                   +<span class="st"> </span>playerFinalPoints |<span class="st"> </span>initialPoints*hit1*pointsAfterCard3
-                                         *hit2*pointsAfterCard4*hit3*pointsAfterCard5
-                   +<span class="st"> </span>dealerOutcome |<span class="st"> </span>dealerUpcard
-                   +<span class="st"> </span>payoff |<span class="st"> </span>playerFinalPoints*dealerOutcome)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">HydeNetwork</span>(<span class="op">~</span><span class="st"> </span>initialAces <span class="op">|</span><span class="st"> </span>card1<span class="op">*</span>card2
+                   <span class="op">+</span><span class="st"> </span>initialPoints <span class="op">|</span><span class="st"> </span>card1<span class="op">*</span>card2
+                   <span class="op">+</span><span class="st"> </span>highUpcard <span class="op">|</span><span class="st"> </span>dealerUpcard
+                   <span class="op">+</span><span class="st"> </span>hit1 <span class="op">|</span><span class="st"> </span>initialPoints<span class="op">*</span>highUpcard
+                   <span class="op">+</span><span class="st"> </span>acesAfterCard3 <span class="op">|</span><span class="st"> </span>initialAces<span class="op">*</span>card3
+                   <span class="op">+</span><span class="st"> </span>pointsAfterCard3 <span class="op">|</span><span class="st"> </span>card1<span class="op">*</span>card2<span class="op">*</span>card3<span class="op">*</span>acesAfterCard3
+                   <span class="op">+</span><span class="st"> </span>hit2 <span class="op">|</span><span class="st"> </span>pointsAfterCard3<span class="op">*</span>highUpcard
+                   <span class="op">+</span><span class="st"> </span>acesAfterCard4 <span class="op">|</span><span class="st"> </span>acesAfterCard3<span class="op">*</span>card4
+                   <span class="op">+</span><span class="st"> </span>pointsAfterCard4 <span class="op">|</span><span class="st"> </span>card1<span class="op">*</span>card2<span class="op">*</span>card3<span class="op">*</span>card4<span class="op">*</span>acesAfterCard4
+                   <span class="op">+</span><span class="st"> </span>hit3 <span class="op">|</span><span class="st"> </span>pointsAfterCard4<span class="op">*</span>highUpcard
+                   <span class="op">+</span><span class="st"> </span>acesAfterCard5 <span class="op">|</span><span class="st"> </span>acesAfterCard4<span class="op">*</span>card5
+                   <span class="op">+</span><span class="st"> </span>pointsAfterCard5 <span class="op">|</span><span class="st"> </span>card1<span class="op">*</span>card2<span class="op">*</span>card3<span class="op">*</span>card4<span class="op">*</span>card5<span class="op">*</span>acesAfterCard5
+                   <span class="op">+</span><span class="st"> </span>playerFinalPoints <span class="op">|</span><span class="st"> </span>initialPoints<span class="op">*</span>hit1<span class="op">*</span>pointsAfterCard3
+                                         <span class="op">*</span>hit2<span class="op">*</span>pointsAfterCard4<span class="op">*</span>hit3<span class="op">*</span>pointsAfterCard5
+                   <span class="op">+</span><span class="st"> </span>dealerOutcome <span class="op">|</span><span class="st"> </span>dealerUpcard
+                   <span class="op">+</span><span class="st"> </span>payoff <span class="op">|</span><span class="st"> </span>playerFinalPoints<span class="op">*</span>dealerOutcome)
 ## 
 ## plot(net)</code></pre></div>
 <div class="figure">
@@ -430,7 +430,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#       'setNode' documentation for more information.</span>
 <span class="co">#       After the first call, we'll turn off validation</span>
 
-cardProbs  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>/<span class="dv">13</span>,<span class="dv">8</span>), <span class="dv">4</span>/<span class="dv">13</span>, <span class="dv">1</span>/<span class="dv">13</span>)  <span class="co"># probs. for 2, 3, ..., 9, (10-K), A</span>
+cardProbs  &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">13</span>,<span class="dv">8</span>), <span class="dv">4</span><span class="op">/</span><span class="dv">13</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">13</span>)  <span class="co"># probs. for 2, 3, ..., 9, (10-K), A</span>
 
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, card1, <span class="dt">nodeType=</span><span class="st">&quot;dcat&quot;</span>,  <span class="dt">pi=</span><span class="kw">vectorProbs</span>(<span class="dt">p=</span>cardProbs, card1))</code></pre></div>
 <pre><code>## Validation has been ignored for parameters defined with character strings</code></pre>
@@ -454,84 +454,84 @@ net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, dealerUpc
 <span class="co"># Deterministic Nodes</span>
 #####################################
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, highUpcard,     <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> highUpcard ~<span class="st"> </span><span class="kw">ifelse</span>(dealerUpcard &gt;<span class="st"> </span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">0</span>))
+               <span class="dt">nodeFormula =</span> highUpcard <span class="op">~</span><span class="st"> </span><span class="kw">ifelse</span>(dealerUpcard <span class="op">&gt;</span><span class="st"> </span><span class="dv">8</span>, <span class="dv">1</span>, <span class="dv">0</span>))
 
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, initialAces,    <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> initialAces ~<span class="st"> </span><span class="kw">ifelse</span>(card1==<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>) +<span class="st"> </span><span class="kw">ifelse</span>(card2==<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>))
+               <span class="dt">nodeFormula =</span> initialAces <span class="op">~</span><span class="st"> </span><span class="kw">ifelse</span>(card1<span class="op">==</span><span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ifelse</span>(card2<span class="op">==</span><span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>))
 
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, acesAfterCard3, <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> acesAfterCard3 ~<span class="st"> </span>initialAces +<span class="st"> </span><span class="kw">ifelse</span>(card3==<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>))
+               <span class="dt">nodeFormula =</span> acesAfterCard3 <span class="op">~</span><span class="st"> </span>initialAces <span class="op">+</span><span class="st"> </span><span class="kw">ifelse</span>(card3<span class="op">==</span><span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>))
 
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, acesAfterCard4, <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> acesAfterCard4 ~<span class="st"> </span>acesAfterCard3 +<span class="st"> </span><span class="kw">ifelse</span>(card4==<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>))
+               <span class="dt">nodeFormula =</span> acesAfterCard4 <span class="op">~</span><span class="st"> </span>acesAfterCard3 <span class="op">+</span><span class="st"> </span><span class="kw">ifelse</span>(card4<span class="op">==</span><span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>))
 
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, acesAfterCard5, <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> acesAfterCard5 ~<span class="st"> </span>acesAfterCard4 +<span class="st"> </span><span class="kw">ifelse</span>(card5==<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>))
+               <span class="dt">nodeFormula =</span> acesAfterCard5 <span class="op">~</span><span class="st"> </span>acesAfterCard4 <span class="op">+</span><span class="st"> </span><span class="kw">ifelse</span>(card5<span class="op">==</span><span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">0</span>))
                
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, initialPoints, <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> initialPoints ~<span class="st"> </span>card1+card2<span class="dv">+2</span>)
+               <span class="dt">nodeFormula =</span> initialPoints <span class="op">~</span><span class="st"> </span>card1<span class="op">+</span>card2<span class="op">+</span><span class="dv">2</span>)
 
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, pointsAfterCard3, <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> pointsAfterCard3 ~
-<span class="st">                 </span><span class="kw">ifelse</span>(acesAfterCard3 ==<span class="st"> </span><span class="dv">3</span>,
+               <span class="dt">nodeFormula =</span> pointsAfterCard3 <span class="op">~</span>
+<span class="st">                 </span><span class="kw">ifelse</span>(acesAfterCard3 <span class="op">==</span><span class="st"> </span><span class="dv">3</span>,
                     <span class="dv">13</span>,
-                    <span class="kw">ifelse</span>(acesAfterCard3 ==<span class="st"> </span><span class="dv">2</span>,
-                       card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span><span class="dv">3</span> -<span class="st"> </span><span class="dv">10</span>,
-                       <span class="kw">ifelse</span>(acesAfterCard3 ==<span class="st"> </span><span class="dv">1</span>,
-                          <span class="kw">ifelse</span>(card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span><span class="dv">3</span> &gt;<span class="st"> </span><span class="dv">22</span>,
-                             card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span><span class="dv">3</span> -<span class="st"> </span><span class="dv">10</span>,
-                             card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span><span class="dv">3</span>),
-                          card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span><span class="dv">3</span>
+                    <span class="kw">ifelse</span>(acesAfterCard3 <span class="op">==</span><span class="st"> </span><span class="dv">2</span>,
+                       card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">10</span>,
+                       <span class="kw">ifelse</span>(acesAfterCard3 <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,
+                          <span class="kw">ifelse</span>(card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">22</span>,
+                             card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">-</span><span class="st"> </span><span class="dv">10</span>,
+                             card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span><span class="dv">3</span>),
+                          card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span><span class="dv">3</span>
                        )
                     )
                  )
               )
 
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, pointsAfterCard4, <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> pointsAfterCard4 ~
-<span class="st">                 </span><span class="kw">ifelse</span>(acesAfterCard4 ==<span class="st"> </span><span class="dv">4</span>,
+               <span class="dt">nodeFormula =</span> pointsAfterCard4 <span class="op">~</span>
+<span class="st">                 </span><span class="kw">ifelse</span>(acesAfterCard4 <span class="op">==</span><span class="st"> </span><span class="dv">4</span>,
                     <span class="dv">14</span>,
-                    <span class="kw">ifelse</span>(acesAfterCard4 ==<span class="st"> </span><span class="dv">3</span>,
-                       <span class="kw">ifelse</span>(card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span><span class="dv">4</span> &gt;<span class="st"> </span><span class="dv">38</span>,
-                          card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span><span class="dv">4</span> -<span class="st"> </span><span class="dv">30</span>,
-                          card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span><span class="dv">4</span> -<span class="st"> </span><span class="dv">20</span>
+                    <span class="kw">ifelse</span>(acesAfterCard4 <span class="op">==</span><span class="st"> </span><span class="dv">3</span>,
+                       <span class="kw">ifelse</span>(card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span><span class="dv">4</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">38</span>,
+                          card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span><span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">30</span>,
+                          card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span><span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">20</span>
                        ),
-                       <span class="kw">ifelse</span>(acesAfterCard4 &gt;<span class="st"> </span><span class="dv">0</span>,
-                          <span class="kw">ifelse</span>(card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span><span class="dv">4</span> &gt;<span class="st"> </span><span class="dv">22</span>,
-                                 card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span><span class="dv">4</span> -<span class="st"> </span><span class="dv">10</span>,
-                                 card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span><span class="dv">4</span>
+                       <span class="kw">ifelse</span>(acesAfterCard4 <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,
+                          <span class="kw">ifelse</span>(card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span><span class="dv">4</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">22</span>,
+                                 card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span><span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">10</span>,
+                                 card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span><span class="dv">4</span>
                           ),
-                          card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span><span class="dv">4</span>
+                          card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span><span class="dv">4</span>
                        )
                     )
                  )
               )
 
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, pointsAfterCard5, <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> pointsAfterCard5 ~<span class="st"> </span>
-<span class="st">                 </span><span class="kw">ifelse</span>(acesAfterCard5 ==<span class="st"> </span><span class="dv">5</span>,
+               <span class="dt">nodeFormula =</span> pointsAfterCard5 <span class="op">~</span><span class="st"> </span>
+<span class="st">                 </span><span class="kw">ifelse</span>(acesAfterCard5 <span class="op">==</span><span class="st"> </span><span class="dv">5</span>,
                     <span class="dv">15</span>,
-                    <span class="kw">ifelse</span>(acesAfterCard5 ==<span class="st"> </span><span class="dv">4</span>,
-                       <span class="kw">ifelse</span>(card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> &gt;<span class="st"> </span><span class="dv">51</span>,
-                          card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> -<span class="st"> </span><span class="dv">40</span>,
-                          card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> -<span class="st"> </span><span class="dv">30</span>
+                    <span class="kw">ifelse</span>(acesAfterCard5 <span class="op">==</span><span class="st"> </span><span class="dv">4</span>,
+                       <span class="kw">ifelse</span>(card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">51</span>,
+                          card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">40</span>,
+                          card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">30</span>
                         ),
-                       <span class="kw">ifelse</span>(acesAfterCard5 ==<span class="st"> </span><span class="dv">3</span>,
-                          <span class="kw">ifelse</span>(card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> &gt;<span class="st"> </span><span class="dv">51</span>,
-                             card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> -<span class="st"> </span><span class="dv">30</span>,
-                             card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> -<span class="st"> </span><span class="dv">20</span>
+                       <span class="kw">ifelse</span>(acesAfterCard5 <span class="op">==</span><span class="st"> </span><span class="dv">3</span>,
+                          <span class="kw">ifelse</span>(card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">51</span>,
+                             card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">30</span>,
+                             card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">20</span>
                           ),
-                          <span class="kw">ifelse</span>(acesAfterCard5 ==<span class="st"> </span><span class="dv">2</span>,
-                             <span class="kw">ifelse</span>(card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> &gt;<span class="st"> </span><span class="dv">31</span>,
-                                card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> -<span class="st"> </span><span class="dv">20</span>,
-                                card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> -<span class="st"> </span><span class="dv">10</span>
+                          <span class="kw">ifelse</span>(acesAfterCard5 <span class="op">==</span><span class="st"> </span><span class="dv">2</span>,
+                             <span class="kw">ifelse</span>(card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">31</span>,
+                                card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">20</span>,
+                                card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">10</span>
                              ),
-                             <span class="kw">ifelse</span>(acesAfterCard5 &gt;<span class="st"> </span><span class="dv">0</span>,
-                                <span class="kw">ifelse</span>(card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> &gt;<span class="st"> </span><span class="dv">22</span>,
-                                   card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span> -<span class="st"> </span><span class="dv">10</span>,
-                                   card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span>
+                             <span class="kw">ifelse</span>(acesAfterCard5 <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>,
+                                <span class="kw">ifelse</span>(card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">22</span>,
+                                   card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">-</span><span class="st"> </span><span class="dv">10</span>,
+                                   card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span>
                                 ),
-                                card1 +<span class="st"> </span>card2 +<span class="st"> </span>card3 +<span class="st"> </span>card4 +<span class="st"> </span>card5 +<span class="st"> </span><span class="dv">5</span>
+                                card1 <span class="op">+</span><span class="st"> </span>card2 <span class="op">+</span><span class="st"> </span>card3 <span class="op">+</span><span class="st"> </span>card4 <span class="op">+</span><span class="st"> </span>card5 <span class="op">+</span><span class="st"> </span><span class="dv">5</span>
                              )
                           )
                        )
@@ -540,21 +540,21 @@ net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, pointsAft
               )
 
 net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, playerFinalPoints, <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-               <span class="dt">nodeFormula =</span> playerFinalPoints ~<span class="st"> </span>
-<span class="st">                 </span><span class="kw">ifelse</span>(hit1 ==<span class="st"> </span><span class="dv">0</span>,
+               <span class="dt">nodeFormula =</span> playerFinalPoints <span class="op">~</span><span class="st"> </span>
+<span class="st">                 </span><span class="kw">ifelse</span>(hit1 <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,
                     initialPoints,
-                    <span class="kw">ifelse</span>(hit2 ==<span class="st"> </span><span class="dv">0</span>,
+                    <span class="kw">ifelse</span>(hit2 <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,
                            pointsAfterCard3,
-                           <span class="kw">ifelse</span>(hit3 ==<span class="st"> </span><span class="dv">0</span>, pointsAfterCard4, pointsAfterCard5)
+                           <span class="kw">ifelse</span>(hit3 <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, pointsAfterCard4, pointsAfterCard5)
                     )
                  )
               )</code></pre></div>
 <p>Node distributions for all random variable &amp; deterministic nodes are now specified, other than <code>dealerOutcome</code>. We have included a dataset containing the conditional probability distribution of <code>dealerOutcome</code> given <code>dealerUpcard</code> in the data frame <code>BJDealer</code> (<em>source: <a href="https://www.blackjackinfo.com/dealer-outcome-probabilities" class="uri">https://www.blackjackinfo.com/dealer-outcome-probabilities</a>. Accessed 2015-04-24.</em>). (These conditional probabilities assume that the dealer is drawing from a deck of infinite size.)</p>
 <p>We will use the <code>cpt()</code> function to obtain an array that contains the conditional probabilities of <code>dealerOutcome</code> given <code>dealerUpcard</code>. This array has class <code>cpt</code> and can be fed into JAGS via <code>setNodeModels</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(BJDealer)
-dealerOutcome.cpt &lt;-<span class="st"> </span><span class="kw">cpt</span>(dealerOutcome ~<span class="st"> </span>dealerUpcard,
+dealerOutcome.cpt &lt;-<span class="st"> </span><span class="kw">cpt</span>(dealerOutcome <span class="op">~</span><span class="st"> </span>dealerUpcard,
                          <span class="dt">data =</span> BJDealer,
-                         <span class="dt">wt   =</span> BJDealer$probability)
+                         <span class="dt">wt   =</span> BJDealer<span class="op">$</span>probability)
 <span class="kw">round</span>(dealerOutcome.cpt,<span class="dv">3</span>)</code></pre></div>
 <pre><code>##             dealerOutcome
 ## dealerUpcard Blackjack  Bust    17    18    19    20    21
@@ -574,7 +574,7 @@ dealerOutcome.cpt &lt;-<span class="st"> </span><span class="kw">cpt</span>(deal
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setDecisionNodes</span>(net, hit1, hit2, hit3)
 net &lt;-<span class="st"> </span><span class="kw">setUtilityNodes</span>(net, payoff)
 
-<span class="kw">c</span>(net$nodeDecision$hit2, net$nodeUtility$payoff)</code></pre></div>
+<span class="kw">c</span>(net<span class="op">$</span>nodeDecision<span class="op">$</span>hit2, net<span class="op">$</span>nodeUtility<span class="op">$</span>payoff)</code></pre></div>
 <pre><code>## [1] TRUE TRUE</code></pre>
 <p>We are now ready to visualize the finished decision network:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(net)</code></pre></div>
@@ -589,44 +589,44 @@ net &lt;-<span class="st"> </span><span class="kw">setUtilityNodes</span>(net, p
 <p>Decision nodes must have children nodes, and for every decision node in the network, there must be at least one utility node that is a decendant of it (although these need not be unique). When decision nodes have parents, the implication is that the parent nodes provide <em>information</em> that is used to guide the process of decision-making for that node. Hence, these links are called <em>information links</em>. For decision nodes that are random variables, we can think of their conditional probability distribution as a frequency (or, alternatively, a representation of belief) of observed decisions under distinct combinations of parent nodes within a population. For example, we may have data on observed hit/stand decisions in blackjack, from which logistic regression models can be estimated to characterize the relationship between point totals at certain hit decisions and probability of deciding to take another card.</p>
 <p>Below, we make such models and incorporate them into the network. We have simplified dealer upcard information into a binary variable for this decision.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(BlackJackTrain)
-BlackJackTrain$highUpcard &lt;-<span class="st"> </span><span class="kw">as.character</span>(BlackJackTrain$dealerUpcard)
-BlackJackTrain$highUpcard &lt;-<span class="st"> </span><span class="kw">factor</span>(BlackJackTrain$highUpcard %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;10-K&quot;</span>,<span class="st">&quot;A&quot;</span>),
+BlackJackTrain<span class="op">$</span>highUpcard &lt;-<span class="st"> </span><span class="kw">as.character</span>(BlackJackTrain<span class="op">$</span>dealerUpcard)
+BlackJackTrain<span class="op">$</span>highUpcard &lt;-<span class="st"> </span><span class="kw">factor</span>(BlackJackTrain<span class="op">$</span>highUpcard <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;10-K&quot;</span>,<span class="st">&quot;A&quot;</span>),
                                     <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>), <span class="kw">c</span>(<span class="st">&quot;9 or lower&quot;</span>, <span class="st">&quot;10 or higher&quot;</span>))
 
 <span class="co"># glm.hit1 &lt;- glm(hit1 ~ initialPoints + I(dealerUpcard %in% c(&quot;9&quot;,&quot;10-K&quot;,&quot;A&quot;)),</span>
 <span class="co">#                 data = BlackJackTrain, family=&quot;binomial&quot;)</span>
 
-glm.hit1 &lt;-<span class="st"> </span><span class="kw">glm</span>(hit1 ~<span class="st"> </span>initialPoints+highUpcard,
+glm.hit1 &lt;-<span class="st"> </span><span class="kw">glm</span>(hit1 <span class="op">~</span><span class="st"> </span>initialPoints<span class="op">+</span>highUpcard,
                 <span class="dt">data =</span> BlackJackTrain, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
-glm.hit2 &lt;-<span class="st"> </span><span class="kw">glm</span>(hit2 ~<span class="st"> </span>pointsAfterCard3+highUpcard,
+glm.hit2 &lt;-<span class="st"> </span><span class="kw">glm</span>(hit2 <span class="op">~</span><span class="st"> </span>pointsAfterCard3<span class="op">+</span>highUpcard,
                 <span class="dt">data =</span> BlackJackTrain, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
-glm.hit3 &lt;-<span class="st"> </span><span class="kw">glm</span>(hit3 ~<span class="st"> </span>pointsAfterCard4+highUpcard,
+glm.hit3 &lt;-<span class="st"> </span><span class="kw">glm</span>(hit3 <span class="op">~</span><span class="st"> </span>pointsAfterCard4<span class="op">+</span>highUpcard,
                 <span class="dt">data =</span> BlackJackTrain, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)
 
 net &lt;-<span class="st"> </span><span class="kw">setNodeModels</span>(net, glm.hit1, glm.hit2, glm.hit3)</code></pre></div>
 <p>Alternatively, decision nodes can be deterministic in nature. In this case, we interpret the function which sets the value of these nodes depending on the value(s) of its parent node(s) as a deterministic strategy that is chosen by the actor. Within the blackjack network, we might envision such a strategy by the following rule, which would be applicable to all three hit decisions in the network: choose ‘hit’ when the current point total is less than 15.</p>
-<p><strong>Utility nodes</strong> are restricted to be deterministic nodes with no descendents. In the blackjack example, for instance, we would assign the payoff utility node as follows:</p>
+<p><strong>Utility nodes</strong> are restricted to be deterministic nodes with no descendants. In the blackjack example, for instance, we would assign the payoff utility node as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, payoff, <span class="st">&quot;determ&quot;</span>, <span class="dt">define=</span><span class="kw">fromFormula</span>(),
-         <span class="dt">nodeFormula =</span> payoff ~
-<span class="st">                         </span><span class="kw">ifelse</span>(playerFinalPoints &gt;<span class="st"> </span><span class="dv">21</span>, -<span class="dv">1</span>,
-                           <span class="kw">ifelse</span>(playerFinalPoints ==<span class="st"> </span><span class="dv">21</span>,
-                             <span class="kw">ifelse</span>(dealerOutcome ==<span class="st"> &quot;Blackjack&quot;</span>, <span class="dv">0</span>,
-                               <span class="kw">ifelse</span>(dealerOutcome ==<span class="st"> </span><span class="dv">7</span>, <span class="dv">0</span>, <span class="dv">1</span>)),
-                             <span class="kw">ifelse</span>(dealerOutcome ==<span class="st"> &quot;Bust&quot;</span>,
-                               <span class="kw">ifelse</span>(playerFinalPoints &lt;<span class="st"> </span><span class="dv">22</span>, <span class="dv">1</span>, -<span class="dv">1</span>),
-                               <span class="kw">ifelse</span>(dealerOutcome ==<span class="st"> &quot;17&quot;</span>,
-                                 <span class="kw">ifelse</span>(playerFinalPoints ==<span class="st"> </span><span class="dv">17</span>, <span class="dv">0</span>,
-                                 <span class="kw">ifelse</span>(playerFinalPoints &gt;<span class="st"> </span><span class="dv">17</span>, <span class="dv">1</span>, -<span class="dv">1</span>)),
-                                 <span class="kw">ifelse</span>(dealerOutcome ==<span class="st"> &quot;18&quot;</span>,
-                                   <span class="kw">ifelse</span>(playerFinalPoints ==<span class="st"> </span><span class="dv">18</span>, <span class="dv">0</span>,
-                                     <span class="kw">ifelse</span>(playerFinalPoints &gt;<span class="st"> </span><span class="dv">18</span>, <span class="dv">1</span>, -<span class="dv">1</span>)),
-                                   <span class="kw">ifelse</span>(dealerOutcome ==<span class="st"> &quot;19&quot;</span>,
-                                     <span class="kw">ifelse</span>(playerFinalPoints ==<span class="st"> </span><span class="dv">19</span>, <span class="dv">0</span>,
-                                       <span class="kw">ifelse</span>(playerFinalPoints &gt;<span class="st"> </span><span class="dv">19</span>, <span class="dv">1</span>, -<span class="dv">1</span>)),
-                                     <span class="kw">ifelse</span>(dealerOutcome ==<span class="st"> &quot;20&quot;</span>,
-                                       <span class="kw">ifelse</span>(playerFinalPoints ==<span class="st"> </span><span class="dv">20</span>, <span class="dv">0</span>,
-                                         <span class="kw">ifelse</span>(playerFinalPoints &gt;<span class="st"> </span><span class="dv">20</span>, <span class="dv">1</span>, -<span class="dv">1</span>)),
-                                       <span class="kw">ifelse</span>(playerFinalPoints ==<span class="st"> </span><span class="dv">21</span>, <span class="dv">0</span>, -<span class="dv">1</span>)))))))))</code></pre></div>
+         <span class="dt">nodeFormula =</span> payoff <span class="op">~</span>
+<span class="st">                         </span><span class="kw">ifelse</span>(playerFinalPoints <span class="op">&gt;</span><span class="st"> </span><span class="dv">21</span>, <span class="op">-</span><span class="dv">1</span>,
+                           <span class="kw">ifelse</span>(playerFinalPoints <span class="op">==</span><span class="st"> </span><span class="dv">21</span>,
+                             <span class="kw">ifelse</span>(dealerOutcome <span class="op">==</span><span class="st"> &quot;Blackjack&quot;</span>, <span class="dv">0</span>,
+                               <span class="kw">ifelse</span>(dealerOutcome <span class="op">==</span><span class="st"> </span><span class="dv">7</span>, <span class="dv">0</span>, <span class="dv">1</span>)),
+                             <span class="kw">ifelse</span>(dealerOutcome <span class="op">==</span><span class="st"> &quot;Bust&quot;</span>,
+                               <span class="kw">ifelse</span>(playerFinalPoints <span class="op">&lt;</span><span class="st"> </span><span class="dv">22</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>),
+                               <span class="kw">ifelse</span>(dealerOutcome <span class="op">==</span><span class="st"> &quot;17&quot;</span>,
+                                 <span class="kw">ifelse</span>(playerFinalPoints <span class="op">==</span><span class="st"> </span><span class="dv">17</span>, <span class="dv">0</span>,
+                                 <span class="kw">ifelse</span>(playerFinalPoints <span class="op">&gt;</span><span class="st"> </span><span class="dv">17</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)),
+                                 <span class="kw">ifelse</span>(dealerOutcome <span class="op">==</span><span class="st"> &quot;18&quot;</span>,
+                                   <span class="kw">ifelse</span>(playerFinalPoints <span class="op">==</span><span class="st"> </span><span class="dv">18</span>, <span class="dv">0</span>,
+                                     <span class="kw">ifelse</span>(playerFinalPoints <span class="op">&gt;</span><span class="st"> </span><span class="dv">18</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)),
+                                   <span class="kw">ifelse</span>(dealerOutcome <span class="op">==</span><span class="st"> &quot;19&quot;</span>,
+                                     <span class="kw">ifelse</span>(playerFinalPoints <span class="op">==</span><span class="st"> </span><span class="dv">19</span>, <span class="dv">0</span>,
+                                       <span class="kw">ifelse</span>(playerFinalPoints <span class="op">&gt;</span><span class="st"> </span><span class="dv">19</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)),
+                                     <span class="kw">ifelse</span>(dealerOutcome <span class="op">==</span><span class="st"> &quot;20&quot;</span>,
+                                       <span class="kw">ifelse</span>(playerFinalPoints <span class="op">==</span><span class="st"> </span><span class="dv">20</span>, <span class="dv">0</span>,
+                                         <span class="kw">ifelse</span>(playerFinalPoints <span class="op">&gt;</span><span class="st"> </span><span class="dv">20</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)),
+                                       <span class="kw">ifelse</span>(playerFinalPoints <span class="op">==</span><span class="st"> </span><span class="dv">21</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>)))))))))</code></pre></div>
 <p>The network model is now fully specified. This can be treated as an ordinary Bayesian network, ignoring the fact that some nodes represent decisions or utilites. For example, we can compile the network and feed it to JAGS with some evidence to obtain a MCMC sample of the joint posterior distribution of the unobserved nodes:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trackedVars &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dealerUpcard&quot;</span>,<span class="st">&quot;playerFinalPoints&quot;</span>,<span class="st">&quot;dealerOutcome&quot;</span>,<span class="st">&quot;payoff&quot;</span>)
 evidence &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">card1 =</span> <span class="dv">3</span>)
@@ -644,58 +644,58 @@ compiledNet &lt;-<span class="st"> </span><span class="kw">compileJagsModel</spa
 ## Initializing model</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">post &lt;-<span class="st"> </span><span class="kw">HydeSim</span>(compiledNet,
                       <span class="dt">variable.names =</span> trackedVars,
-                      <span class="dt">n.iter=</span><span class="dv">10000</span>)</code></pre></div>
-<pre><code>## `bindPosterior` is deprecated and replaced by `bindSim`</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dplyr::<span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code></pre></div>
+                      <span class="dt">n.iter=</span><span class="dv">10000</span>)
+
+dplyr<span class="op">::</span><span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code></pre></div>
 <pre><code>##       card1 dealerOutcome dealerUpcard payoff playerFinalPoints
-## 19893     3            19            9     -1                17
-## 17335     3            18            9     -1                14
-## 25963     3          Bust            9      1                13
-## 9062      3            20            2     -1                14
-## 26249     3            18            7      1                21
-## 21607     3            20            9     -1                14
-## 14422     3            18            7     -1                14
-## 6616      3          Bust            3      1                13
-## 515       3          Bust            2     -1                24
-## 4846      3            20            9     -1                12
-## 8375      3            20            9     -1                16
-## 22824     3          Bust           10     -1                24
-## 27427     3            19            4     -1                15
-## 11621     3          Bust            9      1                20
-## 19235     3            17            5     -1                16
-## 26519     3          Bust            6      1                17
-## 20509     3            21            3     -1                11
-## 4360      3            18            9     -1                14
-## 11369     3            19            1     -1                11
-## 444       3            17            9     -1                14
+## 9183      3            18            7     -1                23
+## 18777     3            17            4     -1                14
+## 15146     3            20            8     -1                15
+## 5254      3            19            2     -1                15
+## 24984     3            19            5      1                21
+## 27703     3            17            6      0                17
+## 19497     3            17            1     -1                13
+## 116       3            18            9     -1                13
+## 8340      3            21            8     -1                14
+## 15409     3            20            9     -1                15
+## 4801      3            20            9     -1                23
+## 14159     3          Bust            1      1                16
+## 9400      3            19            7     -1                12
+## 19083     3            19            9     -1                15
+## 6956      3          Bust            2      1                19
+## 24971     3          Bust            9     -1                24
+## 11041     3            20            9      1                21
+## 15160     3            18            9      1                21
+## 22857     3            17            9     -1                14
+## 29440     3     Blackjack            9      0                21
 ##       chain_index obs_index
-## 19893           2      9893
-## 17335           2      7335
-## 25963           3      5963
-## 9062            1      9062
-## 26249           3      6249
-## 21607           3      1607
-## 14422           2      4422
-## 6616            1      6616
-## 515             1       515
-## 4846            1      4846
-## 8375            1      8375
-## 22824           3      2824
-## 27427           3      7427
-## 11621           2      1621
-## 19235           2      9235
-## 26519           3      6519
-## 20509           3       509
-## 4360            1      4360
-## 11369           2      1369
-## 444             1       444</code></pre>
+## 9183            1      9183
+## 18777           2      8777
+## 15146           2      5146
+## 5254            1      5254
+## 24984           3      4984
+## 27703           3      7703
+## 19497           2      9497
+## 116             1       116
+## 8340            1      8340
+## 15409           2      5409
+## 4801            1      4801
+## 14159           2      4159
+## 9400            1      9400
+## 19083           2      9083
+## 6956            1      6956
+## 24971           3      4971
+## 11041           2      1041
+## 15160           2      5160
+## 22857           3      2857
+## 29440           3      9440</code></pre>
 <p>And, we can do things like compute expected utility (under the distribution of hit decisions observed in the sample, i.e., absent any specific hit strategy) when dealt a 3:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(post$payoff)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(post<span class="op">$</span>payoff)</code></pre></div>
 <pre><code>## 
 ##    -1     0     1 
-## 18598  1373 10029</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(post$payoff)</code></pre></div>
-<pre><code>## [1] -0.2856333</code></pre>
+## 18635  1287 10078</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(post<span class="op">$</span>payoff)</code></pre></div>
+<pre><code>## [1] -0.2852333</code></pre>
 </div>
 <div id="maximum-expected-utility-analysis" class="section level2">
 <h2>Maximum Expected Utility Analysis</h2>
@@ -759,20 +759,17 @@ compiledNet &lt;-<span class="st"> </span><span class="kw">compileJagsModel</spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">samples &lt;-<span class="st"> </span><span class="kw">lapply</span>(compiledNets,
                   HydeSim,
                   <span class="dt">variable.names =</span> trackedVars,
-                  <span class="dt">n.iter=</span><span class="dv">10000</span>)</code></pre></div>
-<pre><code>## `bindPosterior` is deprecated and replaced by `bindSim`
-## `bindPosterior` is deprecated and replaced by `bindSim`
-## `bindPosterior` is deprecated and replaced by `bindSim`
-## `bindPosterior` is deprecated and replaced by `bindSim`</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(samples, head)</code></pre></div>
+                  <span class="dt">n.iter=</span><span class="dv">10000</span>)
+
+<span class="kw">lapply</span>(samples, head)</code></pre></div>
 <pre><code>## [[1]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1          Bust            1    0    0    0      1                17
-## 2            21            8    0    0    0     -1                16
-## 3            17            6    0    0    0      1                20
-## 4            19            4    0    0    0     -1                18
-## 5            20           10    0    0    0     -1                10
-## 6          Bust            2    0    0    0      1                21
+## 1            19            9    0    0    0      1                20
+## 2     Blackjack           10    0    0    0     -1                14
+## 3            19            9    0    0    0      0                19
+## 4          Bust            3    0    0    0      1                14
+## 5            17            9    0    0    0      1                18
+## 6            21           10    0    0    0     -1                18
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -783,12 +780,12 @@ compiledNet &lt;-<span class="st"> </span><span class="kw">compileJagsModel</spa
 ## 
 ## [[2]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1          Bust            9    1    0    0     -1                23
-## 2          Bust            8    1    0    0      1                14
-## 3            21            3    1    0    0     -1                15
-## 4          Bust            1    1    0    0      1                19
-## 5            18            6    1    0    0     -1                15
-## 6            21            3    1    0    0     -1                16
+## 1            19           10    1    0    0      1                21
+## 2            20            5    1    0    0     -1                13
+## 3            17            7    1    0    0      1                20
+## 4            19            2    1    0    0     -1                23
+## 5          Bust            7    1    0    0      1                19
+## 6          Bust            9    1    0    0      1                15
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -799,12 +796,12 @@ compiledNet &lt;-<span class="st"> </span><span class="kw">compileJagsModel</spa
 ## 
 ## [[3]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1            20            9    1    1    0     -1                17
-## 2            20            9    1    1    0      0                20
-## 3            17            9    1    1    0     -1                24
-## 4            21            9    1    1    0     -1                14
-## 5            18           10    1    1    0      1                20
-## 6          Bust            5    1    1    0     -1                24
+## 1            17            9    1    1    0     -1                22
+## 2            18            6    1    1    0      1                21
+## 3            20            6    1    1    0     -1                18
+## 4            20            9    1    1    0     -1                17
+## 5            19            8    1    1    0     -1                14
+## 6            20            9    1    1    0     -1                17
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -815,12 +812,12 @@ compiledNet &lt;-<span class="st"> </span><span class="kw">compileJagsModel</spa
 ## 
 ## [[4]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1          Bust            3    1    1    1      1                21
-## 2          Bust            9    1    1    1      1                16
-## 3            19            9    1    1    1     -1                23
-## 4            20            9    1    1    1     -1                16
-## 5            18            8    1    1    1     -1                13
-## 6            17            8    1    1    1     -1                14
+## 1          Bust            9    1    1    1      1                19
+## 2     Blackjack            9    1    1    1     -1                20
+## 3          Bust            5    1    1    1      1                19
+## 4            19            1    1    1    1     -1                18
+## 5            20            9    1    1    1     -1                19
+## 6            17            9    1    1    1     -1                26
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -830,18 +827,18 @@ compiledNet &lt;-<span class="st"> </span><span class="kw">compileJagsModel</spa
 ## 6           1         6</code></pre>
 <p>We now have a list of data frames, each data frame corresponding to one of the four hit policies (never hit, hit once, hit twice, and hit three times). Straightforward manipulations allow for examination of expected utility:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#summary of expected utility under each policy</span>
-<span class="kw">lapply</span>(samples, function(l) <span class="kw">mean</span>(l$payoff))</code></pre></div>
+<span class="kw">lapply</span>(samples, <span class="cf">function</span>(l) <span class="kw">mean</span>(l<span class="op">$</span>payoff))</code></pre></div>
 <pre><code>## [[1]]
-## [1] -0.0241
+## [1] -0.0444
 ## 
 ## [[2]]
-## [1] -0.2195
+## [1] -0.2307
 ## 
 ## [[3]]
-## [1] -0.3177
+## [1] -0.3299
 ## 
 ## [[4]]
-## [1] -0.4406</code></pre>
+## [1] -0.4399</code></pre>
 <p>We see that, among these four strategies, taking no cards appears to maximize expected utility (i.e., leads to losing the least amount of money.</p>
 <!--
 
