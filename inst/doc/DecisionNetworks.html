@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jarrod Dalton and Benjamin Nutter" />
 
-<meta name="date" content="2018-01-01" />
+<meta name="date" content="2018-07-19" />
 
 <title>Decision Network (Influence Diagram) Analyses in HydeNet</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Decision Network (Influence Diagram) Analyses in HydeNet</h1>
 <h4 class="author"><em>Jarrod Dalton and Benjamin Nutter</em></h4>
-<h4 class="date"><em>2018-01-01</em></h4>
+<h4 class="date"><em>2018-07-19</em></h4>
 
 
 
@@ -648,54 +648,54 @@ compiledNet &lt;-<span class="st"> </span><span class="kw">compileJagsModel</spa
 
 dplyr<span class="op">::</span><span class="kw">sample_n</span>(post, <span class="dv">20</span>)</code></pre></div>
 <pre><code>##       card1 dealerOutcome dealerUpcard payoff playerFinalPoints
-## 9183      3            18            7     -1                23
-## 18777     3            17            4     -1                14
-## 15146     3            20            8     -1                15
-## 5254      3            19            2     -1                15
-## 24984     3            19            5      1                21
-## 27703     3            17            6      0                17
-## 19497     3            17            1     -1                13
-## 116       3            18            9     -1                13
-## 8340      3            21            8     -1                14
-## 15409     3            20            9     -1                15
-## 4801      3            20            9     -1                23
-## 14159     3          Bust            1      1                16
-## 9400      3            19            7     -1                12
-## 19083     3            19            9     -1                15
-## 6956      3          Bust            2      1                19
-## 24971     3          Bust            9     -1                24
-## 11041     3            20            9      1                21
-## 15160     3            18            9      1                21
-## 22857     3            17            9     -1                14
-## 29440     3     Blackjack            9      0                21
+## 6226      3            20            9     -1                15
+## 5868      3            20            9     -1                19
+## 26601     3          Bust            4      1                19
+## 14903     3            20            9     -1                22
+## 1192      3            18           10      1                20
+## 26067     3          Bust            4      1                15
+## 11301     3          Bust            9     -1                23
+## 6290      3            18            7     -1                22
+## 21391     3            17            7     -1                15
+## 10631     3            18            1     -1                11
+## 3357      3     Blackjack            9      0                21
+## 13447     3            17            8      1                20
+## 8108      3            20            1     -1                16
+## 14060     3            17            1     -1                16
+## 23721     3          Bust            3      1                16
+## 14628     3            20            3     -1                 9
+## 6483      3          Bust            8      1                14
+## 7397      3     Blackjack            9     -1                19
+## 6497      3            17           10      1                19
+## 6399      3            20            9     -1                22
 ##       chain_index obs_index
-## 9183            1      9183
-## 18777           2      8777
-## 15146           2      5146
-## 5254            1      5254
-## 24984           3      4984
-## 27703           3      7703
-## 19497           2      9497
-## 116             1       116
-## 8340            1      8340
-## 15409           2      5409
-## 4801            1      4801
-## 14159           2      4159
-## 9400            1      9400
-## 19083           2      9083
-## 6956            1      6956
-## 24971           3      4971
-## 11041           2      1041
-## 15160           2      5160
-## 22857           3      2857
-## 29440           3      9440</code></pre>
+## 6226            1      6226
+## 5868            1      5868
+## 26601           3      6601
+## 14903           2      4903
+## 1192            1      1192
+## 26067           3      6067
+## 11301           2      1301
+## 6290            1      6290
+## 21391           3      1391
+## 10631           2       631
+## 3357            1      3357
+## 13447           2      3447
+## 8108            1      8108
+## 14060           2      4060
+## 23721           3      3721
+## 14628           2      4628
+## 6483            1      6483
+## 7397            1      7397
+## 6497            1      6497
+## 6399            1      6399</code></pre>
 <p>And, we can do things like compute expected utility (under the distribution of hit decisions observed in the sample, i.e., absent any specific hit strategy) when dealt a 3:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(post<span class="op">$</span>payoff)</code></pre></div>
 <pre><code>## 
 ##    -1     0     1 
-## 18635  1287 10078</code></pre>
+## 18545  1349 10106</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(post<span class="op">$</span>payoff)</code></pre></div>
-<pre><code>## [1] -0.2852333</code></pre>
+<pre><code>## [1] -0.2813</code></pre>
 </div>
 <div id="maximum-expected-utility-analysis" class="section level2">
 <h2>Maximum Expected Utility Analysis</h2>
@@ -764,12 +764,12 @@ dplyr<span class="op">::</span><span class="kw">sample_n</span>(post, <span clas
 <span class="kw">lapply</span>(samples, head)</code></pre></div>
 <pre><code>## [[1]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1            19            9    0    0    0      1                20
-## 2     Blackjack           10    0    0    0     -1                14
-## 3            19            9    0    0    0      0                19
-## 4          Bust            3    0    0    0      1                14
-## 5            17            9    0    0    0      1                18
-## 6            21           10    0    0    0     -1                18
+## 1            20            6    0    0    0     -1                19
+## 2            19            3    0    0    0      1                20
+## 3            20            9    0    0    0     -1                17
+## 4            18            7    0    0    0      1                21
+## 5          Bust            2    0    0    0      1                13
+## 6            21            3    0    0    0     -1                19
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -780,12 +780,12 @@ dplyr<span class="op">::</span><span class="kw">sample_n</span>(post, <span clas
 ## 
 ## [[2]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1            19           10    1    0    0      1                21
-## 2            20            5    1    0    0     -1                13
-## 3            17            7    1    0    0      1                20
-## 4            19            2    1    0    0     -1                23
-## 5          Bust            7    1    0    0      1                19
-## 6          Bust            9    1    0    0      1                15
+## 1            20            3    1    0    0     -1                13
+## 2          Bust            7    1    0    0      1                17
+## 3            19            9    1    0    0     -1                18
+## 4          Bust            4    1    0    0      1                14
+## 5          Bust            9    1    0    0      1                18
+## 6            18            9    1    0    0      1                20
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -796,12 +796,12 @@ dplyr<span class="op">::</span><span class="kw">sample_n</span>(post, <span clas
 ## 
 ## [[3]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1            17            9    1    1    0     -1                22
-## 2            18            6    1    1    0      1                21
-## 3            20            6    1    1    0     -1                18
-## 4            20            9    1    1    0     -1                17
-## 5            19            8    1    1    0     -1                14
-## 6            20            9    1    1    0     -1                17
+## 1            20            9    1    1    0     -1                22
+## 2     Blackjack           10    1    1    0     -1                24
+## 3            20            9    1    1    0      1                21
+## 4            21            4    1    1    0     -1                15
+## 5            17            9    1    1    0     -1                25
+## 6            20           10    1    1    0     -1                24
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -812,12 +812,12 @@ dplyr<span class="op">::</span><span class="kw">sample_n</span>(post, <span clas
 ## 
 ## [[4]]
 ##   dealerOutcome dealerUpcard hit1 hit2 hit3 payoff playerFinalPoints
-## 1          Bust            9    1    1    1      1                19
-## 2     Blackjack            9    1    1    1     -1                20
-## 3          Bust            5    1    1    1      1                19
-## 4            19            1    1    1    1     -1                18
-## 5            20            9    1    1    1     -1                19
-## 6            17            9    1    1    1     -1                26
+## 1          Bust           10    1    1    1      1                19
+## 2            18            8    1    1    1     -1                24
+## 3            20            9    1    1    1     -1                22
+## 4            20            9    1    1    1      0                20
+## 5            19            9    1    1    1      1                21
+## 6            21            3    1    1    1     -1                14
 ##   chain_index obs_index
 ## 1           1         1
 ## 2           1         2
@@ -829,16 +829,16 @@ dplyr<span class="op">::</span><span class="kw">sample_n</span>(post, <span clas
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#summary of expected utility under each policy</span>
 <span class="kw">lapply</span>(samples, <span class="cf">function</span>(l) <span class="kw">mean</span>(l<span class="op">$</span>payoff))</code></pre></div>
 <pre><code>## [[1]]
-## [1] -0.0444
+## [1] -0.0382
 ## 
 ## [[2]]
-## [1] -0.2307
+## [1] -0.2105
 ## 
 ## [[3]]
-## [1] -0.3299
+## [1] -0.3094
 ## 
 ## [[4]]
-## [1] -0.4399</code></pre>
+## [1] -0.4391</code></pre>
 <p>We see that, among these four strategies, taking no cards appears to maximize expected utility (i.e., leads to losing the least amount of money.</p>
 <!--
 
