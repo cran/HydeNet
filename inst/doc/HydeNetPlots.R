@@ -1,15 +1,15 @@
-## ---- eval=1:2-----------------------------------------------------------
+## ---- eval=1:2----------------------------------------------------------------
 library(HydeNet)
 data(BlackJack, package="HydeNet")
 plot(BlackJack, useHydeDefaults=FALSE)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  plot(BlackJack)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 getOption("Hyde_plotOptions")
 
-## ---- eval=1-------------------------------------------------------------
+## ---- eval=1------------------------------------------------------------------
 HydePlotOptions(variable=list(shape = "rect", fillcolor = "#A6DBA0"),
                 determ = list(shape = "rect", fillcolor = "#E7D4E8",
                               fontcolor = "#1B7837", linecolor = "#1B7837"),
@@ -19,18 +19,18 @@ HydePlotOptions(variable=list(shape = "rect", fillcolor = "#A6DBA0"),
                                fontcolor = "white"))
 plot(BlackJack)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  HydePlotOptions(restorePackageDefault=TRUE)
 #  plot(BlackJack)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  plot(BlackJack,
 #       customNodes = customNode(node_id = "hit1",
 #                                fillcolor = "purple", shape = "circle",
 #                         fontcolor = "white", height = "2",
 #                         style="filled"))
 
-## ---- eval = FALSE-------------------------------------------------------
+## ---- eval = FALSE------------------------------------------------------------
 #  plot(BlackJack,
 #       customNodes = customNode(node_id = "hit1", height = "2"))
 #  plot(BlackJack,
@@ -38,13 +38,13 @@ plot(BlackJack)
 #  plot(BlackJack,
 #       customNodes = customNode(node_id = "hit3", height = "2"))
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  plot(BlackJack,
 #       customNodes = rbind(customNode(node_id = "hit1", height="2"),
 #                           customNode(node_id = "hit2", height="2"),
 #                           customNode(node_id = "hit3", height="2")))
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  plot(BlackJack,
 #       customNodes = customNode(node_id = "payoff",
 #                                fillcolor = "green",
@@ -54,14 +54,14 @@ plot(BlackJack)
 #                                style="filled"),
 #       useHydeDefaults = FALSE)
 
-## ---- include = FALSE----------------------------------------------------
+## ---- include = FALSE---------------------------------------------------------
 if (!RCurl::url.exists("http://www.graphviz.org/about"))
 {
   stop("Graphviz link does not exist. Find a new link")
 }
 
-if (!RCurl::url.exists("http://www.bicyclecards.com/how-to-play/blackjack/"))
-{
-  stop("Blackjack rules URL does not exist.  Find a new link")
-}
+# if (!RCurl::url.exists("https://bicyclecards.com/how-to-play/blackjack"))
+# {
+#   stop("Blackjack rules URL does not exist.  Find a new link")
+# }
 

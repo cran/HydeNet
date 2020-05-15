@@ -1,7 +1,7 @@
-## ---- echo=FALSE, message=FALSE------------------------------------------
+## ---- echo=FALSE, message=FALSE-----------------------------------------------
 library(HydeNet)
 
-## ---- fig.width=7, eval = 1----------------------------------------------
+## ---- fig.width=7, eval = 1---------------------------------------------------
 net <- HydeNetwork(~ initialAces | card1*card2
                    + initialPoints | card1*card2
                    + highUpcard | dealerUpcard
@@ -21,7 +21,7 @@ net <- HydeNetwork(~ initialAces | card1*card2
 
 plot(net)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #####################################
 # Random Variable Nodes
 #####################################
@@ -153,7 +153,7 @@ net <- setNode(net, playerFinalPoints, "determ", define=fromFormula(),
               )
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 data(BJDealer)
 dealerOutcome.cpt <- cpt(dealerOutcome ~ dealerUpcard,
                          data = BJDealer,
@@ -161,16 +161,16 @@ dealerOutcome.cpt <- cpt(dealerOutcome ~ dealerUpcard,
 round(dealerOutcome.cpt,3)
 net <- setNodeModels(net, dealerOutcome.cpt)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 net <- setDecisionNodes(net, hit1, hit2, hit3)
 net <- setUtilityNodes(net, payoff)
 
 c(net$nodeDecision$hit2, net$nodeUtility$payoff)
 
-## ---- fig.width=7, eval=FALSE--------------------------------------------
+## ---- fig.width=7, eval=FALSE-------------------------------------------------
 #  plot(net)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 data(BlackJackTrain)
 BlackJackTrain$highUpcard <- as.character(BlackJackTrain$dealerUpcard)
 BlackJackTrain$highUpcard <- factor(BlackJackTrain$highUpcard %in% c("10-K","A"),
@@ -188,7 +188,7 @@ glm.hit3 <- glm(hit3 ~ pointsAfterCard4+highUpcard,
 
 net <- setNodeModels(net, glm.hit1, glm.hit2, glm.hit3)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 net <- setNode(net, payoff, "determ", define=fromFormula(),
          nodeFormula = payoff ~
                          ifelse(playerFinalPoints > 21, -1,
@@ -212,7 +212,7 @@ net <- setNode(net, payoff, "determ", define=fromFormula(),
                                        ifelse(playerFinalPoints == 21, 0, -1)))))))))
 
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 trackedVars <- c("dealerUpcard","playerFinalPoints","dealerOutcome","payoff")
 evidence <- list(card1 = 3)
 compiledNet <- compileJagsModel(net, data = evidence,
@@ -225,19 +225,19 @@ post <- HydeSim(compiledNet,
 
 dplyr::sample_n(post, 20)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 table(post$payoff)
 mean(post$payoff)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 policies <- data.frame(hit1 = c(0,1,1,1),
                        hit2 = c(0,0,1,1),
                        hit3 = c(0,0,0,1))
 
-## ---- echo=FALSE---------------------------------------------------------
+## ---- echo=FALSE--------------------------------------------------------------
 set.seed(39482820)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 compiledNets <- compileDecisionModel(net, policyMatrix = policies)
 
 samples <- lapply(compiledNets,
@@ -247,7 +247,7 @@ samples <- lapply(compiledNets,
 
 lapply(samples, head)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 #summary of expected utility under each policy
 lapply(samples, function(l) mean(l$payoff))
 
