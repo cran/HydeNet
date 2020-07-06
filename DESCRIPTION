@@ -1,7 +1,7 @@
 Package: HydeNet
 Type: Package
 Title: Hybrid Bayesian Networks Using R and JAGS
-Version: 0.10.10
+Version: 0.10.11
 Author: Jarrod E. Dalton <daltonj@ccf.org> and Benjamin Nutter
     <benjamin.nutter@gmail.com>
 Maintainer: Benjamin Nutter <benjamin.nutter@gmail.com>
@@ -31,6 +31,6 @@ URL: https://github.com/nutterb/HydeNet,
 BugReports: https://github.com/nutterb/HydeNet/issues
 RoxygenNote: 7.1.0
 NeedsCompilation: no
-Packaged: 2020-05-15 13:21:43 UTC; benjamin
+Packaged: 2020-07-06 12:40:35 UTC; benjamin
 Repository: CRAN
-Date/Publication: 2020-05-15 13:40:10 UTC
+Date/Publication: 2020-07-06 15:20:13 UTC

@@ -12,7 +12,7 @@
 
 <meta name="author" content="Jarrod Dalton and Benjamin Nutter" />
 
-<meta name="date" content="2020-05-15" />
+<meta name="date" content="2020-07-06" />
 
 <title>Working with HydeNetwork Objects</title>
 
@@ -301,7 +301,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Working with HydeNetwork Objects</h1>
 <h4 class="author">Jarrod Dalton and Benjamin Nutter</h4>
-<h4 class="date">2020-05-15</h4>
+<h4 class="date">2020-07-06</h4>
 
 
 
@@ -985,7 +985,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## [1] 5.477226</code></pre>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">net<span class="op">$</span>nodeFormula<span class="op">$</span>d.dimer</a></code></pre></div>
 <pre><code>## d.dimer ~ 210 + 29 * pregnant + 68 * pe
-## &lt;environment: 0x560d1950e7d8&gt;</code></pre>
+## &lt;environment: 0x556aa8558660&gt;</code></pre>
 <p>Or, alternatively, one may directly specify JAGS code for the parameters as character strings. Below, we do this for <code>mu</code>:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">net &lt;-<span class="st"> </span><span class="kw">setNode</span>(net, d.dimer, <span class="dt">nodeType=</span><span class="st">&quot;dnorm&quot;</span>,</a>
 <a class="sourceLine" id="cb42-2" data-line-number="2">               <span class="dt">mean=</span><span class="st">&quot;210 + 29*pregnant + 68*pe&quot;</span>, <span class="dt">sd =</span> <span class="kw">sqrt</span>(<span class="dv">30</span>))</a></code></pre></div>
